@@ -20,7 +20,7 @@ print('Loading ----25% Done')
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from langchain import OpenAI
+from langchain.llms import OpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
