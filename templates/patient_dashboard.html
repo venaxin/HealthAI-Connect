@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/header/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login/pat_dash.css') }}">
+</head>
+<body>
+    <header class="header-fixed">
+
+        <div class="header-limiter">
+            <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
+            <nav>
+                <a href="{{url_for('home')}}" >Home</a>
+                
+                <a href="{{ url_for('login') }}">Log Out</a>
+            </nav>
+    
+        </div>
+    
+    </header>
+    <div class="header-fixed-placeholder"></div>
+    <br>
+    <h1 class="fadeIn" style="
+    margin: 15px 0px 15px 20px;
+    text-shadow: 0px 3px 5px;
+    text-transform: capitalize;">Welcome, {{ username }}!</h1>
+    <div class="container">
+
+        <!-- Table for booked appointments -->
+            <div class="col-md-6 booked ">
+                
+                <h2>
+                    <span>Booked</span>
+                    <span>Appointments</span>
+                </h2>
+
+                <div class="padding animate__animated animate__fadeInBottomLeft">
+                <table class="custom-table" border="1">
+                    <thead>
+                        <tr style="background:transparent;">
+                            <th>Doctor</th>
+                            <th>Chat</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                        {% if appointments %}
+                            {% for appointment in appointments %}
+                                <tr>
+                                    <td>&nbsp;&nbsp;{{ appointment.doctor }}</td>
+                                    <td><a href="{{ url_for('chat' , username=username) }}"><button id="openChatBtn" >Open Chat</button></a></td>
+                                    <td>{{ appointment.date }}</td>
+                                    <td>{{ appointment.time }}</td>
+                                </tr>
+                                <tr class="spacer">
+                                    <td colspan="100" style="background:transparent;"> </td>
+                                </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="4" style="text-align: center;">No booked appointments..</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table></div>
+            </div>
+            <!-- Middle gap -->
+            <div class="col-sm-1"></div>
+            <!-- Form to book a new appointment -->
+            <div class="col-md-6 booking ">
+
+                <h2>
+                    <span>Book</span>
+                    <span>an</span>
+                    <span>Appointment</span>
+                </h2>
+                
+                <div class="book_table animate__animated animate__fadeInTopRight">
+                    <form action="{{ url_for('book_appointment') }}" method="post">
+                        <div class="details">
+                        <div class="animation form-group">
+                            <label for="doctor">Select Doctor:</label>
+                            <select class="form-control" id="doctor" name="doctor" required>
+                                {% for doctor in doctors %}
+                                    <option>{{ doctor }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="animation form-group">
+                            <label for="date">Select Date:</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class=" animation form-group">
+                            <label for="time">Select Time:</label>
+                            <input type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                    </div>
+                    <div class="boo-but">
+                        <div class=" sub-but">
+                            <button type="submit" class="button-51" role="button" id="bookAppointmentBtn">
+                                <span class="button-51__Content">
+                                    <span class="button-51__Text text">B</span>
+                                    <span class="button-51__Text text">O</span>
+                                    <span class="button-51__Text text">O</span>
+                                    <span class="button-51__Text text">K</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                    <p class="fadeIn" id="confirmation-message"></p>
+                </div> 
+                   
+            </div>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the button and message elements
+            var bookAppointmentBtn = document.getElementById('bookAppointmentBtn');
+            var confirmationMessage = document.getElementById('confirmation-message');
+            
+            // Check if there's a confirmation message in session storage
+            var storedConfirmationMessage = sessionStorage.getItem('confirmationMessage');
+            if (storedConfirmationMessage) {
+              confirmationMessage.textContent = storedConfirmationMessage;
+              confirmationMessage.style.display = 'block';
+              // Clear the stored message after displaying it
+              sessionStorage.removeItem('confirmationMessage');
+              // Set a timeout to hide the message after 10 seconds
+              setTimeout(function() {
+                confirmationMessage.style.display = 'none';
+              }, 7000);  // Increase the timeout to 10 seconds
+            }
+      
+            // Add click event listener to the button
+            bookAppointmentBtn.addEventListener('click', function() {
+              // Display the confirmation message
+              confirmationMessage.textContent =  "Your appointment request has been sent!  please wait for the doctor to confirm your appointment.";
+              confirmationMessage.style.display = 'block';  
+              // Store the message in session storage
+              sessionStorage.setItem('confirmationMessage',  "Your appointment request has been sent!  please wait for the doctor to confirm your appointment.");
+              // Set a timeout to hide the message after 10 seconds
+              setTimeout(function() {
+                confirmationMessage.style.display = 'none';
+              }, 7000);  // Increase the timeout to 10 seconds
+            });
+          });
+    </script>
+    <script>
+        const columns = Array.from(document.getElementsByClassName('animation'));
+
+            function slideOut(column) {
+            column.classList.add('slide-out');
+            }
+
+            function slideIn(column, index) {
+            setTimeout(function() {
+                column.classList.remove('slide-out');
+            }, (index + 1) * 200);  
+            }
+
+            columns.forEach(slideOut);
+            columns.forEach(slideIn);
+    </script>
+    <script >
+        const boobut = Array.from(document.getElementsByClassName('boo-but'));
+function slideO(row) {
+  row.classList.add('slide-out');
+}
+function slideI(row, index) {
+  setTimeout(function() {
+    row.classList.remove('slide-out');
+  }, (index + 5) * 200);  
+}
+boobut.forEach(slideO);
+
+boobut.forEach(slideI);
+    </script>
+    <script src="../static/login/animation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../static/header.js"></script>
+</body>
+</html>

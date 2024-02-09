@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HealthAI Connect</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='3dcard.css') }}">
+  <link rel="stylesheet" href="../static/header/header.css">
+  
+</head>
+<body>
+  <header class="header-fixed" style="background: linear-gradient(to right, #000000, #001a64,#010307);box-shadow: rgb(56 144 200 / 7%) 0px 1px 1px, #a4f0ff 0px 2px 2px, rgb(115 241 234 / 7%) 0px 4px 4px, #7ae1f64f 0px 8px 8px, #7be9ff8c 0px 16px 16px;">
+    <div class="header-limiter">
+        <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>       
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('login') }}">Login</a>    
+        </nav>
+    </div>
+  </header>
+<div class="header-fixed-placeholder"></div>
+    <section id="about-us" class="about-section">
+      <h2>HealthCare Imaging</h2>
+      <br><br>
+        <div class="feature-cards">
+  <a href="{{ url_for('pneumonia') }}" alt="Pneumonia">
+    <div class="card">
+      <div class="wrapper">
+        <img src="../static/images/lungss.gif"  class="cover-image" />
+      </div>
+      <h3 class="title">Pneumonia Detection</h3>  
+      <img src="../static/images/lungs-up.png"  class="character first-holo" />
+    </div>
+  </a>
+  
+  <a href="{{ url_for('tumor') }}" alt="Tumor">
+    <div class="card">
+      <div class="wrapper">
+        <img src="../static/images/brain.gif" style="mix-blend-mode:darken;" class="cover-image" />
+      </div>
+      <h3 class="title">Brain Tumor Detection</h3>  
+      <img src="../static/images/human-brains.png" class="character" />
+    </div>
+  </a>
+  <a href="{{ url_for('nutri') }}" alt="NutriVision">
+    <div class="card">
+      <div class="wrapper">
+        <img src="../static/images/nutrivision.jpeg" style="mix-blend-mode:darken;" class="cover-image" />
+      </div>
+      <h3 class="title">NutriVision</h3>  
+      <img src="../static/images/nutrivision2.png" class="character last-holo" />
+    </div>
+  </a>
+</div> 
+</div></section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="../static/header/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background: linear-gradient(to left, #03e9f4 0%, rgb(0, 0, 0) 20%);
+  background-size: 200% 100%; /* Double the background size */
+  animation: colorTravel 5s linear infinite; /* Animation for color travel */
+}
+
+@keyframes colorTravel {
+  0% {
+      background-position: 100% 0; /* Start position of the gradient */
+  }
+  100% {
+      background-position: -100% 0; /* End position of the gradient */
+  }
+}
+
+:root {
+  --box-width: calc(calc(100% / var(--boxes-in-row)) - 6px); /* Adjust width and margin to add 3px gap between boxes */
+}
+
+.box {
+  width: var(--box-width); /* Fixed box width */
+  height: 100px;
+  background-color: #090243;
+  transition: background-color 0.3s;
+  margin: 3px; /* Set 3px margin between boxes */
+}
+
+.box:hover {
+  background-color: #03e9f4;
+}
+
+
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgb(0, 0, 0,0.7);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+div.backBtn {
+  width: 100px;
+  left: 24px;
+    top: 15px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+}
+
+span.line {
+  bottom: auto;
+  right: auto;
+  top: auto;
+  left: auto;
+  background-color: #03e9f4;;
+  border-radius: 10px;
+  width: 46%;
+  left: 0px;
+  height: 5px;
+  display: block;
+  position: absolute;
+  transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+}
+
+span.tLine {
+  top: 0px;
+}
+
+span.mLine {
+  top: 13px;
+  opacity: 0;
+}
+
+span.bLine {
+  top: 26px;
+}
+
+.label {
+  position: absolute;
+  left: 0px;
+  color: snow;
+  top: 5px;
+  width: 100%;
+  /* text-align: center; */
+  transition: all 0.4s ease;
+  font-size: 1em;
+}
+
+div.backBtn:hover span.label {
+  left: 25px
+}
+
+div.backBtn:hover span.line {
+  left: -10px;
+  height: 5px;
+  background-color: #60f7f7;
+}
+
+div.backBtn:hover span.tLine {
+  width: 25px;
+  transform: rotate(-45deg);
+  left: -15px;
+  top: 6px;
+}
+
+div.backBtn:hover span.mLine {
+  opacity: 1;
+  width: 30px;
+}
+
+div.backBtn:hover span.bLine {
+  width: 25px;
+  transform: rotate(45deg);
+  left: -15px;
+  top: 20px;
+}
+
+
+.login-box h1{
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.fa-eye{
+  position: absolute;
+  top: 10px;
+  left: 296px;
+  color: white;
+  cursor: pointer;
+}
+.fa-eye-slash{
+  position: absolute;
+  top: 10px;
+  left: 295px;
+  color: white;
+  cursor: pointer;
+}
+.login-box form .subbmit {
+  position: relative;
+  display: inline-block;
+
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin: 10px 10px 10px 10px;
+  letter-spacing: 4px
+}
+
+.login-box .subbmit:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box .subbmit span {
+  position: absolute;
+  display: block;
+}
+
+.login-box .subbmit span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.login-box .subbmit span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.login-box .subbmit span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box .subbmit span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+.pushable{
+  display: none;
+}
+
+.register{
+  color:#03e9f4; 
+  text-decoration:none;
+}
+select{margin-bottom: 20px;
+  border: none;
+  background: transparent;
+  outline: none;
+  width:222px;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+option{
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+}
+option:hover{
+background: #03e9f4;
+}

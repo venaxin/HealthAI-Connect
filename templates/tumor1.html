@@ -1,0 +1,62 @@
+{% extends "tumor.html" %} {% block content %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  "Empowering Lives through Precise Brain Tumor Detection"
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<center>
+  <br />
+  <h2 class="heading1">Brain Tumor Detection</h2>
+  <br />
+
+  <form id="upload-file" method="post" enctype="multipart/form-data ">
+    <div class="mb-5 container" style="width: 500px">
+      <label for="imageUpload" class="para form-label"
+        >Upload X-Ray here!</label
+      >
+      <input
+        class="form-control bg-secondary"
+        type="file"
+        name="file"
+        class="btn btn-success"
+        id="imageUpload"
+        accept=".png, .jpg, .jpeg"
+      />
+    </div>
+  </form>
+  <div class="image-section" style="display: none">
+    <div class="img-contain">
+      <h2 class="heading2">Uploaded Image</h2>
+      <img
+        id="imagePreview"
+        class="image img-responsive"
+        src="#"
+        style="width: 300px; height: 300px"
+      />
+    </div>
+    <br /><br />
+    <div>
+      <button
+        type="button"
+        class="btn btn-success btn-lg fw-bold"
+        id="btn-predict"
+        style="width: 300px; font-size: 33px; padding: 10px 20px"
+      >
+        Predict
+      </button>
+    </div>
+  </div>
+
+  <div class="loader" style="display: none"></div>
+
+  <h3 class="results" id="result">
+    <span> </span>
+  </h3>
+</center>
+<br /><br />
+{% endblock %}

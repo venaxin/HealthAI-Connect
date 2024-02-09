@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HealthAI Connect</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='flip.css') }}"
+    />
+    <link rel="stylesheet" href="../static/header/header.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Cookie"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../static/carousel/carousel.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/6c08a6e84f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Green overlay -->
+    <div class="green-overlay" id="overlay"></div>
+
+    <!-- Loader -->
+    <section class="loader">
+      <div class="butblur"></div>
+      <aside>
+        <div class="info__box shinny"></div>
+        <div class="item__box">
+          <div class="item shinny" id="left"></div>
+          <div class="item shinny" id="middle"></div>
+          <div class="item shinny" id="right"></div>
+        </div>
+      </aside>
+    </section>
+    <!-- header -->
+    <div class="carousel-image-container">
+      <header class="header-fixed">
+        <div class="header-limiter">
+          <img
+            class="logo"
+            id="changingImage"
+            src="../static/images/HealthAI-e.gif"
+            alt="Default Image"
+          />
+          <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('login') }}">Login</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Rahmath dont remove this as it keeps the header a fullstop-->
+      <div class="header-fixed-placeholder"></div>
+
+      <!-- banner -->
+      <div class="image-context">
+        <div>
+          <h2>Skip the Travel!</h2>
+          <h2>Take Online Doctor Consultation</h2>
+          <div class="image-cont-bottom">
+            <a href="{{ url_for('login') }}">
+              <button class="button-29" role="button">Book Now</button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- carousel -->
+    <div class="gtco-testimonials">
+      <div class="owl-carousel owl-carousel1 owl-theme">
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/Disease-prediction.png"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Prediction <br />
+                <span> Disease & Health Prediction </span>
+              </h5>
+              <p class="card-text">
+                “ Assess your health condition swiftly with our ML models,
+                trained to analyze symptoms or reviews. Empowering personalized
+                diagnostics for informed well-being decisions ”
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/bot_card.jpeg"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                AI Chatbot<br />
+                <span> NLP Driven Chatbot </span>
+              </h5>
+              <p class="card-text">
+                “ The NLP-driven Medical Chatbot is an innovative feature of HealthAI Connect, designed to offer users precise and concise answers to their medical queries. ”
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/nutri1.jpeg"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Nutritionist<br />
+                <span> NutriVision </span>
+              </h5>
+              <p class="card-text">
+                “  Instant food analysis through images, tailored answers to your dietary questions using Google Gemini Pro Vision for accurate calorie counts and professional recommendations. ”
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/Header_Brain_Tumors_AA.jpg"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Detection<br />
+                <span> Brain Tumor Detection </span>
+              </h5>
+              <p class="card-text">
+                “ Brain Tumor detection through an Convolutional Neural Network
+                (CNN) in our Deep Learning model. Elevate diagnostics for early
+                intervention and improved patient outcomes. ”
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/pneumonia.png"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Detection<br />
+                <span>Pneumonia Detection </span>
+              </h5>
+              <p class="card-text">
+                “ Detect Pneumonia Infections using an Convolutional Neural
+                Network (CNN) in our Deep Learning model. Accurate and efficient
+                diagnosis for improved patient care. ” &nbsp; &nbsp; &nbsp;
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/online-doctor-icon.png"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Web Consultancy<br />
+                <span> Online Doctor Consultancy</span>
+              </h5>
+              <p class="card-text">
+                “ Connect with healthcare experts online for secure and
+                personalized consultations. Get professional advice and discuss
+                concerns from the comfort of your home. ”&nbsp; &nbsp; &nbsp;
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card text-center">
+            <img
+              class="card-img-top"
+              src="../static/images/medical-appointment-booking-system.png"
+              alt=""
+            />
+            <div class="card-body">
+              <h5>
+                Appointment System<br />
+                <span> Online Appointment Booking System</span>
+              </h5>
+              <p class="card-text">
+                “ Effortless Online Appointment Booking System – Seamlessly
+                schedule your appointments anytime, anywhere. Streamlined,
+                convenient, and tailored for your busy lifestyle ”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- services -->
+    <section id="about-us" class="about-section">
+      <h2>Our HealthCare Services</h2>
+      <p>
+        Explore the Project's Key Functionalities. Experience a World of
+        Features:
+      </p>
+      <div class="feature-cards">
+        <a href="{{ url_for('symptompredict') }}" class="animatedLink">
+          <div class="feature-card">
+            <div class="feature-front">
+              <h3>
+                Symptom based<br />
+                Disease Predictor
+              </h3>
+              <img
+                src="../static/images/symptom.png"
+                width="75%"
+                height="60%"
+                alt="Dialog Flow Chatbot"
+              />
+            </div>
+            <div class="feature-back">
+              <p>
+                Symptom Predictor employs advanced Machine Learning techniques
+                to analyze user-input symptoms, predicting potential diseases or
+                health conditions based on the provided data. Upon entering
+                symptoms, the feature identifies and presents likely diseases,
+                offering concise descriptions of the conditions.
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ url_for('reviewpredict') }}" class="animatedLink">
+          <div class="feature-card">
+            <div class="feature-front">
+              <h3>Health Description Disease Predictor</h3>
+              <img
+                src="../static/images/review.png"
+                width="75%"
+                height="60%"
+                alt="Recommendation System"
+              />
+            </div>
+            <div class="feature-back">
+              <p>
+                Review Predictor employs advanced algorithms to analyze scenario
+                text, predicting associated diseases and suggesting appropriate
+                medications. Users input scenarios to receive concise disease
+                insights and recommended medicines, aiding in understanding
+                potential health concerns and suggesting relevant treatment
+                options.
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ url_for('healthcare') }}" class="animatedLink">
+          <div class="feature-card">
+            <div class="feature-front">
+              <h3 style="margin-bottom: 75px">HealthCare Imaging</h3>
+              <img
+                src="../static/images/healthcare.png"
+                width="75%"
+                height="50%"
+                alt="Image Availability Check"
+              />
+            </div>
+            <div class="feature-back">
+              <p>
+                Healthcare Imaging is an advanced feature utilizing AI-driven
+                algorithms to analyze medical imaging, such as X-rays, CT scans,
+                or MRIs. It assesses these images to detect potential indicators
+                of diseases like tumors, tuberculosis, and other anomalies,
+                aiding in early disease identification and proactive healthcare
+                management.
+              </p>
+            </div>
+          </div></a
+        >
+      </div>
+    </section>
+    <br /><br /><br />
+    <!-- benefits -->
+    <section id="benefits" class="benefits-section appear">
+      <div class="benefits-container">
+        <div class="benefit-desc">
+          <h2>Benefits of Our HealthCare Services</h2>
+          <p>
+            At health grades, We take the guesswork out of finding the right
+            medicine and make an appointment for professional help.
+          </p>
+          <a href="{{ url_for('login') }}"
+            ><button
+              class="button-53"
+              role="button"
+              style="display: block; width: fit-content"
+            >
+              Go to Dashboard
+            </button></a
+          >
+        </div>
+        <div class="benefit-images">
+          <div class="benefit-cards one">
+            <div class="benefit-card">
+              <div class="benefit-image">
+                <img
+                  src="../static/images/diagnosis.png"
+                  alt="Fast Results"
+                  class="benefit-icon"
+                />
+                <img src="../static/images/drugs.png" class="drugs" />
+              </div>
+              <h4>Rapid Diagnosis and Results</h4>
+              <p>
+                Swift, precise diagnoses through our advanced AI models for
+                timely health decisions.
+              </p>
+            </div>
+          </div>
+          <div class="benefit-cards">
+            <div class="benefit-card">
+              <div class="benefit-image">
+                <img
+                  src="../static/images/healthcare2.png"
+                  alt="Accessible Care"
+                  class="benefit-icon"
+                />
+                <img src="../static/images/drugs.png" class="drugs" />
+              </div>
+              <div>
+                <h4>Accessible and Convenient Care</h4>
+                <p>
+                  Access diverse medical services online, fitting into your busy
+                  life effortlessly.
+                </p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-image">
+                <img
+                  src="../static/images/counselling.png"
+                  alt="Empowered Decisions"
+                  class="benefit-icon"
+                />
+                <img src="../static/images/drugs.png" class="drugs" />
+              </div>
+              <h4>Empowered Health Decisions</h4>
+              <p>
+                Empower yourself with personalized health insights and expert
+                advice for informed decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- why us -->
+    <section class="why-section">
+      <h2 class="why-title">Why Choose Us?</h2>
+      <div class="point left">
+        <h3>Cutting-Edge AI-Driven Diagnostics:</h3>
+        <p>
+          Utilize cutting-edge AI models to predict diseases accurately based on
+          symptoms or reviews, even detecting critical conditions like brain
+          tumors or pneumonia.
+        </p>
+      </div>
+      <div class="point left">
+        <h3>Seamless Doctor-Patient Interaction:</h3>
+        <p>
+          Seamless web chat functionality for immediate consultations and
+          appointments with specialized doctors across various medical fields.
+        </p>
+      </div>
+      <div class="point right">
+        <h3>Personalized Healthcare Solutions:</h3>
+        <p>
+          Tailored medical advice and treatment plans, providing personalized
+          care based on individual patient data and history.
+        </p>
+      </div>
+      <div class="point right">
+        <h3>Comprehensive Medical Services:</h3>
+        <p>
+          Access a wide array of medical facilities—booking appointments, expert
+          consultations, predictive health analytics, and specialized AI-driven
+          diagnostic services—all in one place.
+        </p>
+      </div>
+      <div class="image-container">
+        <img
+          class="img-why"
+          src="../static/images/doctor3d-removebg-preview.png"
+          alt="Doctor Image"
+        />
+      </div>
+      <div class="hex-container">
+        <div class="side"></div>
+        <div class="side"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+      </div>
+    </section>
+    <!-- chatbot -->
+    <div>
+      <div class="chatButton" id="chatButton">
+        <div class="backgroundAnimation">
+          <div class="lines"></div>
+        </div>
+        <img src="../static/images/chat-icon.gif" />
+      </div>
+
+      <div class="chatBox" id="chatBox">
+        <div class="chatheader">
+          <h3 class="bot-name">
+            <img
+              class="chat-icon"
+              src="../static/images/chat-icon.gif"
+              alt="Chat Icon"
+            />Dr.Rowbot
+          </h3>
+
+          <button id="closeChat">&times;</button>
+        </div>
+
+        <div class="chatwallpaper">
+          <div id="waveContainer">
+            <div class="wave-01"></div>
+            <div class="wave-02"></div>
+            <div class="wave-03"></div>
+          </div>
+          <div class="chatLog" id="chatLog"></div>
+          <div class="inputt">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendMessage" aria-label="Send message">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                  fill="#000000"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+    <!-- tech used -->
+    <div class="tech-container">
+      <h3>Technology Used</h3>
+      <div class="tech-used">
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/python.png" />
+          <div class="tech-name">Python</div>
+        </div>
+
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/sql-server.png" />
+          <div class="tech-name">SQL Lite</div>
+        </div>
+
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/brain.png" />
+          <div class="tech-name">Machine Learning</div>
+        </div>
+
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/chip.png" />
+          <div class="tech-name">Artificial Intelligence</div>
+        </div>
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/deep-learning.png" />
+          <div class="tech-name">Neural Networks</div>
+        </div>
+
+        <div class="tech-item">
+          <img class="tech-image" src="../static/images/link.png" />
+          <div class="tech-name">Langchain</div>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+    <!-- comms -->
+    <div class="connected">
+      <h1>Stay Connected with HealthAI Connect</h1>
+      <div class="wrapper">
+        <div
+          class="button"
+          onclick="window.location.href = 'https://www.facebook.com';"
+        >
+          <div class="icon"><i class="fa fa-facebook-f"></i></div>
+          <span>Facebook</span>
+        </div>
+        <div
+          class="button"
+          onclick="window.location.href = 'https://www.instagram.com';"
+        >
+          <div class="icon"><i class="fa fa-instagram"></i></div>
+          <span>Instagram</span>
+        </div>
+        <div
+          class="button"
+          onclick="window.location.href = 'https://github.com/venaxin';"
+        >
+          <div class="icon"><i class="fa fa-github"></i></div>
+          <span>Github</span>
+        </div>
+        <div
+          class="button"
+          onclick="window.location.href = 'https://www.linkedin.com';"
+        >
+          <div class="icon"><i class="fa fa-linkedin"></i></div>
+          <span>LinkedIn</span>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <!-- footer -->
+    <footer class="classic-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <p>Phone: +1 (123) 456-7890</p>
+          <p>Email: helpdesk@hospital.com</p>
+          <p>Address: 123 Street, City, Country</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="social-icons">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Other Pages</h3>
+          <ul class="social-icons">
+            <li>
+              <a href="{{ url_for('reviewpredict') }}">Review predictor</a>
+            </li>
+            <li>
+              <a href="{{ url_for('symptompredict') }}">Symptoms Predictor</a>
+            </li>
+
+            <li>
+              <a href="{{ url_for('healthcare') }}">HealthCare Imaging</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Message Us</h3>
+          <ul class="contact-us">
+            <li><input type="text" placeholder="Type your message" /></li>
+            <li><button class="button-29" role="button">Send</button></li>
+          </ul>
+        </div>
+      </div>
+      <br /><br />
+      <div class="footer-bottom">
+        <p>&copy; 2023 Your Company. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      // Get all elements with the specified class
+      const links = document.querySelectorAll(".animatedLink");
+      // Get the overlay element
+      const overlay = document.getElementById("overlay");
+
+      // Loop through all links and add click event listener to each
+      links.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+
+          // Expand the green overlay from the left
+          overlay.style.width = "100%";
+
+          // Get the URL from the clicked link and wait for the animation to complete before redirecting
+          const url = this.href;
+          setTimeout(function () {
+            window.location.href = url; // Redirect to the URL of the clicked link
+          }, 500); // Adjust the delay time if needed, matching the animation duration
+        });
+      });
+    </script>
+    <script>
+      function toggleLoaderAndScrolling() {
+        var loader = document.querySelector(".loader");
+        var body = document.querySelector("body");
+        var chtbt = document.querySelector(".chatButton");
+
+        // Show loader
+        loader.style.display = "block";
+        chtbt.style.display = "none";
+
+        loader.scrollIntoView({
+          behavior: "smooth",
+        });
+
+        body.classList.add("no-scroll");
+
+        setTimeout(function () {
+          loader.style.display = "none";
+          chtbt.style.display = "block";
+
+          body.classList.remove("no-scroll");
+        }, 2000);
+      }
+
+      toggleLoaderAndScrolling();
+    </script>
+
+    <script src="../static/script.js"></script>
+    <!-- for header -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../static/header/header.js"></script>
+    <script src="../static/scroll.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="../static/carousel/carousel.js"></script>
+  </body>
+</html>

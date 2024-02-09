@@ -1,0 +1,330 @@
+@import url(https://db.onlinewebfonts.com/c/41cdafd19e156a1f74759f9c88b878ff?family=Google+Sans+Text+Regular);
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+
+.about-section {
+  background-image: linear-gradient(to right, #000000, #001a64,#010307);
+  padding: 40px 80px 40px 80px;
+  box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  margin: auto;
+  max-height: min-content;
+  max-width: 70%;
+  margin-top: 70px;
+  transform: translateX(100%);
+  transition: transform 1s ease-in-out;
+}
+
+.about-section.slide-in {
+  /* Move the section into view */
+  transform: translateX(0%);
+}
+
+.about-section h2 {
+  font-size: xx-large;
+  margin-top: -15px;
+  text-align: center;
+  color: #ffffff;
+}
+.about-section h3 {
+  text-align: center;
+  font-size: 25px;
+  color: #333;
+  padding: 10px 0px 0px 0px;
+}
+.about-section > p {
+  font-family: 'Nunito Sans', sans-serif;
+  text-align: center;
+  padding: 5px;
+  font-size: 20px;
+  color: #ffffff;
+}
+.feature-back p {
+  font-family: 'Nunito Sans', sans-serif;
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: snow;
+}
+.link {
+  transition: transform 0.3s ease;
+}
+
+/* Adjust the transform scale when hovering to create an effect */
+.link:hover {
+  transform: scale(1.05);
+}
+/* Style for the feature cards container */
+.feature-cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 1000px) {
+  .feature-cards {
+    flex-direction: column; /* Display cards in a column */
+    align-items: center; /* Center align cards */
+  }
+
+  .feature-card {
+    width: 80%; /* Adjust width to fit the viewport */
+    height: auto;
+    margin: 20px 0; /* Add margin for spacing */
+  }
+}
+
+/* Style for each feature card */
+.feature-card {
+  width: 300px;
+  height: 400px;
+  perspective: 1000px; /* Create a 3D effect */
+  margin: 20px;
+  cursor: pointer;
+}
+
+/* Style for the front and back of each card */
+.feature-front,
+.feature-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+/* Style for the front of the card */
+.feature-front {
+  background-color: #f9f9f9;
+  display: flex;
+  min-width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  justify-content: center;
+  transform: rotateY(0deg);
+}
+.feature-front h3 {
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+/* Style for the back of the card */
+.feature-back {
+  font-family: 'Nunito Sans', sans-serif;
+  background: linear-gradient(
+    to left,
+    #218aede2,
+    #011656,
+    #218aede2,
+    #218aede2,
+    #011656,
+    #218aede2,
+    #218aede2,
+    #011656,
+    #218aede2,
+    #218aede2,
+    #011656,
+    #218aede2,
+    #218aede2
+  ); /* Adjust the colors as needed */
+  background-size: 300% 100%;
+  animation: gradientFlow 1s linear infinite;
+  display: flex;
+  min-width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  justify-content: center;
+  transform: rotateY(180deg); /* Initially flipped */
+}
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+/* Hover effect to flip the card */
+.feature-card:hover .feature-front {
+  transform: rotateY(180deg);
+}
+
+.feature-card:hover .feature-back {
+  transform: rotateY(0deg);
+}
+
+.feature-card.flip .feature-front {
+  transform: rotateY(180deg);
+}
+
+.feature-card.flip .feature-back {
+  transform: rotateY(0deg);
+  animation: none; /* To stop the background animation when flipped */
+}
+
+.why-section {
+  width: 100%;
+  height: 600px;
+  margin: 100px 0px;
+  /* border-top: 30px solid #5c7e4d;
+  border-bottom: 30px solid #5c7e4d; */
+  display: grid;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 4s ease, transform 1s ease;
+}
+
+.why-section.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+.why-title {
+  font-size: xxx-large;
+    margin-top: 30px;
+    margin-left: -42px;
+  grid-column-start: 3;
+  grid-column-end: span 2;
+}
+
+.image-container {
+  grid-row-start: 2;
+  grid-row-end: span 4;
+  grid-column-start: 3;
+  grid-column-end: span 1;
+}
+.img-why {
+  height: 493px;
+  width: 500px;
+  margin: 0 0 0 -105px;
+  display: block;
+}
+.point {
+  width: 350px;
+  height: 175px;
+  color: whitesmoke;
+  padding: 20px;
+  border: 1px solid rgb(0 71 255 / 32%);
+  border-radius: 20px;
+  background-color: rgb(0 44 255 / 76%);;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  
+}
+.point h3 {
+  font-size: x-large;
+  text-align: center;
+}
+.point p {
+  font-size: medium;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.left {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  margin-left: 140px;
+}
+.right {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  margin-left: 50px;
+}
+.point:nth-child(1),
+.point:nth-child(3) {
+  grid-row-start: 2;
+  grid-row-end: span 2;
+}
+
+.point:nth-child(2),
+.point:nth-child(4) {
+  grid-row-start: 4;
+  grid-row-end: span 2;
+}
+.hex-container {
+  
+  position: relative;
+  top: -250px;
+  right: 912px;
+  height: 700px;
+  width: 500%;
+  overflow: hidden;
+  z-index:-2;
+}
+.top {
+  border: 16px solid #011656;
+  height: 0px;
+  width: 723px;
+  position: relative;
+  top: -992px;
+  left: 366px;
+}
+.bottom {
+  border: 16px solid #011656;
+  height: 0px;
+  width: 723px;
+  position: relative;
+  top: -356px;
+  left: 366px;
+}
+.side {
+  height: 450px;
+  width: 450px;
+  position: relative;
+  border: 23px solid transparent;
+  transform: rotate(45deg);
+}
+.side:nth-child(1) {
+  top: 102px;
+  left: 872px;
+  border-right-color: #011656;
+  border-top-color: #011656;
+}
+.side:nth-child(2) {
+  top: -394px;
+  right: -120px;
+  border-left-color: #011656;
+  border-bottom-color: #011656;
+}
+.tech-container {
+  text-align: center;
+}
+.tech-container h3{
+  font-size: 40px;
+  margin-left: -42px;
+}
+.tech-used {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.tech-item {
+  display: inline-block;
+  margin: 10px;
+  opacity: 0;
+transform: translateY(50px); /* Move the items off-screen */
+transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Show the tech items with animation when in the viewport */
+.tech-item.appear {
+opacity: 1;
+transform: translateY(0);
+}
+
+.tech-image {
+  width: 100px;
+  height: 100px; /* Adjust the height as needed */
+}
+
+.tech-name {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: larger;
+  margin-top: 5px;
+}

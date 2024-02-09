@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/header/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login/doc_dash.css') }}">
+</head>
+<body>
+    <header class="header-fixed">
+
+        <div class="header-limiter">
+            <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
+            <nav>
+                <a href="{{url_for('home')}}">Home</a>
+                
+                <a href="{{ url_for('login') }}">Log Out</a>
+            </nav>
+    
+        </div>
+    
+    </header>
+    <div class="header-fixed-placeholder"></div>
+    
+    
+<br>
+    <h1 class="fadeIn">Welcome, Dr. {{ username }}!</h1>
+    <div class="app-tables">
+    <!-- Display booked appointments -->
+    <div class="appointment-card ">
+        <h2>
+            <span>Appointment</span>
+            <span>Requests</span>
+        </h2>
+        <div class="padding animate__animated animate__fadeInTopLeft">
+        <table class="appointments-table" border="1">
+            <thead>
+                <tr style="background:transparent;">
+                    <th>Patient</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th style="text-align:center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if appointments %}
+                    <!-- If booked appointments exist -->
+                    {% for appointment in appointments %}
+                        <tr >
+                            <td>&nbsp;&nbsp;{{ appointment['patient'] }}</td>
+                            <td>{{ appointment['date'] }}</td>
+                            <td>{{ appointment['time'] }}</td>
+                            <td>
+                                <div class="accept">
+                                    <form action="{{ url_for('accept_appointment', appointment_id=loop.index0) }}" method="post">
+                                        <button type="submit" name="action" value="accept">Accept</button>
+                                        
+                                        <button type="submit" name="action" value="reject">Reject</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="spacer">
+                            <td colspan="100"> </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center;">No Booking Request yet..</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table></div>
+    </div> <br>
+    <div class="accepted-appointment-card ">
+        <h2>
+            <span>Booked</span>
+            <span>Appointments</span>
+        </h2>
+        <div class="padding animate__animated animate__fadeInBottomRight">
+        <table class="appointments-table" border="1">
+            <thead>
+                <tr style="background:transparent;">
+                    <th>Patient</th>
+                    <th>Chat</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th style="width: fit-content;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if accepted_appointments %}
+                        <!-- If accepted appointments exist -->
+                        {% for accepted_appointment in accepted_appointments %}
+                            <!-- Rows for accepted appointments -->
+                            <tr>
+                                <td>&nbsp;&nbsp;{{ accepted_appointment['patient'] }}</td>
+                                <td><a href="{{ url_for('chat' , username=username) }}"><button id="openChatBtn" >Open Chat</button></a></td>
+                                <td>{{ accepted_appointment['date'] }}</td>
+                                <td>{{ accepted_appointment['time'] }}</td>
+                                <td>
+                                    <form action="{{ url_for('complete_appointment', appointment_id=loop.index0) }}" method="post">
+                                        <center><button type="submit">Done</button></center>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr class="spacer">
+                                <td colspan="100"> </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <!-- If no accepted appointments exist -->
+                        <tr>
+                            <td colspan="5" style="text-align: center;">No accepted appointments yet</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table></div>
+    </div>
+    <script src="../static/login/animation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../static/header/header.js"></script>
+</body>
+</html>

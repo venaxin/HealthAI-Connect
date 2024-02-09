@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/login/login.css">
+</head>
+<body>
+    <div class="login-box">
+         <a href="{{url_for('home')}}">
+            <div class="backBtn">
+               <span class="line tLine"></span>
+               <span class="line mLine"></span>
+               <span class="label">Home</span>
+               <span class="line bLine"></span>
+            </div>
+         </a>
+        <h1>LOGIN</h1>
+        <form method="post" action="{{ url_for('login') }}" >
+            <div class="user-box">
+                <input style="font-family:Verdana, Geneva, Tahoma, sans-serif;" type="text" id="username" name="username" required>
+                <label for="username">Username:</label>
+            </div>
+            <div class="user-box">
+                <input style="font-family:Verdana, Geneva, Tahoma, sans-serif;" type="password" id="password" name="password" required>
+                <label for="password">Password:</label>
+                <span id="togglePassword" class="toggle-password" onclick="togglePasswordVisibility()">
+                    <i class="fa fa-eye"></i>
+                </span>
+            </div>
+        <center><a class="subbmit" href="#" onclick="document.forms[0].submit();">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        <button class="pushable" type="submit">
+          </button>Login
+          </a></center>
+          
+          {% if message %}
+              <p style="color:white " >{{ message }}</p>
+          {% endif %}
+          <hr width="317px">
+          <p style="color:white ">If not registered, <a class="register" href="{{ url_for('register') }}">Register here</a></p>
+    </form></div>
+    <script src="../static/login/login.js"></script>
+</body>
+</html>

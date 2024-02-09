@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+*{
+    font-family: 'Nunito Sans', sans-serif;
+}
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+img{
+    border-radius: 10px;
+}
+body, html{
+    background: #03396c;
+    padding: 0;
+    margin: 0;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.foot
+{
+
+    background-color: #222222;
+    color:white;
+    margin-top:300px;
+    margin-bottom:0px;
+    padding-top:30px;
+    padding-bottom: 30px;
+    padding-left:0px;
+    text-align:center;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 0px;
+
+    bottom: 0;
+    width: 100%;
+
+
+}
+.bg-black {
+    background-color: #011f4b !important;
+    color: white;
+
+}
+textarea.form-control{
+    background-color: #dee8eb !important;
+}
+textarea {
+    background-color: #c8c8c8 !important;
+    resize: none;
+}
+.container {
+    width: 2000px;
+    margin: auto; /* Adjusted to 0 */
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+#default h2{
+    padding-top: 23px;
+    text-align: center;
+}
+.form-control[type=file] {
+    background: #03396c !important;
+    color: white;
+}
+.img_section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.alert-success {
+    background-color: #dee8eb;
+}
+.card {
+    color:white;
+    background-color: 	#6497b1;
+    margin: 10px; /* Adjusted margin */
+    padding: 20px;
+    width: 900px; /* Adjusted width */
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box; /* Added to include padding and borders in width calculation */
+}
+.right p{
+    color:white;
+    text-align: left;
+
+}
+.card h2{
+    color:white;
+    text-align: left;
+    font-weight:700;
+}
+.inputt{
+    display: flex;
+    flex-direction: column;
+}
+.imageinput{
+    display: flex;
+    align-items: center;
+}
+#imagePreview{
+    border-radius: 10px;
+    display: flex;
+    margin: auto;
+}
+.image-section button{
+    background-color: #03396c !important;
+    text-align: center;
+    align-self: center;
+     padding: 10px 20px 10px 20px;
+    margin-left: 20px;
+}
+.result{
+    color:white;
+    text-align: center;
+    padding-top: 23px;
+}

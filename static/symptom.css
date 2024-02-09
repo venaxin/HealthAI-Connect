@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  background-image: url("../static/images/sympback.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  overflow-y: auto; 
+
+}
+
+h1 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom:20px; 
+    color:#3374a4;
+    font-weight:900;
+}
+h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom:20px; 
+    color:#3374a4;
+    font-weight:900;
+}
+form {
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.19);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+form h2{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 30px;
+    margin: auto;
+}
+.symptomselect {
+    width: 85%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.44);
+    box-shadow: rgba(112, 213, 246, 0.25) 0px 50px 100px -20px,
+      rgba(103, 204, 244, 0.553) 0px 30px 60px -30px,
+      rgba(70, 242, 248, 0.35) 0px -2px 6px 0px inset;
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    display: flex;
+    flex-wrap: wrap; /* Wrap children to the next line */
+    justify-content: space-between; /* Add space between children */
+    gap: 20px; /* Adjust the gap between children */
+}
+.alert-success {
+    --bs-alert-color: var(--bs-success-text-emphasis) ;
+    --bs-alert-bg: #b7f8ff !important;
+    --bs-alert-border-color: #9797973d !important;
+    --bs-alert-link-color: var(--bs-success-text-emphasis);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 35px;
+}
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1.5px solid #92eaf9;
+    border-radius: 15px;
+    height: 40px;
+    text-transform: capitalize;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 6px;
+    right: 1px;
+    width: 20px;
+}
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+border-bottom-left-radius: 15px;
+border-bottom-right-radius: 15px;
+}
+.select2-container--open .select2-dropdown--above {
+    border-radius: 20px;
+     border-bottom: 1px solid #aaa;
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px;
+}
+.select2-container--open .select2-dropdown--below {
+    border-radius: 20px;
+    background-color: #9aedfff8;
+    border: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 0 10px rgb(0 255 217 / 48%);
+}
+.select2-results__option[aria-selected] {
+    color: rgb(0, 0, 0) !important;
+    cursor: pointer;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #4ef3ffbe;
+    color: rgb(0, 0, 0);
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 2px solid #156bff74;
+    border-radius: 20px;
+}
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #00a7cd;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+    width: 0 !important; /* Set the width to 0 to hide the scrollbar */
+    display: none !important; /* Optional: Hide the scrollbar in WebKit browsers */
+}
+
+/* Adjust the width of select elements within the symptom select */
+.symptomselect select {
+    width: calc(33.33% - 10px); /* Three select elements per row */
+    margin-bottom: 10px;
+}
+.select2-results__option {
+    height: 40px; /* Set the height for select options */
+    line-height: 40px; /* Set the line-height for select options */
+}
+
+/* Adjust for smaller screens if needed */
+@media (max-width: 768px) {
+    .symptomselect select {
+        width: calc(50% - 10px); /* Display two select elements per row for smaller screens */
+    }
+}
+.updown{
+    width:260px;
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 5px; /* Adjust space between label and select */
+}
+
+select {
+    width: 100%; /* Selects take full width within columns */
+    margin-bottom: 10px; /* Add space between select options */
+}
+
+/* Adjust for smaller screens if needed */
+@media (max-width: 768px) {
+    form {
+        grid-template-columns: 1fr 1fr; /* Adjust for smaller screens */
+        grid-template-rows: auto; /* Reset rows for responsiveness */
+    }
+}
+
+input[type="submit"] {
+    border: 1px solid #ffffff7d;
+    background-color: rgba(0, 234, 255, 0.277) !important;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 20px 20px 20px;
+    font-size: 23px;
+    font-weight: 700;
+    height: 50px;
+    width: 12%;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 30px;
+    border-radius: 3px;
+    text-transform: capitalize;
+    align-self: center;
+    border-radius: 25px;
+}
+
+
+input:focus {
+    outline: none;
+}
+
+input.input-submit {
+    background-image: linear-gradient(0, #64c6ff, #00f2ff);
+    background-size: 0;
+    transition: .8s;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+input.input-submit:hover {
+    background-size: 100%;
+    color: #fff;
+}
+
+
+h1 + p {
+    margin-top: 30px;
+}
+
+ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.prediction-result {
+    width: 80%;
+    margin: 40px auto;
+    padding: 2px 20px;
+    background-color: rgba(255, 255, 255, 0.19);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+}
+
+.prediction-result h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.result-info b{
+    font-size: 20px;
+    color: #093145 !important;
+}
+.result-info b {
+    color: #333;
+    border: 1px rgba(208, 208, 208, 0.367) solid ;
+    border-radius: 15px;
+    background-color: rgb(116 227 255 / 44%);;
+    box-shadow: rgba(112, 213, 246, 0.25) 0px 50px 100px -20px,
+      rgba(103, 204, 244, 0.553) 0px 30px 60px -30px,
+      rgba(70, 242, 248, 0.35) 0px -2px 6px 0px inset;
+    backdrop-filter: blur(15px);
+   padding: 10px;
+   margin-left: 7px;
+}
+.perc{
+    padding: 5px;
+    font-size: larger;
+    font-weight:bold;
+    color: #04abff !important;
+    text-decoration: none;
+}
+.result-info p {
+    font-size: large;
+    color: black;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.result-info ul {
+    list-style-type: '➤'; /* Use disc style for bullets */
+    padding-left: 20px; /* Add left padding to accommodate the bullets */
+}
+
+.result-info li {
+    font-size: large;
+    color: black;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-family: 'Nunito Sans', sans-serif;
+}
+.selected-symptoms {
+    display: flex; /* Use flexbox for side-by-side layout */
+    justify-content: center; /* Center the list horizontally */
+}
+
+/* Style for the ul element */
+.selected-symptoms ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+/* Style for the li elements */
+.selected-symptoms li {
+    background-color: #5cd8ff87;
+    color: black;
+    padding: 10px;
+    margin: 5px;
+    font-weight: bold;
+    border: 2px solid #0006;
+    box-shadow: #7ec8ffcc 0px 3px 6px, rgb(0 231 255 / 64%) 0px 3px 6px;
+    display: inline-block;
+    font-family: 'Nunito Sans', sans-serif;
+}
