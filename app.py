@@ -717,4 +717,4 @@ def save_appointments_to_csv(appointments, file_path):
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
