@@ -34,7 +34,9 @@ body {
   margin-top: 10%;
   margin-left: 3%;
 }
-
+.image-context {
+  width: 900px;
+}
 .image-cont-bottom a {
   margin: 50px 25px 0px 0;
 }
