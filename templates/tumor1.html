@@ -1,7 +1,7 @@
 {% extends "tumor.html" %} {% block content %}
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  "Empowering Lives through Precise Brain Tumor Detection"
+  Caution : This is a prediction model and not a substitute for a professional medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not upload any irrelevant images.
   <button
     type="button"
     class="btn-close"
@@ -40,7 +40,8 @@
       />
     </div>
     <br /><br />
-    <div>
+    <!-- <div>
+      
       <button
         type="button"
         class="btn btn-success btn-lg fw-bold"
@@ -49,14 +50,17 @@
       >
         Predict
       </button>
+    </div> -->
+    <div id="fifth" class="buttonBox">
+      <button type="button" id="btn-predict">Predict</button>
     </div>
   </div>
 
   <div class="loader" style="display: none"></div>
 
-  <h3 class="results" id="result">
+  <h5 class="results" id="result">
     <span> </span>
-  </h3>
+  </h5>
 </center>
 <br /><br />
 {% endblock %}

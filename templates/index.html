@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <title>HealthAI Connect</title>
     <link rel="stylesheet" href="../static/styles.css" />
-    <link rel="icon" href="../static/images/Disease-prediction.png" type="image/x-icon">
+    <link
+      rel="icon"
+      href="../static/images/Disease-prediction.png"
+      type="image/x-icon"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='flip.css') }}"
@@ -28,6 +32,7 @@
       src="https://kit.fontawesome.com/6c08a6e84f.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body>
     <!-- Green overlay -->
@@ -68,15 +73,16 @@
 
       <!-- banner -->
       <div class="image-context">
-        <div>
-          <h2>Skip the Travel!</h2>
-          <h2>Take Online Doctor Consultation</h2>
-          <div class="image-cont-bottom">
-            <a href="{{ url_for('login') }}">
-              <button class="button-29" role="button">Book Now</button></a
-            >
-          </div>
+        <div class="image-text">
+          <h2 id="typed-output" class="d-inline"></h2>
         </div>
+      </div>
+      <div class="image-cont-bottom">
+        <a href="{{ url_for('login') }}"
+          ><div class="button-29" role="button">
+            <span>Book Now</span>
+          </div></a
+        >
       </div>
     </div>
     <!-- carousel -->
@@ -115,7 +121,9 @@
                 <span> NLP Driven Chatbot </span>
               </h5>
               <p class="card-text">
-                “ The NLP-driven Medical Chatbot is an innovative feature of HealthAI Connect, designed to offer users precise and concise answers to their medical queries. ”
+                “ The NLP-driven Medical Chatbot is an innovative feature of
+                HealthAI Connect, designed to offer users precise and concise
+                answers to their medical queries. ”
               </p>
             </div>
           </div>
@@ -133,7 +141,9 @@
                 <span> NutriVision </span>
               </h5>
               <p class="card-text">
-                “  Instant food analysis through images, tailored answers to your dietary questions using Google Gemini Pro Vision for accurate calorie counts and professional recommendations. ”
+                “ Instant food analysis through images, tailored answers to your
+                dietary questions using Google Gemini Pro Vision for accurate
+                calorie counts and professional recommendations. ”
               </p>
             </div>
           </div>
@@ -244,11 +254,15 @@
             </div>
             <div class="feature-back">
               <p>
-                Symptom Predictor employs advanced Machine Learning techniques
-                to analyze user-input symptoms, predicting potential diseases or
-                health conditions based on the provided data. Upon entering
-                symptoms, the feature identifies and presents likely diseases,
-                offering concise descriptions of the conditions.
+                <b>Symptom Predictor</b> employs advanced Machine Learning
+                techniques to
+                <b
+                  >analyze user-input symptoms, predicting potential diseases or
+                  health conditions</b
+                >
+                based on the provided data. Upon selecting symptoms, the feature
+                identifies and presents likely diseases, offering concise
+                descriptions of the conditions.
               </p>
             </div>
           </div>
@@ -266,9 +280,13 @@
             </div>
             <div class="feature-back">
               <p>
-                Review Predictor employs advanced algorithms to analyze scenario
-                text, predicting associated diseases and suggesting appropriate
-                medications. Users input scenarios to receive concise disease
+                <b>Health Description Disease Predictor</b> employs advanced
+                algorithms
+                <b
+                  >to analyze scenario text, predicting associated diseases and
+                  suggesting appropriate medications.</b
+                >
+                Users input scenarios as text to receive concise disease
                 insights and recommended medicines, aiding in understanding
                 potential health concerns and suggesting relevant treatment
                 options.
@@ -289,11 +307,15 @@
             </div>
             <div class="feature-back">
               <p>
-                Healthcare Imaging is an advanced feature utilizing AI-driven
-                algorithms to analyze medical imaging, such as X-rays, CT scans,
-                or MRIs. It assesses these images to detect potential indicators
-                of diseases like tumors, tuberculosis, and other anomalies,
-                aiding in early disease identification and proactive healthcare
+                <b>Healthcare Imaging</b> is an advanced feature utilizing
+                AI-driven algorithms
+                <b
+                  >to analyze medical imaging, such as X-rays, CT scans, or
+                  MRIs.</b
+                >
+                It assesses these images to detect potential indicators of
+                diseases like tumors, tuberculosis, and other anomalies, aiding
+                in early disease identification and proactive healthcare
                 management.
               </p>
             </div>
@@ -377,6 +399,7 @@
       </div>
     </section>
     <!-- why us -->
+    <!-- connected -->
     <section class="why-section">
       <h2 class="why-title">Why Choose Us?</h2>
       <div class="point left">
@@ -416,12 +439,6 @@
           alt="Doctor Image"
         />
       </div>
-      <div class="hex-container">
-        <div class="side"></div>
-        <div class="side"></div>
-        <div class="top"></div>
-        <div class="bottom"></div>
-      </div>
     </section>
     <!-- chatbot -->
     <div>
@@ -439,7 +456,7 @@
               class="chat-icon"
               src="../static/images/chat-icon.gif"
               alt="Chat Icon"
-            />Dr.Rowbot
+            />Medibot
           </h3>
 
           <button id="closeChat">&times;</button>
@@ -507,42 +524,8 @@
         </div>
       </div>
     </div>
-    <br /><br /><br />
-    <!-- comms -->
-    <div class="connected">
-      <h1>Stay Connected with HealthAI Connect</h1>
-      <div class="wrapper">
-        <div
-          class="button"
-          onclick="window.location.href = 'https://www.facebook.com';"
-        >
-          <div class="icon"><i class="fa fa-facebook-f"></i></div>
-          <span>Facebook</span>
-        </div>
-        <div
-          class="button"
-          onclick="window.location.href = 'https://www.instagram.com';"
-        >
-          <div class="icon"><i class="fa fa-instagram"></i></div>
-          <span>Instagram</span>
-        </div>
-        <div
-          class="button"
-          onclick="window.location.href = 'https://github.com/venaxin';"
-        >
-          <div class="icon"><i class="fa fa-github"></i></div>
-          <span>Github</span>
-        </div>
-        <div
-          class="button"
-          onclick="window.location.href = 'https://www.linkedin.com';"
-        >
-          <div class="icon"><i class="fa fa-linkedin"></i></div>
-          <span>LinkedIn</span>
-        </div>
-      </div>
-    </div>
-    <br /><br />
+    <br /><br /><br /><br /><br />
+
     <!-- footer -->
     <footer class="classic-footer">
       <div class="footer-content">
@@ -581,11 +564,41 @@
             <li><input type="text" placeholder="Type your message" /></li>
             <li><button class="button-29" role="button">Send</button></li>
           </ul>
+          <div class="wrapper">
+            <div
+              class="button"
+              onclick="window.location.href = 'https://www.facebook.com';"
+            >
+              <div class="icon"><i class="fa fa-facebook-f"></i></div>
+              <span>Facebook</span>
+            </div>
+            <div
+              class="button"
+              onclick="window.location.href = 'https://www.instagram.com';"
+            >
+              <div class="icon"><i class="fa fa-instagram"></i></div>
+              <span>Instagram</span>
+            </div>
+            <div
+              class="button"
+              onclick="window.location.href = 'https://github.com/venaxin';"
+            >
+              <div class="icon"><i class="fa fa-github"></i></div>
+              <span>Github</span>
+            </div>
+            <div
+              class="button"
+              onclick="window.location.href = 'https://www.linkedin.com';"
+            >
+              <div class="icon"><i class="fa fa-linkedin"></i></div>
+              <span>LinkedIn</span>
+            </div>
+          </div>
         </div>
       </div>
       <br /><br />
       <div class="footer-bottom">
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
+        <p>&copy; 2023 HealthAI Connect. All rights reserved.</p>
       </div>
     </footer>
     <script>
@@ -636,7 +649,19 @@
 
       toggleLoaderAndScrolling();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+      var options = {
+        strings: ["Skip the Travel!", "Take Online Doctor Consultation"],
+        typeSpeed: 50,
+        backSpeed: 30,
+        startDelay: 500,
+        backDelay: 1000,
+        loop: true,
+      };
 
+      var typed = new Typed("#typed-output", options);
+    </script>
     <script src="../static/script.js"></script>
     <!-- for header -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

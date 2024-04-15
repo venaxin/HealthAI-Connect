@@ -105,7 +105,7 @@ function displayDefaultInstructions() {
     // Add default instructions to the chat log only if it's the first message
     instructionsShown = true;
     const defaultInstructions =
-      "Welcome! I am Dr.Rowbot, Ask me anything about your health or medical concerns. I'm here to help!";
+      "Welcome! I am Medibot, Ask me anything about health or medical concerns. I'm here to help!";
     const defaultMessageElement = document.createElement("div");
     defaultMessageElement.classList.add("message");
     defaultMessageElement.classList.add("chatbot-message"); // Adding chatbot message class

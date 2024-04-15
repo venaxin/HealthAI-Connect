@@ -1,9 +1,9 @@
 @import url(https://db.onlinewebfonts.com/c/41cdafd19e156a1f74759f9c88b878ff?family=Google+Sans+Text+Regular);
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap");
 
 .about-section {
-  background-image: linear-gradient(to right, #000000, #001a64,#010307);
+  background-image: linear-gradient(to right, #4897bc, #001a64, #010307);
   padding: 40px 80px 40px 80px;
   box-shadow: 20px 20px 10px 0px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -21,7 +21,7 @@
 }
 
 .about-section h2 {
-  font-size: xx-large;
+  font-size: 45px;
   margin-top: -15px;
   text-align: center;
   color: #ffffff;
@@ -33,17 +33,17 @@
   padding: 10px 0px 0px 0px;
 }
 .about-section > p {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   text-align: center;
   padding: 5px;
   font-size: 20px;
   color: #ffffff;
 }
 .feature-back p {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   text-align: center;
   padding: 15px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.6;
   color: snow;
@@ -111,8 +111,8 @@
 }
 /* Style for the back of the card */
 .feature-back {
-  font-family: 'Nunito Sans', sans-serif;
-  background: linear-gradient(
+  font-family: "Nunito Sans", sans-serif;
+  /* background: linear-gradient( 
     to left,
     #218aede2,
     #011656,
@@ -127,7 +127,8 @@
     #011656,
     #218aede2,
     #218aede2
-  ); /* Adjust the colors as needed */
+  );*/ /* Adjust the colors as needed */
+  border: 3px solid #ffffff;
   background-size: 300% 100%;
   animation: gradientFlow 1s linear infinite;
   display: flex;
@@ -182,15 +183,36 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.why-section-background {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  border-radius: 71% 29% 70% 30% / 36% 30% 70% 64%;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: rgb(255 255 255 / 25%) 0px 50px 100px -20px,
+    rgb(255 255 255 / 30%) 0px 30px 60px -30px,
+    rgb(44 71 99 / 35%) 0px -2px 6px 0px inset;
+  backdrop-filter: blur(6px);
+}
 .why-title {
-  font-size: xxx-large;
-    margin-top: 30px;
-    margin-left: -42px;
+  font-size: 45px;
+  margin-top: 30px;
+  margin-left: -42px;
   grid-column-start: 3;
   grid-column-end: span 2;
 }
 
 .image-container {
+  border-radius: 71% 29% 70% 30% / 36% 30% 70% 64%;
+  background-color: rgb(0 74 255 / 65%);
+  box-shadow: rgb(0 64 255 / 92%) 0px 50px 100px -20px,
+    rgb(0 0 0 / 77%) 0px 30px 60px -30px,
+    rgb(46 77 96 / 81%) 0px -2px 6px 0px inset;
+  backdrop-filter: blur(6px);
+  height: 520px;
+  width: 320px;
+  border: 1px solid rgb(0 71 255 / 32%);
   grid-row-start: 2;
   grid-row-end: span 4;
   grid-column-start: 3;
@@ -209,19 +231,18 @@
   padding: 20px;
   border: 1px solid rgb(0 71 255 / 32%);
   border-radius: 20px;
-  background-color: rgb(0 44 255 / 76%);;
+  background-color: rgb(0 44 255 / 76%);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  
 }
 .point h3 {
   font-size: x-large;
   text-align: center;
 }
 .point p {
-  font-size: medium;
-  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
 }
 .left {
   grid-column-start: 1;
@@ -245,14 +266,13 @@
   grid-row-end: span 2;
 }
 .hex-container {
-  
   position: relative;
   top: -250px;
   right: 912px;
   height: 700px;
   width: 500%;
   overflow: hidden;
-  z-index:-2;
+  z-index: -2;
 }
 .top {
   border: 16px solid #011656;
@@ -292,8 +312,9 @@
 .tech-container {
   text-align: center;
 }
-.tech-container h3{
-  font-size: 40px;
+.tech-container h3 {
+  color: white;
+  font-size: 45px;
   margin-left: -42px;
 }
 .tech-used {
@@ -307,14 +328,14 @@
   display: inline-block;
   margin: 10px;
   opacity: 0;
-transform: translateY(50px); /* Move the items off-screen */
-transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(50px); /* Move the items off-screen */
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Show the tech items with animation when in the viewport */
 .tech-item.appear {
-opacity: 1;
-transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .tech-image {
@@ -323,8 +344,9 @@ transform: translateY(0);
 }
 
 .tech-name {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 700;
   font-size: larger;
   margin-top: 5px;
+  color: white;
 }
