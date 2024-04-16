@@ -223,14 +223,23 @@ def send():
     if user_question:
         try: 
             # Attempt to perform similarity search
+            google_gemini=genai.GenerativeModel('gemini-pro')
             docs = knowledge_base.similarity_search(user_question)
-            print(docs)
-            # Assuming 'llm' is a pre-trained language model
-            chain = load_qa_chain(llm=llm, chain_type="stuff")
-            with get_openai_callback() as cb:
+            print(docs[0])
+            doc=f" {docs[0]}"
+            # Assuming 'llm' is a pre-trained language model If nothing related to the question in the prompt then you can't answer the question .
+            #chain = load_qa_chain(llm=llm, chain_type="stuff")
+            #with get_openai_callback() as cb:
                 # Attempt to run the QA chain
-                response = chain.run(input_documents=docs, question=user_question,return_only_outputs=True)
-                print(cb)
+             #   response = chain.run(input_documents=docs, question=user_question,return_only_outputs=True)
+              #  print(cb)
+            PROMPT="""You are an expert in medical and healthcare knowledge and your name is medibot. If you are asked "who are you" you can say your name and profession. and you can reply to thank you also.
+            you need to answer the following question from the given information only and provide the best possible answer from given info only.
+            if there is any related word or info in the prompt then you can answer the question.   
+            Your answer should be very precise and in one para and to the point dont give any irrelevant information. your answer should be like you are telling not giving from any resources"""
+            question=PROMPT+user_question+doc 
+            responses= google_gemini.generate_content(question)
+            response=responses.text
             return jsonify({'response': response})
 
         except ValueError as e:

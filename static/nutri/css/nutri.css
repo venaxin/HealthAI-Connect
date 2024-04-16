@@ -12,7 +12,7 @@
     animation: spin 1s linear infinite;
 }
 img{
-    border-radius: 10px;
+    border-radius: 25px;
 }
 body, html{
     background: #03396c;
@@ -51,10 +51,15 @@ body, html{
 }
 textarea.form-control{
     background-color: #dee8eb !important;
+    border-radius: 25px;
 }
 textarea {
     background-color: #c8c8c8 !important;
     resize: none;
+}
+.form-control[type=file]:not(:disabled):not([readonly]) {
+    cursor: pointer;
+    border-radius: 25px;
 }
 .container {
     width: 2000px;
@@ -82,13 +87,14 @@ textarea {
 }
 .card {
     color:white;
-    background-color: 	#6497b1;
+    background-color: 	#00143d;
     margin: 10px; /* Adjusted margin */
     padding: 20px;
     width: 900px; /* Adjusted width */
     min-height: 70vh;
     display: flex;
     flex-direction: column;
+    border-radius: 25px;
     align-items: center;
     box-sizing: border-box; /* Added to include padding and borders in width calculation */
 }
@@ -111,7 +117,7 @@ textarea {
     align-items: center;
 }
 #imagePreview{
-    border-radius: 10px;
+    border-radius: 25px;
     display: flex;
     margin: auto;
 }
