@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+}
+.display {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0px}
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 0px 0 0 -17px;
+  width: 107%;
+}
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button:hover {
+  color: rgb(1, 21, 102);
+}
+.content {
+  border-radius: 5px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-height: 490px;
+}
+.info-card {
+  display: block;
+  background: #03396c ;
+  margin-top: 40px;
+  margin-left: 100px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  padding: 20px;
+  width: 500px;
+  max-height: 650px;
+  overflow: hidden;
+}
+
+.info-card::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit (Chrome, Safari, Opera) */
+}
+.content p {
+  text-align: justify;
+}
+h1 {
+  margin: auto;
+}
+
+.info-box-fixed .info-box-limiter a {
+  text-decoration: none;
+}
+
+.info-box-fixed .info-box-limiter nav {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 15px;
+  line-height: 35px;
+  margin-bottom: -16px;
+}
+
+.info-box-fixed .info-box-limiter nav a {
+  font-family: "Nunito Sans", sans-serif;
+  display: inline-block;
+  padding: 0 15px;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  position: relative;
+}
+
+.info-box-fixed .info-box-limiter nav a::before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 3px;
+  bottom: -0.5rem;
+  left: 50%;
+  font-weight: 900;
+  background: linear-gradient(90deg, #46dffa, #98e4f7);
+  transition: width 200ms ease-in-out, left 200ms ease-in-out; /* Added ease-in-out */
+  transform-origin: center; /* Added transform origin */
+}
+
+.info-box-fixed .info-box-limiter nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+  transition: background-color 0.6s ease-in-out;
+}
+
+.info-box-fixed .info-box-limiter nav a.clicked::after {
+  background-color: #ffffff;
+}
