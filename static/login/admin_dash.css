@@ -161,7 +161,7 @@ tr.spacer {
 }
 .padding{
   padding: 10px 12px 8px 12px;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: inset 0px 0px 19px -6px #9686ff;
   backdrop-filter: blur(15px);
   background: #5f72af;
