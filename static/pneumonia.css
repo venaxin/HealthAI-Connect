@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap");
 body {
-  background: #00143d;
+  background: #03396c;
   font-family: "Nunito Sans", sans-serif;
 }
 .form-control {
@@ -11,7 +11,7 @@ body {
   font-weight: 700;
   line-height: 1.5;
   color: #ffffff;
-  background-color: #03396c !important;
+  background-color: #00143d !important;
   background-clip: padding-box;
   border: var(--bs-border-width) solid #ffffff;
   -webkit-appearance: none;
@@ -24,13 +24,13 @@ body {
   width: 300px;
   height: 300px;
   border-radius: 25px;
-  border: 2px solid #03396c;
+  border: 2px solid #00143d;
 }
 .img-contain {
   width: 440px;
   height: 385px;
   border-radius: 25px;
-  background-color: #03396c;
+  background-color: #00143d;
 }
 .heading1 {
   font-family: "Nunito Sans", sans-serif;
@@ -83,7 +83,7 @@ body {
   margin-top: 25px;
   font-weight: 900;
   padding: 10px 20px;
-  background-color: #03396c;
+  background-color: #00143d;
   border-radius: 25px;
 }
 .alert-success {
@@ -95,4 +95,7 @@ body {
 .display center {
   height: 500px;
   width: 100%;
+}
+.loader{
+  margin-top: 25px;
 }
