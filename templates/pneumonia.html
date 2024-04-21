@@ -1,7 +1,9 @@
 {% extends "pneumonia1.html" %} {% block content %}
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  "Empowering Lives through Pneumonia Detection"
+  Caution : This is a prediction model and not a substitute for a professional
+  medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not
+  upload any irrelevant images.
   <button
     type="button"
     class="btn-close"
@@ -14,10 +16,9 @@
     <center>
       <br />
       <h2 class="heading1">Pneumonia Detection</h2>
-      <br />
 
       <form id="upload-file" method="post" enctype="multipart/form-data ">
-        <div class="mb-5 container" style="width: 500px">
+        <div class="mb-4 container" style="width: 500px">
           <label for="imageUpload" class="para form-label"
             >Upload X-Ray here!</label
           >
@@ -43,7 +44,15 @@
             type="button"
             class="btn btn-success btn-lg fw-bold"
             id="btn-predict"
-            style="font-size: 25px;  border-radius:50px; background-color: #00143d; color: white; padding: 10px 20px; margin-top: 20px; margin-bottom: 20px;"
+            style="
+              font-size: 25px;
+              border-radius: 50px;
+              background-color: #00143d;
+              color: white;
+              padding: 10px 20px;
+              margin-top: 20px;
+              margin-bottom: 20px;
+            "
           >
             Predict
           </button>
@@ -56,7 +65,7 @@
         <span> </span>
       </h3>
     </center>
-    <br /><br />
+    <br />
   </div>
   <div class="info-card">
     <h1>Pneumonia</h1>
@@ -75,6 +84,7 @@
       </div>
       <hr style="width: 600px; margin-left: -40px" />
       <div class="content" id="overview-content">
+        <img class="info-image" src="../static/images/pneumonia_info1.png" />
         <p>
           Pneumonia is an infection in your lungs caused by bacteria, viruses or
           fungi. Pneumonia causes your lung tissue to swell (inflammation) and

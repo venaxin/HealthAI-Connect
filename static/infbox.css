@@ -10,7 +10,8 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0px}
+  padding: 0px;
+}
 .buttons-container {
   display: flex;
   justify-content: space-around;
@@ -33,11 +34,18 @@ body {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  max-height: 490px;
+  max-height: 543px;
+}
+.info-image {
+  float: right;
+  width: 280px;
+  padding: 10px 0px 0px 10px;
+  border-radius: 25px;
+  margin-right: 0;
 }
 .info-card {
   display: block;
-  background: #00143d ;
+  background: #00143d;
   margin-top: 40px;
   margin-left: 100px;
   justify-content: space-between;
@@ -45,7 +53,7 @@ body {
   border-radius: 25px;
   padding: 20px;
   width: 500px;
-  max-height: 650px;
+  max-height: 675px;
   overflow: hidden;
 }
 

@@ -20,15 +20,7 @@
     <link rel="stylesheet" href="../static/header/header.css" />
   </head>
   <body>
-    <header
-      class="header-fixed"
-      style="
-        background: linear-gradient(to right, #000000, #030b22, #011029);
-        box-shadow: rgb(56 144 200 / 7%) 0px 1px 1px, #a4f0ff 0px 2px 2px,
-          rgb(115 241 234 / 7%) 0px 4px 4px, #7ae1f64f 0px 8px 8px,
-          #7be9ff8c 0px 16px 16px;
-      "
-    >
+    <header class="header-fixed" style="background: #00143d">
       <div class="header-limiter">
         <img
           class="logo"
@@ -51,7 +43,7 @@
       </h1>
       <h3
         class="animate__animated animate__fadeInUp"
-        style="color: white; margin-top: -5px; font-size: 20px;"
+        style="color: white; margin-top: -5px; font-size: 20px"
       >
         Please describe your health condition or any medication that you took.
       </h3>
@@ -69,6 +61,7 @@
           cols="50"
           required
           class="animate__animated animate__fadeIn"
+          placeholder="Type here..."
         >
 {{ rawtext }}</textarea
         >
@@ -76,7 +69,7 @@
         <button
           type="submit"
           class="animate__animated animate__fadeInUp"
-          style="font-weight: bold; font-size: 15px; padding: 10px"
+          style="font-weight: bold; font-size: 18px; padding: 18px; margin-top: 0px; background: #00143d; color: white;"
         >
           Predict
         </button>
@@ -192,33 +185,16 @@
           class="animate__animated animate__fadeInUp"
           style="
             font-weight: bold;
-            font-size: 20px;
-            background: #ffffff42;
-            border-radius: 15px;
-            padding: 12px;
+            font-size: 25px;
+            background: #00143d;
+            border-radius: 25px;
+            padding: 20px;
             width: fit-content;
             margin: auto;
-            color: cyan;
+            color: white;
           "
         >
-          Condition : <b style="font-size: 26px; color: white">{{ result }}</b>
-        </p>
-        <p
-          class="animate__animated animate__fadeInUp"
-          style="
-            font-weight: bold;
-            font-size: 20px;
-            background: #ffffff42;
-            border-radius: 15px;
-            padding: 12px;
-            width: fit-content;
-            margin: auto;
-            color: cyan;
-            margin-left: 13px;
-          "
-        >
-          Confidence :
-          <b style="font-size: 26px; color: white">{{confidence}}%</b>
+          Disease : <b style="font-size: 25px; color:cyan">{{ result }}</b>
         </p>
       </div>
       <p

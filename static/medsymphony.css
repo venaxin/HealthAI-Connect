@@ -44,11 +44,7 @@
 }
 body {
     font-family: 'Nunito Sans', sans-serif;
-    background-image: url('../static/images/revbak_result.png');
-
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background: #03396c;
     margin: 0;
     padding: 0;
     display: flex;
@@ -71,8 +67,8 @@ h3{
     margin-top: 5px;
 }
 .alert-success {
-    --bs-alert-color: var(--bs-success-text-emphasis) ;
-    --bs-alert-bg: #b7f8ff !important;
+    --bs-alert-color: black !important;
+    --bs-alert-bg: #ffffff !important;
     --bs-alert-border-color: #9797973d !important;
     --bs-alert-link-color: var(--bs-success-text-emphasis);
 }
@@ -200,19 +196,18 @@ h3{
     margin: 0 auto;
     width: fit-content;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.796);
+    border-radius: 25px;
 }
 form {
     width: fit-content;
     font-size: medium;
     display: grid;
     margin: auto;
-    background-color: #004e5e4a;
+    background-color: #00143d;
     color: white;
     padding: 20px 20px 0px 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.796);
+    border-radius: 25px;
+
 }
 .container {
     text-align: center;
@@ -226,9 +221,7 @@ form {
     background-color: #01102fe0;
     padding: 20px;
     color: white;
-    border-radius: 8px 89px 0 0px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.796);
-    
+    border-radius: 25px 25px 0 0px;
 }
 .info p{
     color: white;
@@ -236,21 +229,20 @@ form {
 }
 .precautions{
     text-align: center;
-    background-color: #5de4ff8f;
+    background-color: #4a6c93;
     padding: 20px;
     color: white;
-    border-radius: 0 0 8px 89px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.796);
-    
+    border-radius: 0 0 25px 25px;
 }
 textarea {
     height: 100%;
     width: 90%;
+    font-size: 20px;
     /* overflow: hidden; */
     margin: auto;
     padding: 19px 20px 88px 20px;
     border: 1px solid #0d0c0c;
-    border-radius: 14px;
+    border-radius: 25px;
     resize: none;
 }
 
@@ -265,7 +257,7 @@ button {
     margin: 20px auto;
     color: #fff;
     border: none;
-    border-radius: 14px;
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -280,19 +272,19 @@ button:hover {
     padding: 16px;
     justify-content: space-evenly;
     margin: 0 auto;
-    border-radius: 15px;
+    border-radius: 25px;
     min-width: fit-content;
     max-width: fit-content;
-    background: #000d2f99;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.796);
+    background: #00143d;
 }
 
 .lists {
     margin: 0px 15px;
     padding: 10px 12px 10px 12px;
-    background-color: #ffffff;
-    border-radius: 15px;
+    background-color: #4a6c93;
+    border-radius: 25px;
     font-weight: 700;
+    color:white;
 }
 ul{
     list-style-type: disclosure-closed;

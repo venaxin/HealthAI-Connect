@@ -36,12 +36,7 @@ body {
 /* header */
 
 .header-fixed {
-  background-image: linear-gradient(
-    to top,
-    #29204e,
-    #443f81,
-    #744ffa
-  );
+  background:#5f72af;
   padding: 20px 40px;
   height: 73px;
   color: #ffffff;
@@ -107,7 +102,7 @@ h1 {
 
 /* Doctor Dashboard styles */
 h2 {
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 700;
   font-family: 'Nunito Sans', sans-serif;
   text-align: center;
@@ -169,6 +164,7 @@ tr.spacer {
   border-radius: 10px;
   box-shadow: inset 0px 0px 19px -6px #9686ff;
   backdrop-filter: blur(15px);
+  background: #5f72af;
 }
 table th{
     padding: 10px;

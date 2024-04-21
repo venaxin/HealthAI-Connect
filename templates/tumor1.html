@@ -1,7 +1,9 @@
 {% extends "tumor.html" %} {% block content %}
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  Caution : This is a prediction model and not a substitute for a professional medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not upload any irrelevant images.
+  Caution : This is a prediction model and not a substitute for a professional
+  medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not
+  upload any irrelevant images.
   <button
     type="button"
     class="btn-close"
@@ -9,38 +11,36 @@
     aria-label="Close"
   ></button>
 </div>
-<center>
-  <br />
-  <h2 class="heading1">Brain Tumor Detection</h2>
-  <br />
-
-  <form id="upload-file" method="post" enctype="multipart/form-data ">
-    <div class="mb-5 container" style="width: 500px">
-      <label for="imageUpload" class="para form-label"
-        >Upload X-Ray here!</label
-      >
-      <input
-        class="form-control bg-secondary"
-        type="file"
-        name="file"
-        class="btn btn-success"
-        id="imageUpload"
-        accept=".png, .jpg, .jpeg"
-      />
-    </div>
-  </form>
-  <div class="image-section" style="display: none">
-    <div class="img-contain">
-      <h2 class="heading2">Uploaded Image</h2>
-      <img
-        id="imagePreview"
-        class="image img-responsive"
-        src="#"
-        style="width: 300px; height: 300px"
-      />
-    </div>
-    <br /><br />
-    <!-- <div>
+<div class="display">
+  <div class="detect">
+    <center>
+      <h2 class="heading1">Brain Tumor Detection</h2>
+      <form id="upload-file" method="post" enctype="multipart/form-data ">
+        <div class="container" style="width: 500px">
+          <label for="imageUpload" class="para form-label"
+            >Upload X-Ray here!</label
+          >
+          <input
+            class="form-control bg-secondary"
+            type="file"
+            name="file"
+            class="btn btn-success"
+            id="imageUpload"
+            accept=".png, .jpg, .jpeg"
+          />
+        </div>
+      </form>
+      <div class="image-section" style="display: none">
+        <div class="img-contain">
+          <h2 class="heading2">Uploaded Image</h2>
+          <img
+            id="imagePreview"
+            class="image img-responsive"
+            src="#"
+            style="width: 300px; height: 300px"
+          />
+        </div>
+        <!-- <div>
       
       <button
         type="button"
@@ -51,16 +51,343 @@
         Predict
       </button>
     </div> -->
-    <div id="fifth" class="buttonBox">
-      <button type="button" id="btn-predict">Predict</button>
+        <div id="fifth" class="buttonBox">
+          <button type="button" id="btn-predict">Predict</button>
+        </div>
+      </div>
+      <div class="loader" style="display: none"></div>
+      <h5 class="results" id="result">
+        <span> </span>
+      </h5>
+    </center>
+  </div>
+  <div class="info-card">
+    <h1>Brain Tumor</h1>
+    <div class="container">
+      <div class="info-box-fixed">
+        <div class="info-box-limiter">
+          <nav>
+            <a class="button" onclick="showContent('overview')"> OVERVIEW </a>
+            <a class="button" onclick="showContent('symptoms')"> SYMPTOMS </a>
+            <a class="button" onclick="showContent('treatments')">
+              TREATMENTS
+            </a>
+            <a class="button" onclick="showContent('spec')">CAUSES</a>
+          </nav>
+        </div>
+      </div>
+      <hr style="width: 600px; margin-left: -40px" />
+      <div class="content" id="overview-content">
+        <img class="info-image" src="../static/images/Brain_Tumor_info.jpg" />
+        <p>
+          A brain tumor is an abnormal growth of cells within the brain. These
+          tumors, characterized by their potential to be either benign or
+          malignant, can originate within the brain itself (primary tumors) or
+          migrate from other parts of the body (metastatic tumors). Their
+          genesis often stems from genetic mutations, exposure to ionizing
+          radiation, or other environmental influences.
+        </p>
+        <hr style="width: 494px" />
+        <h3>Types of Brain Tumors</h3>
+        <p>
+          The landscape of brain tumors is as diverse as the human experience.
+          Gliomas, arising from the brain's supportive glial cells, encompass
+          various subtypes, each presenting unique challenges in diagnosis and
+          treatment. Meningiomas, originating from the protective membranes
+          surrounding the brain and spinal cord, pose distinct considerations
+          due to their often slow-growing nature. Pituitary adenomas, nestled
+          within the hormonal command center of the brain, disrupt endocrine
+          function with profound consequences. Additionally, metastatic brain
+          tumors, arising from distant sites such as the lungs or breasts,
+          present formidable diagnostic and therapeutic dilemmas.<br />
+        </p>
+        <hr style="width: 494px" />
+        <h3>Prognosis</h3>
+        <p>
+          The prognosis for individuals with brain tumors is as varied as the
+          tumors themselves. Factors such as the tumor's histological type,
+          location, size, and molecular characteristics, along with the
+          individual's overall health and treatment response, intricately shape
+          the journey ahead. While some tumors may respond favorably to
+          treatment and afford a favorable prognosis, others may prove
+          recalcitrant to current therapeutic modalities, necessitating ongoing
+          research and innovation to improve outcomes.
+        </p>
+      </div>
+
+      <div class="content" id="symptoms-content" style="display: none">
+        <b>Requires a Medical Diagnosis</b>
+        <p>
+          Symptoms include new or increasingly strong headaches, blurred vision,
+          weakness of limbs, loss of balance, confusion, and seizures. In some
+          cases, there may be no symptoms.
+        </p>
+        <p>People may experience:</p>
+        <ul>
+          <li>Headache: can be persistent or severe</li>
+          <li>
+            Muscular: difficulty walking, muscle weakness, problems with
+            coordination, weakness of one side of the body, or weakness of the
+            arms and legs
+          </li>
+          <li>Whole body: dizziness, fatigue, or vertigo</li>
+          <li>Gastrointestinal: nausea or vomiting</li>
+          <li>Sensory: pins and needles or reduced sensation of touch</li>
+          <li>
+            Cognitive: inability to speak or understand language or mental
+            confusion
+          </li>
+          <li>
+            Also common: balance disorder, blurred vision, difficulty speaking,
+            personality change, seizures, or sleepiness
+          </li>
+        </ul>
+
+        <hr style="width: 494px; margin-left: 0px" />
+
+        <h4>Brain Tumor Symptoms by Location</h4>
+        <p><strong>Lobes in the Brain</strong></p>
+        <p>
+          The main part of the brain is called the cerebrum. Brain tumors in
+          different parts of the cerebrum might cause different symptoms.
+        </p>
+
+        <h5><strong>Brain Tumors in the Front of the Brain</strong></h5>
+        <p>
+          The frontal lobes are in the front of the brain. They control thinking
+          and movement. Frontal lobe brain tumors might cause balance problems
+          and trouble walking. There might be personality changes, such as
+          forgetfulness and lack of interest in usual activities. Sometimes
+          family members notice that the person with the brain tumor seems
+          different.
+        </p>
+
+        <h5><strong>Brain Tumors in the Middle of the Brain</strong></h5>
+        <p>
+          The parietal lobes are in the upper middle part of the brain. They
+          help process information about touch, taste, smell, vision, and
+          hearing. Parietal lobe brain tumors can cause problems related to the
+          senses. Examples include vision problems and hearing problems.
+        </p>
+
+        <h5><strong>Brain Tumors in the Back of the Brain</strong></h5>
+        <p>
+          The occipital lobes are in the back of the brain. They control vision.
+          Occipital lobe brain tumors can cause vision loss.
+        </p>
+
+        <h5><strong>Brain Tumors in the Lower Part of the Brain</strong></h5>
+        <p>
+          The temporal lobes are on the sides of the brain. They process
+          memories and senses. Temporal lobe brain tumors can cause memory
+          problems. They might cause someone to see, taste, or smell something
+          that isn't there. Sometimes the taste or smell is unpleasant or
+          unusual.
+        </p>
+      </div>
+
+      <div class="content" id="treatments-content" style="display: none">
+        <p>
+          The treatment of brain tumors is a complex and multifaceted process
+          that often requires a combination of therapies tailored to the
+          individual patient's specific diagnosis, tumor type, location, and
+          overall health. Below are some of the main treatment modalities used:
+        </p>
+
+        <h5><strong>1. Surgery</strong></h5>
+        <p>
+          Surgical resection, the removal of the tumor through an operation, is
+          often the first-line treatment for many brain tumors. The goal of
+          surgery is to remove as much of the tumor as possible while preserving
+          neurological function. In some cases, complete removal may not be
+          feasible due to the tumor's location or size.
+        </p>
+
+        <h5><strong>2. Radiation Therapy</strong></h5>
+        <p>
+          Radiation therapy uses high-energy beams of radiation to target and
+          destroy cancer cells. It can be delivered externally through a machine
+          (external beam radiation) or internally through implanted radioactive
+          seeds (brachytherapy). Radiation therapy may be used as a primary
+          treatment, adjuvant therapy following surgery, or palliative therapy
+          to relieve symptoms and improve quality of life.
+        </p>
+
+        <h5><strong>3. Chemotherapy</strong></h5>
+        <p>
+          Chemotherapy involves the use of powerful drugs to kill cancer cells
+          or inhibit their growth. Chemotherapy for brain tumors may be
+          administered orally, intravenously, or directly into the cerebrospinal
+          fluid (intrathecal chemotherapy). It is often used in combination with
+          surgery and/or radiation therapy, particularly for aggressive or
+          recurrent tumors.
+        </p>
+
+        <h5><strong>4. Targeted Therapy</strong></h5>
+        <p>
+          Targeted therapy utilizes drugs or other substances that specifically
+          target and interfere with the molecular pathways involved in tumor
+          growth and survival. These treatments are often tailored to the
+          specific genetic mutations or biomarkers present in the tumor cells.
+          Targeted therapy may be used alone or in combination with other
+          treatments.
+        </p>
+
+        <h5><strong>5. Immunotherapy</strong></h5>
+        <p>
+          Immunotherapy harnesses the body's immune system to recognize and
+          attack cancer cells. This may involve the use of immune checkpoint
+          inhibitors, which help activate the immune response against tumor
+          cells, or therapeutic vaccines, which stimulate the immune system to
+          target the tumor. Immunotherapy is an area of active research in the
+          treatment of brain tumors.
+        </p>
+
+        <h5><strong>6. Stereotactic Radiosurgery</strong></h5>
+        <p>
+          Stereotactic radiosurgery is a non-invasive technique that delivers
+          precisely targeted radiation to the tumor while minimizing exposure to
+          surrounding healthy tissue. It is often used for small tumors or as a
+          boost after conventional radiation therapy. Despite its name,
+          stereotactic radiosurgery does not involve actual surgery.
+        </p>
+
+        <h5><strong>7. Supportive Care</strong></h5>
+        <p>
+          In addition to specific treatments targeting the tumor, supportive
+          care plays a crucial role in managing symptoms, improving quality of
+          life, and addressing the physical, emotional, and psychosocial needs
+          of patients and their families. This may include pain management,
+          physical therapy, occupational therapy, speech therapy, nutritional
+          support, counseling, and palliative care.
+        </p>
+
+        <h5><strong>Conclusion</strong></h5>
+        <p>
+          The treatment of brain tumors requires a multidisciplinary approach
+          involving collaboration among neurosurgeons, neuro-oncologists,
+          radiation oncologists, medical oncologists, neuropathologists, and
+          other healthcare professionals. Advances in research and technology
+          continue to expand the treatment options available and improve
+          outcomes for patients with brain tumors.
+        </p>
+      </div>
+
+      <div class="content" id="spec-content" style="display: none">
+        <h4><b> Brain Tumors that Begin in the Brain</b></h4>
+        <p>
+          Brain tumors that start as a growth of cells in the brain are called
+          <b>primary brain tumors</b>. They might start right in the brain or in
+          the tissue nearby. Nearby tissue might include the membranes that
+          cover the brain, called meninges. Brain tumors also can happen in
+          nerves, the pituitary gland, and the pineal gland.
+        </p>
+
+        <p>
+          Brain tumors happen when cells in or near the brain get changes in
+          their <b>DNA</b>. A cell's DNA holds the instructions that tell the
+          cell what to do. The changes tell the cells to grow quickly and
+          continue living when healthy cells would die as part of their natural
+          life cycle. This makes a lot of extra cells in the brain. The cells
+          can form a growth called a tumor.
+        </p>
+
+        <p>
+          It's not clear what causes the DNA changes that lead to brain tumors.
+          For many people with brain tumors, the cause is never known. Sometimes
+          parents pass DNA changes to their children. The changes can increase
+          the risk of having a brain tumor. These
+          <b>hereditary brain tumors</b> are rare. If you have a family history
+          of brain tumors, talk about it with your health care provider. You
+          might consider meeting with a health care provider trained in genetics
+          to understand whether your family history increases your risk of
+          having a brain tumor.
+        </p>
+
+        <p>
+          When brain tumors happen in children, they're likely to be primary
+          brain tumors. In adults, brain tumors are more likely to be cancer
+          that started somewhere else and spread to the brain.
+        </p>
+
+        <h3>Cancer that Spreads to the Brain</h3>
+        <p>
+          Secondary brain tumors happen when cancer starts somewhere else and
+          spreads to the brain. When cancer spreads, it's called
+          <b>metastatic cancer</b>.
+        </p>
+
+        <p>Any cancer can spread to the brain, but common types include:</p>
+
+        <ul>
+          <li>Breast cancer.</li>
+          <li>Colon cancer.</li>
+          <li>Kidney cancer.</li>
+          <li>Lung cancer.</li>
+          <li>Melanoma.</li>
+        </ul>
+
+        <p>
+          It's not clear why some cancers spread to the brain and others are
+          more likely to spread to other places.
+        </p>
+
+        <p>
+          Secondary brain tumors most often happen in people who have a history
+          of cancer. Rarely, a brain tumor may be the first sign of cancer that
+          began somewhere else in the body.
+        </p>
+
+        <p>
+          In adults, secondary brain tumors are far more common than are primary
+          brain tumors.
+        </p>
+
+        <h3>Risk Factors</h3>
+        <p>
+          In most people with primary brain tumors, the cause isn't clear. But
+          doctors have identified some factors that may raise the risk.
+        </p>
+
+        <p>Risk factors include:</p>
+
+        <ul>
+          <li>
+            <b>Age:</b> Brain tumors can happen at any age, but they happen most
+            often in older adults. Some brain tumors mostly affect adults. Some
+            brain tumors happen most often in children.
+          </li>
+          <li>
+            <b>Race:</b> Anyone can get a brain tumor. But some types of brain
+            tumors are more common in people of certain races. For example,
+            gliomas are more common in white people. Meningiomas are more common
+            in Black people.
+          </li>
+          <li>
+            <b>Exposure to Radiation:</b> People who have been exposed to a
+            strong type of radiation have an increased risk of brain tumor. This
+            strong radiation is called ionizing radiation. The radiation is
+            strong enough to cause DNA changes in the body's cells. The DNA
+            changes can lead to tumors and cancers. Examples of ionizing
+            radiation include radiation therapy used to treat cancer and
+            radiation exposure caused by atomic bombs. Low-level radiation from
+            everyday objects isn't linked to brain tumors. Low levels of
+            radiation include the energy that comes from cellphones and radio
+            waves. There is no convincing evidence that using cellphones causes
+            brain tumors. But more studies are happening to make sure.
+          </li>
+          <li>
+            <b>Inherited Syndromes:</b> Some DNA changes that increase the risk
+            of brain tumor run in families. Examples include the DNA changes
+            that cause neurofibromatosis 1 and 2, tuberous sclerosis, Lynch
+            syndrome, Li-Fraumeni syndrome, Von Hippel-Lindau disease, familial
+            adenomatous polyposis, Cowden syndrome, and Gorlin syndrome.
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div class="loader" style="display: none"></div>
-
-  <h5 class="results" id="result">
-    <span> </span>
-  </h5>
-</center>
-<br /><br />
-{% endblock %}
+  <br /><br />
+  {% endblock %}
+</div>

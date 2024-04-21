@@ -4,8 +4,8 @@
     --card-width: 270px;
   }
 .about-section {
-    background-color: rgba(0, 0, 0, 0.39);
-    box-shadow: #7be9ff8c 0px 41px 37px -40px, #7be9ff8c 0px 28px 39px -18px, #7be9ff8c 0px -4px 14px 1px inset;
+    background: #00143d;
+    box-shadow:20px 20px 10px 0px rgba(0, 0, 0, 0.2);
     padding: 40px 80px 40px 80px;
     border-radius: 20px;
     margin: 50px auto;
@@ -16,7 +16,7 @@
   text-decoration: none;
 }
 body{
-  background:linear-gradient(to right, #2e4584, #193c9f,#95b1ea);
+  background:#03396c;
   background-size:contain;
   background-attachment: fixed;
   background-position: center;

@@ -10,7 +10,7 @@
   
 </head>
 <body>
-  <header class="header-fixed" style="background: linear-gradient(to right, #000000, #001a64,#010307);box-shadow: rgb(56 144 200 / 7%) 0px 1px 1px, #a4f0ff 0px 2px 2px, rgb(115 241 234 / 7%) 0px 4px 4px, #7ae1f64f 0px 8px 8px, #7be9ff8c 0px 16px 16px;">
+  <header class="header-fixed" style="background: #00143d;">
     <div class="header-limiter">
         <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
         <nav>
@@ -23,9 +23,11 @@
 <div class="header-fixed-placeholder"></div>
     <section id="about-us" class="about-section">
       <h2>HealthCare Imaging</h2>
+      <br>
+      <p>Advanced imaging technology delivering accurate diagnoses with compassionate care.</p>
       <br><br>
         <div class="feature-cards">
-  <a href="{{ url_for('pneumonia') }}" alt="Pneumonia">
+  <a href="{{ url_for('pneumonia') }}" alt="Pneumonia" style="margin: 0px 0px 0px -40px;">
     <div class="card">
       <div class="wrapper">
         <img src="../static/images/lungss.gif"  class="cover-image" />
@@ -35,7 +37,7 @@
     </div>
   </a>
   
-  <a href="{{ url_for('tumor') }}" alt="Tumor">
+  <a href="{{ url_for('tumor') }}" alt="Tumor" >
     <div class="card">
       <div class="wrapper">
         <img src="../static/images/brain.gif" style="mix-blend-mode:darken;" class="cover-image" />
@@ -44,7 +46,7 @@
       <img src="../static/images/human-brains.png" class="character" />
     </div>
   </a>
-  <a href="{{ url_for('nutri') }}" alt="NutriVision">
+  <a href="{{ url_for('nutri') }}" alt="NutriVision" >
     <div class="card">
       <div class="wrapper">
         <img src="../static/images/nutrivision.jpeg" style="mix-blend-mode:darken;" class="cover-image" />

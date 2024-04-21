@@ -1,60 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="../static/login/chats.css">
-    <link rel='stylesheet' type='text/css' href='../static/login/bubbles.css'>
-</head>
-<body>
-    <div class="container" id="co">
-        <canvas id="c"></canvas>
-        <div class="chat-container" >
-            <div class="chat-header">    
-                <button id="goBackBtn" onclick="goBack()" >&#10006;</button>
-                <h3>HealthAI Consultancy +</h3>   
-                <div class="dot-menu">
-                    <input id="dot-menu" type="checkbox" class="dot-menu__checkbox">
-                    <label for="dot-menu" class="dot-menu__label">
-                        <span>&#9776;</span>
-                        <div class="dropdown">
-                            <form id="clearChatsForm" action="{{ url_for('clear_chats', username=username) }}" method="post">
-                                <button id="clearChatsBtn" type="submit">Clear Chats</button>
-                            </form>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <div class="chat-log">
-                <div id="defaultPage" style="display: {% if messages %}none{% else %}block{% endif %}">
-                    <div class="defaultMsg">
-
-                        <h3>Hey there! {{username}}!</h3>
-                        <img src="../static/images/patient-doctor-removebg.png">
-                    </div>
-                </div>
-                <ul id="messages" >
-                    {% for message in messages %}
-                        <li class="{% if message.username == username %}right{% endif %}">
-                            <div class="message-content">
-                                <strong>{{ message.username }}</strong>
-                                <p class="content">{{ message.content }}</p>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>    
-            <form id="form" action="">
-                <div class="Inputt">
-                    <!-- Use the passed username as a hidden field -->
-                    <input type="hidden" id="username" value="{{ username }}">
-                    <input class="userInput" id="input" placeholder="Type your message here..." autocomplete="off">
-                    <button class="sendButton" id="button"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z" fill="#0e1111"></path></svg></button>
-                </div>
-            </form>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../static/login/chats.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat-container">
+        <div class="chat-header">
+          <button id="goBackBtn" onclick="goBack()">&#10006;</button>
+          <h3>HealthAI Consultancy +</h3>
+          <div class="dot-menu">
+            <input id="dot-menu" type="checkbox" class="dot-menu__checkbox" />
+            <label for="dot-menu" class="dot-menu__label">
+              <span>&#9776;</span>
+              <div class="dropdown">
+                <form
+                  id="clearChatsForm"
+                  action="{{ url_for('clear_chats', username=username) }}"
+                  method="post"
+                >
+                  <button id="clearChatsBtn" type="submit">Clear Chats</button>
+                </form>
+              </div>
+            </label>
+          </div>
         </div>
-
+        <div class="chat-log">
+          <div
+            id="defaultPage"
+            style="display: {% if messages %}none{% else %}block{% endif %}"
+          >
+            <div class="defaultMsg">
+              <h3>Hey there! {{username}}!</h3>
+              <img src="../static/images/patient-doctor-removebg.png" />
+            </div>
+          </div>
+          <ul id="messages">
+            {% for message in messages %}
+            <li class="{% if message.username == username %}right{% endif %}">
+              <div class="message-content">
+                <strong>{{ message.username }}</strong>
+                <p class="content">{{ message.content }}</p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <form id="form" action="">
+          <div class="Inputt">
+            <!-- Use the passed username as a hidden field -->
+            <input type="hidden" id="username" value="{{ username }}" />
+            <input
+              class="userInput"
+              id="input"
+              placeholder="Type your message here..."
+              autocomplete="off"
+            />
+            <button class="sendButton" id="button">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                  fill="#0e1111"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+    <div class="boxes first">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="boxes second">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="boxes third">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="boxes fourth">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="../static/login/chat.js"></script>
-    <script src="../static/login/bubbles.js"></script>
-</body>
+    </body>
 </html>
