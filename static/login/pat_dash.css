@@ -23,15 +23,16 @@ body {
     #dde5ee,
     #d3e0e9
   ); */
-  background: url(../images/pat_dash_back.jpg);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 110%;
+  background: #122c83;
   font-family: 'Nunito Sans', sans-serif;
-  margin: 0;
-  overflow-x: hidden;
 }
-
+select.form-control:not([size]):not([multiple]) {
+  height: calc(2.25rem + 2px);
+  border-radius: 25px;
+}
+input[type=date], input[type=datetime-local], input[type=month], input[type=time] {
+  border-radius: 25px;
+}
 h2 {
   font-size: 30px;
   /* text-shadow: 0 4.36px 7px #333333, 0 2px 1px #757575; */
@@ -51,6 +52,7 @@ h2 {
 span {
   display: inline-block;
     opacity: 0;
+    color: #ffffff;
     font-size: 30px;
     font-weight: 900;
     filter: blur(4px);
@@ -85,13 +87,13 @@ span:nth-child(4) {
 }
 .padding {
   padding: 10px 16px 5px 16px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.19);
+  border-radius: 25px;
+  background-color: rgb(38 141 213 / 66%);
   backdrop-filter: blur(15px);
   box-shadow: inset 0px 0px 19px -6px #266bff;
 }
 h1 {
-  color: #0e4276;
+  color: #ffffff;
   text-align: left;
   margin-top: 15px;
   margin-bottom: 20px;
@@ -126,7 +128,7 @@ h1 {
 /* header */
 
 .header-fixed {
-  background: linear-gradient(45deg, #011325, #00356a, #012345);;
+  background: rgb(38 141 213 / 66%);
   padding: 20px 40px;
   height: 81px;
   color: #ffffff;
@@ -260,12 +262,12 @@ form {
   }
 }
 .book_table {
-  background-color: rgba(255, 255, 255, 0.19);
+  background-color: rgb(38 141 213 / 66%);
   backdrop-filter: blur(15px);
   box-shadow: inset 0px 0px 19px -6px #266bff;
 
   padding: 16px 16px 0px 16px;
-  border-radius: 10px;
+  border-radius: 25px;
   overflow: hidden;
 }
 
@@ -331,7 +333,7 @@ label {
   -webkit-tap-highlight-color: transparent;
   align-items: center;
   background: #fff;
-  border-radius: 0.5rem;
+  border-radius: 25px;
   border: 0;
   /* box-shadow: inset 0 -0.0625rem 0 #b5b5b5, inset -0.0625rem 0 0 #e3e3e3, inset 0.0625rem 0 0 #e3e3e3, inset 0 0.0625rem 0 #e3e3e3; */
   color: #303030;
@@ -457,6 +459,7 @@ label {
 }
 
 .button-51__Text {
+  color: #000;
   font-size: 30px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
