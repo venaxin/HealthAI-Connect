@@ -27,6 +27,8 @@
       type="text/css"
       href="{{ url_for('static', filename='login/pat_dash.css') }}"
     />
+    <link rel="stylesheet" href="../static/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body>
     <header class="header-fixed">
@@ -46,15 +48,69 @@
     </header>
     <div class="header-fixed-placeholder"></div>
     <br />
-    <h1
-      class="fadeIn"
-      style="
-        margin: 15px 0px 15px 20px;
-        text-transform: capitalize;
-      "
-    >
-      Welcome, {{ username }}!
-    </h1>
+    <div class="nutri">
+      <h1
+        class="fadeIn"
+        style="margin: 15px 0px 15px 20px; text-transform: capitalize"
+      >
+        Welcome, {{ username }}!
+      </h1>
+      <div class="Nutri_contain">
+        <a href="{{ url_for('nutri') }}" alt="NutriVision">
+          <img
+            src="../static/images/nutition.jpg"
+            alt="Nutrition"
+            class="Nutri_img" />
+          <p>
+            Unlock the Secrets of Your Food: Picture This - Healthier You!<br /></p
+        ></a>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="main">
+      <div class="features">
+        <a href="{{ url_for('symptompredict') }}" class="animatedLink">
+          <div class="feature">
+            <img src="../static/images/admin_dash_back.jpg" alt="Doctor" />
+            <div class="description">
+              <p>
+                Try our <b>Symptom based disease predictor </b> predictive
+                health at your fingertips: Know, Prepare, Prevail!
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ url_for('reviewpredict') }}" class="animatedLink">
+          <div class="feature">
+            <img src="../static/images/admin_dash_back.jpg" alt="Chat" />
+            <div class="description">
+              <p>
+                Health in focus: Our <b>Descriptive Predictor </b> simplifies
+                wellness planning. Know, Prepare, Prevail!
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="{{ url_for('healthimaging_patient') }}" class="animatedLink">
+          <div class="feature">
+            <img
+              src="../static/images/admin_dash_back.jpg"
+              alt="Medical History"
+            />
+            <div class="description">
+              <p>
+                <b>HealthCare Imaging </b>-Spot brain tumors early or detect
+                pneumonia swiftly : Explore symptoms, causes, and treatments
+                with ease.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br />
+    <br />
     <div class="container">
       <!-- Table for booked appointments -->
       <div class="col-md-6 booked">
@@ -103,9 +159,11 @@
       <!-- Form to book a new appointment -->
       <div class="col-md-6 booking">
         <div class="book_table animate__animated animate__fadeInTopRight">
-          <h2><span>Book</span>
-          <span>an</span>
-          <span>Appointment</span></h2>
+          <h2>
+            <span>Book</span>
+            <span>an</span>
+            <span>Appointment</span>
+          </h2>
           <form action="{{ url_for('book_appointment') }}" method="post">
             <h2></h2>
             <div class="details">
@@ -160,6 +218,58 @@
         </div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <div>
+      <div class="chatButton" id="chatButton">
+        <div class="backgroundAnimation">
+          <div class="lines"></div>
+        </div>
+        <img src="../static/images/chat-icon.gif" />
+      </div>
+
+      <div class="chatBox" id="chatBox">
+        <div class="chatheader">
+          <h3 class="bot-name">
+            <img
+              class="chat-icon"
+              src="../static/images/chat-icon.gif"
+              alt="Chat Icon"
+            />Medibot
+          </h3>
+
+          <button id="closeChat">&times;</button>
+        </div>
+
+        <div class="chatwallpaper">
+          <div id="waveContainer">
+            <div class="wave-01"></div>
+            <div class="wave-02"></div>
+            <div class="wave-03"></div>
+          </div>
+          <div class="chatLog" id="chatLog"></div>
+          <div class="inputt">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendMessage" aria-label="Send message">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                  fill="#000000"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get the button and message elements
@@ -234,5 +344,6 @@
     <script src="../static/login/animation.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static/header.js"></script>
+    <script src="../static/script.js"></script>
   </body>
 </html>

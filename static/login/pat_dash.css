@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap");
 @keyframes fade-in {
   100% {
     opacity: 1;
@@ -23,20 +23,23 @@ body {
     #dde5ee,
     #d3e0e9
   ); */
-  background: #122c83;
-  font-family: 'Nunito Sans', sans-serif;
+  background: #003358cf;
+  font-family: "Nunito Sans", sans-serif;
 }
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 2px);
   border-radius: 25px;
 }
-input[type=date], input[type=datetime-local], input[type=month], input[type=time] {
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
   border-radius: 25px;
 }
 h2 {
   font-size: 30px;
   /* text-shadow: 0 4.36px 7px #333333, 0 2px 1px #757575; */
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-size: 45px;
   font-weight: 600;
   text-align: center;
@@ -51,11 +54,11 @@ h2 {
 
 span {
   display: inline-block;
-    opacity: 0;
-    color: #ffffff;
-    font-size: 30px;
-    font-weight: 900;
-    filter: blur(4px);
+  opacity: 0;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 900;
+  filter: blur(4px);
 }
 
 span:nth-child(1) {
@@ -88,9 +91,7 @@ span:nth-child(4) {
 .padding {
   padding: 10px 16px 5px 16px;
   border-radius: 25px;
-  background-color: rgb(38 141 213 / 66%);
-  backdrop-filter: blur(15px);
-  box-shadow: inset 0px 0px 19px -6px #266bff;
+  background-color: #00143d;
 }
 h1 {
   color: #ffffff;
@@ -108,7 +109,6 @@ h1 {
     text-align: left;
     vertical-align: top;
     background-color: rgba(255, 255, 255, 0.19);
-  
   }
   tr {
     transition: all 1s ease-in-out;
@@ -128,7 +128,7 @@ h1 {
 /* header */
 
 .header-fixed {
-  background: rgb(38 141 213 / 66%);
+  background: #00143d;
   padding: 20px 40px;
   height: 81px;
   color: #ffffff;
@@ -140,7 +140,7 @@ h1 {
 }
 
 .header-fixed .header-limiter nav a {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   display: inline-block;
   padding: 0 15px;
   text-decoration: none;
@@ -203,7 +203,7 @@ container a:hover {
 
 .fadeIn {
   animation: fadeIn 2s ease-in-out;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 900;
   margin: 15px 0px 15px 20px;
   font-size: 50px;
@@ -212,7 +212,6 @@ container a:hover {
   border: none;
   width: 100%;
   border-collapse: collapse;
-  
 }
 
 .custom-table th {
@@ -220,6 +219,7 @@ container a:hover {
   padding: 10px;
   text-align: left;
   border: none;
+  color: white;
   background-color: #f2f2f200;
 }
 .custom-table td {
@@ -262,10 +262,8 @@ form {
   }
 }
 .book_table {
-  background-color: rgb(38 141 213 / 66%);
+  background-color: #00143d;
   backdrop-filter: blur(15px);
-  box-shadow: inset 0px 0px 19px -6px #266bff;
-
   padding: 16px 16px 0px 16px;
   border-radius: 25px;
   overflow: hidden;
@@ -320,12 +318,13 @@ form a {
 }
 
 label {
+  color: white;
   font-weight: 700;
 }
 
 .button-51 {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   box-sizing: border-box;
   font-size: 0.8125rem;
   font-weight: 450;
@@ -403,11 +402,11 @@ label {
 }
 
 .button-51:hover {
-  background: #0052a3 ; 
+  background: #0052a3;
   box-shadow: inset 0 -0.0625rem 0 #003feb, inset 0.0625rem 0 0 #00b4f6,
     inset -0.0625rem 0 0 #003cff, inset 0 0.0625rem 0 #00c6f7;
-    outline: none;
-    color: white;
+  outline: none;
+  color: white;
 }
 
 .button-51:focus,
@@ -467,4 +466,79 @@ label {
     270deg
   ); /* Rotate the text back to the correct orientation */
   margin: 12px 6px; /* Remove any default margin to ensure precise alignment */
+}
+
+.features {
+  display: flex;
+  justify-content: space-evenly;
+}
+.feature {
+  min-height: 320px;
+  max-height: 330px;
+  min-width: 400px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  background-color: #00143d;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease-in-out;
+
+}
+.feature img {
+  width: 400px;
+  height: 180px;
+  border-radius: 25px;
+}
+.feature h4 {
+  font-size: 22px;
+  text-align: left;
+  margin-top: 10px;
+  font-weight: 700;
+}
+.feature:hover{
+  transform: scale(1.03);
+}
+.description {
+  padding: 20px;
+  text-align: left;
+}
+
+.description p b{
+  font-size: 18px;
+  font-weight: 700;
+}
+.nutri{
+  display: flex;
+  justify-content: space-between;
+}
+.Nutri_contain{
+  transition: transform 0.4s ease-in-out;
+  text-align: left;
+  background: #00143d;
+  border-radius: 25px;
+  color: white;
+  margin-right: 20px;
+  width: 277px;
+  text-decoration: none;
+}
+.Nutri_contain img{
+  width: 101px;
+  border-radius: 25px;
+  float :right;
+}
+.Nutri_contain p{
+  padding: 10px 0 0 15px;
+}
+.Nutri_contain:hover{
+  transform: scale(1.03);
+}
+.Nutri_contain a{
+  text-decoration: none;
+  color:#fff;
+}
+.Nutri_contain a:hover{
+  text-decoration: none;
+  color:#fff;
 }

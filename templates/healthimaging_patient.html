@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HealthAI Connect</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='3dcard.css') }}">
+  <link rel="stylesheet" href="../static/header/header.css">
+  
+</head>
+<body>
+  <header class="header-fixed" style="background: #00143d;">
+    <div class="header-limiter">
+        <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a> 
+        </nav>
+    </div>
+  </header>
+<div class="header-fixed-placeholder"></div>
+    <section id="about-us" class="about-section">
+      <h2>HealthCare Imaging</h2>
+      <br>
+      <p>Advanced imaging technology delivering accurate diagnoses with compassionate care.</p>
+      <br><br>
+        <div class="feature-cards">
+  <a href="{{ url_for('pneumonia') }}" alt="Pneumonia" style="margin: 0px 0px 0px -40px;">
+    <div class="card">
+      <div class="wrapper">
+        <img src="../static/images/lungss.gif"  class="cover-image" />
+      </div>
+      <h3 class="title">Pneumonia Detection</h3>  
+      <img src="../static/images/lungs-up.png"  class="character first-holo" />
+    </div>
+  </a>
+  
+  <a href="{{ url_for('tumor') }}" alt="Tumor" >
+    <div class="card">
+      <div class="wrapper">
+        <img src="../static/images/brain.gif" style="mix-blend-mode:darken;" class="cover-image" />
+      </div>
+      <h3 class="title">Brain Tumor Detection</h3>  
+      <img src="../static/images/human-brains.png" class="character" />
+    </div>
+  </a>
+</div> 
+</div></section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="../static/header/header.js"></script>
+</body>
+</html>

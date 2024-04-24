@@ -346,8 +346,10 @@ def nutri():
 
 @app.route('/healthcare', methods=['GET'])
 def healthcare():
-    return render_template('healtimageing.html')
-
+    return render_template('healthimaging.html')
+@app.route('/healthimaging_patient', methods=['GET'])
+def healthimaging_patient():
+    return render_template('healthimaging_patient.html')
 #Brain Tumor Detection
 def get_className(classNo):
     class_index = np.argmax(classNo)

@@ -59,7 +59,6 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  font-family: Google Sans Text Regular;
 }
 h2 {
   color: white;
@@ -69,6 +68,9 @@ h2,
 h3 {
   font-family: "Nunito Sans", sans-serif;
   margin: 15px 0px;
+}
+.animatedLink:hover {
+  text-decoration: none;
 }
 /* loader */
 .no-scroll {
@@ -440,7 +442,7 @@ aside {
   font-size: 15px;
   border: 1px solid #424141;
   border-radius: 20px;
-  height: 25px;
+
   outline: none;
 }
 
