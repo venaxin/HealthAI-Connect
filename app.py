@@ -103,31 +103,22 @@ def clear_chats():
         # Return a 405 Method Not Allowed response for other methods
         return 'Method Not Allowed', 405
 
-# CSV file paths
-patient_appointment_csv_file_path = 'database/Accepted_appointments.csv'
+ 
+# Load existing users from CSV files
 patient_csv_file_path = 'database/credentials.csv'
 doctor_csv_file_path = 'database/doctor_credentials.csv'
 admin_csv_file_path = 'database/admin_credentials.csv'
 appointment_csv_file_path = 'database/appointments.csv'
+patient_appointment_csv_file_path = 'database/Accepted_appointments.csv'
 
 # Create CSV files if they don't exist
-Path(patient_csv_file_path).touch()
-Path(doctor_csv_file_path).touch()
-Path(admin_csv_file_path).touch()
-Path(appointment_csv_file_path).touch()
-Path(patient_appointment_csv_file_path).touch()
-# Load existing users from CSV files
-with open(patient_csv_file_path, 'r') as file:
-    patient_reader = csv.reader(file)
-    patients = {row[0]: row[1] for row in patient_reader}
+for file_path in [patient_csv_file_path, doctor_csv_file_path, admin_csv_file_path, appointment_csv_file_path, patient_appointment_csv_file_path]:
+    Path(file_path).touch()
 
-with open(doctor_csv_file_path, 'r') as file:
-    doctor_reader = csv.reader(file)
-    doctors = {row[0]: row[1] for row in doctor_reader}
-
-with open(admin_csv_file_path, 'r') as file:
-    admin_reader = csv.reader(file)
-    admins = {row[0]: row[1] for row in admin_reader}
+# Load existing users from CSV files using pandas
+patients = pd.read_csv(patient_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
+doctors = pd.read_csv(doctor_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
+admins = pd.read_csv(admin_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
 
 print('Loading embedding models...')
 # Chatbot
@@ -284,9 +275,74 @@ def reviewpredict():
 
     return render_template('review.html', rawtext=rawtext)
 
+@app.route('/hddp', methods=["GET", "POST"])
+def hddp():
+    
+    if request.method == 'POST':
+        raw_text = request.form['rawtext']
+
+        if raw_text != "":
+            clean_text = cleanText(raw_text)
+            clean_lst = [clean_text]
+            text_vectorized = vectorizer.transform(clean_lst)
+            # Get the decision values (confidence scores) from the model
+            decision_values = model.decision_function(text_vectorized)
+
+            # Apply the sigmoid function to squash decision values into [0, 1] range
+            sigmoid_scores = scipy.special.expit(decision_values)
+
+            # Display the predicted class and its confidence scores
+            predicted_class = model.predict(text_vectorized)[0]
+            confidence = round(sigmoid_scores[0, model.classes_ == predicted_class][0] * 100, 2) 
+            df = pd.read_csv(DATA_PATH)
+            top_drugs = top_drugs_extractor(predicted_class, df)
+            return render_template('hddp.html', rawtext=raw_text, result=predicted_class, top_drugs=top_drugs,confidence=confidence)
+        else:
+            raw_text = "There is no text to select"
+
+    return render_template('hddp.html', rawtext=rawtext)
 
    
+@app.route('/spp', methods=["GET",'POST'])
+def spp():
+    if request.method=="POST":  
+        selected_symptoms = [
+            request.form.get('symptom1'),
+            request.form.get('symptom2'),
+            request.form.get('symptom3'),
+            request.form.get('symptom4'),
+            request.form.get('symptom5'),
+            request.form.get('symptom6'),
+        ]
+        psymptoms = selected_symptoms
+        selected_symptom=[]
+        # Perform the prediction using the loaded model
+        a = np.array(df1["Symptom"])
+        b = np.array(df1["weight"])
+        for j in range(len(psymptoms)):
+            for k in range(len(a)):
+                if psymptoms[j]==a[k]:
+                    selected_symptom.append(a[k])
+                    psymptoms[j]=b[k]
+        psy = [psymptoms]
+        pred2 = diseaseModel.predict(psy)
+        decision_function_scores = diseaseModel.predict_proba(psy)
+    
+    # Get the index of the predicted class
+        predicted_class_index = np.argmax(decision_function_scores)
+        confidence_percentage = round(decision_function_scores[0, predicted_class_index] * 100, 2)
 
+        # Additional code for getting disease description and recommendations
+        disp = discrp[discrp['Disease'] == pred2[0]]
+        disp = disp.values[0][1]
+        recomnd = ektra7at[ektra7at['Disease'] == pred2[0]]
+        c = np.where(ektra7at['Disease'] == pred2[0])[0][0]
+        precaution_list = []
+        for i in range(1, len(ektra7at.iloc[c])):
+            precaution_list.append(ektra7at.iloc[c, i])
+
+        return render_template('spp.html', disease=pred2[0], description=disp, precautions=precaution_list ,symptoms=symptoms,confidence=confidence_percentage , selected_symptoms=selected_symptom)
+    return render_template('spp.html',symptoms=symptoms)
 
 def cleanText(raw_review):
     # 1. Delete HTML 
@@ -426,7 +482,6 @@ def predict_neumonia():
 
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -450,6 +505,7 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
@@ -457,75 +513,57 @@ def dashboard():
         if user_type == 'patient':
             patient_username = session['username']
             appointments = get_patient_appointments(patient_username)
-            return render_template('patient_dashboard.html', username=patient_username, appointments=appointments,doctors=doctors)
+            return render_template('patient_dashboard.html', username=patient_username, appointments=appointments, doctors=doctors)
         elif user_type == 'doctor':
             # Load doctor-specific data and pass it to the template
             return render_template('doctor_dashboard.html', username=session['username'], appointments=get_doctor_appointments(session['username']))
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
+
 
 def get_patient_appointments(patient_username):
     try:
-        with open(patient_appointment_csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            appointments = [row for row in reader if row['patient'] == patient_username]
+        appointments = pd.read_csv(patient_appointment_csv_file_path)
+        appointments = appointments[appointments['patient'] == patient_username].to_dict('records')
         return appointments
     except FileNotFoundError:
         return []
 
-    
+
 @app.route('/admin_dashboard')
 def admin_dashboard():
     if 'username' in session and session['user_type'] == 'admin':
-        with open(patient_csv_file_path, 'r') as file:
-            patient_reader = csv.DictReader(file)
-            patientss = [row for row in patient_reader]
-        with open(doctor_csv_file_path, 'r') as file:
-            doctor_reader = csv.DictReader(file)
-            doctorss = [row for row in doctor_reader]
+        patientss = pd.read_csv(patient_csv_file_path).to_dict('records')
+        doctorss = pd.read_csv(doctor_csv_file_path).to_dict('records')
         return render_template('admin_dashboard.html', username=session['username'], patientss=patientss, doctorss=doctorss)
     else:
-        return redirect(url_for('home'))
-    
+        return redirect(url_for('index'))
+
+
 @app.route('/admin_delete_user', methods=['POST'])
 def admin_delete_user():
-    patients=''
-    doctors=''
     if 'username' in session and session['user_type'] == 'admin':
         user_type = request.form.get('user_type')
         username_to_delete = request.form.get('username')
-        print(user_type, username_to_delete)
         if user_type and username_to_delete:
             if user_type == 'patient':
-                with open(patient_csv_file_path, 'r') as file:
-                    patient_reader = csv.DictReader(file)
-                    patientss = [row for row in patient_reader]
-                # Use a list comprehension to exclude the user to delete
-                patient = [row for row in patientss if row['username'] != username_to_delete]
-                print(patients)
-                print('deleting patient')
-                save_userss_to_csv(patient, patient_csv_file_path)
+                patients_df = pd.read_csv(patient_csv_file_path)
+                patients_df = patients_df[patients_df['username'] != username_to_delete]
+                patients_df.to_csv(patient_csv_file_path, index=False)
             elif user_type == 'doctor':
-                with open(doctor_csv_file_path, 'r') as file:
-                    doctor_reader = csv.DictReader(file)
-                    doctorss = [row for row in doctor_reader]
-                doctor = [row for row in doctorss if row['username'] != username_to_delete]
-                print('deleting doctor')
-                save_userss_to_csv(doctor, doctor_csv_file_path)
+                doctors_df = pd.read_csv(doctor_csv_file_path)
+                doctors_df = doctors_df[doctors_df['username'] != username_to_delete]
+                doctors_df.to_csv(doctor_csv_file_path, index=False)
 
     return redirect(url_for('admin_dashboard'))
 
-def save_userss_to_csv(users, file_path):
-    with open(file_path, 'w', newline='') as file:
-        fieldnames = ['username', 'password']  # Replace with actual field names
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(users)
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     session.pop('user_type', None)
-    return redirect(url_for('home'))
+    return redirect(url_for('index'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -539,21 +577,23 @@ def register():
                 return render_template('register.html', message='Username already exists. Try another one.')
 
             if user_type == 'patient':
-                patients[username] = password
-                save_users_to_csv(patients, patient_csv_file_path)
+                patients_df = pd.DataFrame([[username, password]], columns=['username', 'password'])
+                patients_df.to_csv(patient_csv_file_path, mode='a', index=False, header=False)
             elif user_type == 'doctor':
-                doctors[username] = password
-                save_users_to_csv(doctors, doctor_csv_file_path)
+                doctors_df = pd.DataFrame([[username, password]], columns=['username', 'password'])
+                doctors_df.to_csv(doctor_csv_file_path, mode='a', index=False, header=False)
 
-            return redirect(url_for('home'))
+            return redirect(url_for('index'))
         else:
             return render_template('register.html', message='Username, password, and user type are required.')
 
     return render_template('register.html')
 
+
 def user_exists(username):
     # Check if the username exists in patients or doctors
     return username in patients or username in doctors
+
 
 @app.route('/book_appointment', methods=['POST'])
 def book_appointment():
@@ -562,32 +602,27 @@ def book_appointment():
         doctor_username = request.form.get('doctor')
         date = request.form.get('date')
         time = request.form.get('time')
-
+        age=request.form.get('age')
+        phone=request.form.get('phone')
+        session_purpose=request.form.get('session_purpose')
+ 
         if patient_username and doctor_username and date and time:
-            appointment_data = f"{doctor_username},{patient_username},{date},{time}"
+            appointment_data = {'doctor': doctor_username, 'patient': patient_username, 'date': date, 'time': time,'age':age,'phone':phone,'session_purpose':session_purpose}
             save_appointment_to_csv(appointment_data, appointment_csv_file_path)
             return redirect(url_for('dashboard'))
         else:
             return render_template('patient_dashboard.html', username=session['username'], message='All fields are required.')
 
-def save_users_to_csv(users, file_path):
-    with open(file_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        for username, password in users.items():
-            writer.writerow([username, password])
-
 
 def save_appointment_to_csv(appointment_data, file_path):
-    with open(file_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(appointment_data.split(','))
+    appointments_df = pd.DataFrame([appointment_data])
+    appointments_df.to_csv(file_path, mode='a', index=False, header=False)
 
 
 def get_doctor_appointments(doctor_username):
     try:
-        with open(appointment_csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            appointments = [row for row in reader if row['doctor'] == doctor_username]
+        appointments = pd.read_csv(appointment_csv_file_path)
+        appointments = appointments[appointments['doctor'] == doctor_username].to_dict('records')
         return appointments
     except FileNotFoundError:
         return []
@@ -602,14 +637,13 @@ def doctor_dashboard():
         return render_template('doctor_dashboard.html', username=doctor_username, appointments=appointments,
                                accepted_appointments=accepted_appointments)
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
 
 
 def get_accepted_appointments(doctor_username):
     try:
-        with open(patient_appointment_csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            appointments = [dict(row) for row in reader if row['doctor'] == doctor_username and row['condition'] == 'accept']
+        appointments = pd.read_csv(patient_appointment_csv_file_path)
+        appointments = appointments[(appointments['doctor'] == doctor_username) & (appointments['condition'] == 'accept')].to_dict('records')
         return appointments
     except FileNotFoundError:
         return []
@@ -632,99 +666,55 @@ def complete_appointment(appointment_id):
 
 def remove_appointment_from_csv(doctor_username, appointment):
     try:
-        with open(patient_appointment_csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            appointments = [row for row in reader if
-                            row['doctor'] == doctor_username and row['condition'] == 'accept' and (
-                                    row['patient'], row['date'], row['time']) != (
-                                    appointment['patient'], appointment['date'], appointment['time'])]
-
-        with open(patient_appointment_csv_file_path, 'w', newline='') as file:
-            fieldnames = ['doctor', 'patient', 'date', 'time', 'condition']
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(appointments)
+        appointments_df = pd.read_csv(patient_appointment_csv_file_path)
+        appointments_df = appointments_df[~((appointments_df['doctor'] == doctor_username) &
+                                           (appointments_df['condition'] == 'accept') &
+                                           (appointments_df['patient'] == appointment['patient']) &
+                                           (appointments_df['date'] == appointment['date']) &
+                                           (appointments_df['time'] == appointment['time']))]
+        appointments_df.to_csv(patient_appointment_csv_file_path, index=False)
     except FileNotFoundError:
         pass
 
 
 def remove_appointments_from_csv(doctor_username, appointment):
     try:
-        with open(appointment_csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            appointments = [
-                row for row in reader if row['doctor'] == doctor_username and
-                                         (row['doctor'] != appointment['doctor'] or
-                                          row['patient'] != appointment['patient'] or
-                                          row['date'] != appointment['date'] or
-                                          row['time'] != appointment['time'])
-            ]
-
-        with open(appointment_csv_file_path, 'w', newline='') as file:
-            fieldnames = ['doctor', 'patient', 'date', 'time']
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(appointments)
+        appointments_df = pd.read_csv(appointment_csv_file_path)
+        appointments_df = appointments_df[~((appointments_df['doctor'] == doctor_username) &
+                                           (appointments_df['patient'] == appointment['patient']) &
+                                           (appointments_df['date'] == appointment['date']) &
+                                           (appointments_df['time'] == appointment['time']))]
+        appointments_df.to_csv(appointment_csv_file_path, index=False)
     except FileNotFoundError:
         pass
 
 
 @app.route('/accept_appointment/<int:appointment_id>', methods=['POST'])
 def accept_appointment(appointment_id):
-    print("Entering accept_appointment route")
-
     if 'username' in session and session['user_type'] == 'doctor':
-        print("User is a doctor and logged in")
         doctor_username = session['username']
         appointments = get_doctor_appointments(doctor_username)
         action = request.form['action']
 
         if request.method == 'POST':
-            print("Handling POST request")
             # Process the form submission only for POST requests
             if 0 <= appointment_id < len(appointments):
-                print(f"Valid appointment_id: {appointment_id}")
                 appointment = appointments[appointment_id]
-                print(len(appointment))
-                if len(appointment) >= 4:
-                    if action == 'accept':
-                        save_appointments_to_csv(appointments, patient_appointment_csv_file_path)
-                        print("Appointment accepted")
-                        # Get additional appointment details
-                        doctor_name = appointment['doctor']
-                        date = appointment['date']
-                        time = appointment['time']
-                        patient_name = appointment['patient']
-                        print(f"Appointment details: {date}, {time}, {patient_name}")
-                        # Save the accepted appointment details to patient_appointments.csv
-                        save_accepted_appointment(doctor_name, date, time, patient_name, 'accept',
-                                                 patient_appointment_csv_file_path)
-                        remove_appointments_from_csv(doctor_name, appointment)
-                    elif action == 'reject':
-                        remove_appointments_from_csv(doctor_username, appointment)
-                        print("Appointment rejected")
+                if action == 'accept':
+                    save_accepted_appointment(doctor_username, appointment)
+                    remove_appointments_from_csv(doctor_username, appointment)
+                elif action == 'reject':
+                    remove_appointments_from_csv(doctor_username, appointment)
+
                 return redirect(url_for('doctor_dashboard'))
-    return redirect('doctor_dashboard')
+
+    return redirect(url_for('doctor_dashboard'))
 
 
-def save_accepted_appointment(doctor_name, date, time, patient_name, condition, file_path):
-    fieldnames = ['doctor', 'patient', 'date', 'time', 'condition']
-    # Check if the file exists
-    file_exists = os.path.isfile(file_path)
-    with open(file_path, 'a', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        # Write header only if the file is newly created
-        if not file_exists:
-            writer.writeheader()
-        # Write the accepted appointment details with the condition set to 'accept'
-        writer.writerow({'doctor': doctor_name, 'patient': patient_name, 'date': date, 'time': time, 'condition': condition})
-
-
-def save_appointments_to_csv(appointments, file_path):
-    with open(file_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        for row in appointments:
-            writer.writerow(row)
+def save_accepted_appointment(doctor_name, appointment):
+    appointment_data = {'doctor': doctor_name, 'patient': appointment['patient'], 'date': appointment['date'], 'time': appointment['time'], 'condition': 'accept'}
+    appointments_df = pd.DataFrame([appointment_data])
+    appointments_df.to_csv(patient_appointment_csv_file_path, mode='a', index=False, header=False)
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':

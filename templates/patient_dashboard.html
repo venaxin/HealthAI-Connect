@@ -31,89 +31,273 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body>
-    <header class="header-fixed">
-      <div class="header-limiter">
+    <div class="sidebar">
+      <div class="sidebar-header">
         <img
-          class="logo"
+          style="height: 54px; width: 250px; mix-blend-mode: luminosity"
           id="changingImage"
           src="../static/images/HealthAI-e.gif"
           alt="Default Image"
         />
-        <nav>
-          <a href="{{url_for('home')}}">Home</a>
+      </div>
+      <a href="#" class="dropdown-toggle">Disease Predictor</a>
+      <div class="dropdown" id="features-dropdown">
+        <a href="{{ url_for('spp') }}">- Symptom</a>
+        <a href="{{ url_for('hddp') }}">- Descriptive</a>
+      </div>
 
-          <a href="{{ url_for('login') }}">Log Out</a>
-        </nav>
+      <a href="#" class="dropdown-toggle">HealthCare Imaging</a>
+      <div class="dropdown" id="features-dropdown">
+        <a href="{{ url_for('spp') }}">- Pneumonia</a>
+        <a href="{{ url_for('hddp') }}">- Brain Tumor</a>
       </div>
-    </header>
-    <div class="header-fixed-placeholder"></div>
-    <br />
-    <div class="nutri">
-      <h1
-        class="fadeIn"
-        style="margin: 15px 0px 15px 20px; text-transform: capitalize"
+      <a href="{{ url_for('nutri') }}">Nutrivision</a>
+      <a href="#book_an_appointment" class="smooth-scroll"
+        >Book an Appointment</a
       >
-        Welcome, {{ username }}!
-      </h1>
-      <div class="Nutri_contain">
-        <a href="{{ url_for('nutri') }}" alt="NutriVision">
-          <img
-            src="../static/images/nutition.jpg"
-            alt="Nutrition"
-            class="Nutri_img" />
-          <p>
-            Unlock the Secrets of Your Food: Picture This - Healthier You!<br /></p
-        ></a>
+      <a href="#booked_appointments" class="smooth-scroll">Appointments </a>
+      <a href="#">Logout</a>
+
+      <div class="sidebar-footer">
+        <img src="../static/images/health-logo.png" alt="" />
+        <p>© 2021 HealthAI</p>
+        for more info, please email us at info@healthai.com
       </div>
     </div>
-    <br />
-    <br />
-    <div class="main">
-      <div class="features">
-        <a href="{{ url_for('symptompredict') }}" class="animatedLink">
-          <div class="feature">
-            <img src="../static/images/admin_dash_back.jpg" alt="Doctor" />
-            <div class="description">
+    <div class="content">
+      <br />
+      <div class="nutri">
+        <div class="greet">
+          <h1
+            class="fadeIn"
+            style="
+              font-weight: 900;
+              font-size: 50px;
+              margin: 0px 0px 5px 10px;
+              text-transform: capitalize;
+            "
+          >
+            Welcome, {{ username }}!
+          </h1>
+          <p class="fadeIn">Hope you are doing well</p>
+          <div class="dash-banner">
+            <div>
+              <h1>Find the Best Doctors for HealthCare</h1>
+            <p>~ Empowering Your Journey to Better Health</p>
+            </div>
+            <img src="../static/images/doc_banner.png" alt="" />
+          </div>
+        </div>
+        <div>
+          <div class="usertype-header">
+            <h5>Patient Dashboard</h5>
+          </div>
+          <div class="Nutri_contain">
+            <a href="{{ url_for('nutri') }}" alt="NutriVision">
+              <img
+                src="../static/images/nutition.jpg"
+                alt="Nutrition"
+                class="Nutri_img" />
               <p>
-                Try our <b>Symptom based disease predictor </b> predictive
-                health at your fingertips: Know, Prepare, Prevail!
-              </p>
+                Unlock the Secrets of Your Food: Picture It For Healthier
+                You!<br /></p
+            ></a>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="bmi_calculator">
+        <form action="calculator.js" method="post">
+          <h2>Body Mass Index</h2>
+          <div class="choose_method">
+            <div>
+              <label for="metric" class="radio_wrap">
+                <input
+                  type="radio"
+                  name="method"
+                  id="metric"
+                  value="metric"
+                  checked
+                />
+                Metric
+                <span></span>
+              </label>
+            </div>
+            <div>
+              <label for="imperial" class="radio_wrap">
+                <input
+                  type="radio"
+                  name="method"
+                  id="imperial"
+                  value="imperial"
+                />
+                Imperial
+                <span></span>
+              </label>
             </div>
           </div>
-        </a>
-        <a href="{{ url_for('reviewpredict') }}" class="animatedLink">
-          <div class="feature">
-            <img src="../static/images/admin_dash_back.jpg" alt="Chat" />
-            <div class="description">
-              <p>
-                Health in focus: Our <b>Descriptive Predictor </b> simplifies
-                wellness planning. Know, Prepare, Prevail!
-              </p>
+          <div class="stats">
+            <div>
+              <label for="height">Height</label>
+              <input type="number" name="height" id="height" placeholder="0" />
+              <p class="cm">cm</p>
+            </div>
+            <div>
+              <label for="weight">Weight</label>
+              <input type="number" name="weight" id="weight" placeholder="0" />
+              <p class="kg">kg</p>
             </div>
           </div>
-        </a>
-        <a href="{{ url_for('healthimaging_patient') }}" class="animatedLink">
-          <div class="feature">
+          <div class="stats_imperial">
+            <div>
+              <label for="height_ft">Height</label>
+              <input
+                type="number"
+                name="height_ft"
+                id="height_ft"
+                placeholder="0"
+              />
+              <p class="ft">ft</p>
+            </div>
+            <div>
+              <input
+                type="number"
+                name="height_in"
+                id="height_in"
+                placeholder="0"
+              />
+              <span class="dot"></span>
+              <p class="in">in</p>
+            </div>
+            <div>
+              <label for="weight">Weight</label>
+              <input
+                type="number"
+                name="weight_st"
+                id="weight_st"
+                placeholder="0"
+              />
+              <p class="st">st</p>
+            </div>
+            <div>
+              <input
+                type="number"
+                name="weight_lbs"
+                id="weight_lbs"
+                placeholder="0"
+              />
+              <span class="dot"></span>
+              <p class="lbs">lbs</p>
+            </div>
+          </div>
+        </form>
+        <div class="result_output">
+          <div class="wrap_result">
+            <p id="welcome">Welcome!</p>
+            <p id="top_bmi">Your BMI is...</p>
+            <p id="result"></p>
+            <p id="welcome_more">
+              Enter your height and weight and you’ll see your BMI result here
+            </p>
+          </div>
+          <p id="ideal_bmi_info"></p>
+        </div>
+      </div>
+
+      <div class="bmi_components_wrap">
+        <h1>Essential Components for a Healthy Lifestyle</h1>
+        <div class="component">
+          <div class="comp-header">
             <img
-              src="../static/images/admin_dash_back.jpg"
-              alt="Medical History"
+              src="../static/images/icon-eating.svg"
+              alt=""
+              height="64"
+              width="64"
             />
-            <div class="description">
-              <p>
-                <b>HealthCare Imaging </b>-Spot brain tumors early or detect
-                pneumonia swiftly : Explore symptoms, causes, and treatments
-                with ease.
-              </p>
-            </div>
+            <h3>Healthy eating</h3>
           </div>
-        </a>
+          <p>
+            Healthy eating promotes weight control, disease prevention, better
+            digestion, immunity, mental clarity, and mood.
+          </p>
+        </div>
+        <div class="component">
+          <div class="comp-header">
+            <img
+              src="../static/images/icon-exercise.svg"
+              alt=""
+              height="64"
+              width="64"
+            />
+            <h3>Regular exercise</h3>
+          </div>
+          <p>
+            Exercise improves fitness, aids weight control, elevates mood, and
+            reduces disease risk, fostering wellness and longevity.
+          </p>
+        </div>
+        <div class="component">
+          <div class="comp-header">
+            <img
+              src="../static/images/icon-sleep.svg"
+              alt=""
+              height="64"
+              width="64"
+            />
+            <h3>Adequate sleep</h3>
+          </div>
+          <p>
+            Sleep enhances mental clarity, emotional stability, and physical
+            wellness, promoting overall restoration and rejuvenation.
+          </p>
+        </div>
       </div>
-    </div>
-    <br />
-    <br />
-    <div class="container">
+      <div class="main">
+        <div class="features">
+          <a href="{{ url_for('spp') }}" class="animatedLink">
+            <div class="feature">
+              <img src="../static/images/admin_dash_back.jpg" alt="Doctor" />
+              <div class="description">
+                <p>
+                  Try our <b>Symptom based disease predictor </b> predictive
+                  health at your fingertips: Know, Prepare, Prevail!
+                </p>
+              </div>
+            </div>
+          </a>
+          <a href="{{ url_for('hddp') }}" class="animatedLink">
+            <div class="feature">
+              <img src="../static/images/admin_dash_back.jpg" alt="Chat" />
+              <div class="description">
+                <p>
+                  Health in focus: Our <b>Descriptive Predictor </b> simplifies
+                  wellness planning. Know, Prepare, Prevail!
+                </p>
+              </div>
+            </div>
+          </a>
+          <a href="{{ url_for('healthimaging_patient') }}" class="animatedLink">
+            <div class="feature">
+              <img
+                src="../static/images/admin_dash_back.jpg"
+                alt="Medical History"
+              />
+              <div class="description">
+                <p>
+                  <b>HealthCare Imaging </b>-Spot brain tumors early or detect
+                  pneumonia swiftly : Explore symptoms, causes, and treatments
+                  with ease.
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <br />
+      <br />
       <!-- Table for booked appointments -->
-      <div class="col-md-6 booked">
+      <div class="booked" id="booked_appointments">
         <div class="padding animate__animated animate__fadeInBottomLeft">
           <table class="custom-table" border="1">
             <h2>
@@ -157,7 +341,7 @@
       <!-- Middle gap -->
       <div class="col-sm-1"></div>
       <!-- Form to book a new appointment -->
-      <div class="col-md-6 booking">
+      <div class="booking" id="book_an_appointment">
         <div class="book_table animate__animated animate__fadeInTopRight">
           <h2>
             <span>Book</span>
@@ -196,6 +380,67 @@
                 />
               </div>
             </div>
+            <div class="details">
+              <div class="animation form-group">
+                <label for="age">Age:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="age"
+                  name="age"
+                  required
+                />
+              </div>
+              <div class="animation form-group">
+                <label for="phone">Phone Number:</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phone"
+                  name="phone"
+                  required
+                />
+              </div>
+              <div class="animation form-group">
+                <label for="session_purpose">Session Purpose:</label>
+                <select
+                  class="form-control"
+                  id="session_purpose"
+                  name="session_purpose"
+                  required
+                >
+                  <option value="" disabled selected>
+                    Select Session Purpose
+                  </option>
+                  <option value="Personal Health Session">
+                    Personal Health Session
+                  </option>
+                  <option value="Cognitive Behavioral Therapy (CBT) Session">
+                    Cognitive Behavioral Therapy (CBT) Session
+                  </option>
+                  <option value="Supportive Session">Supportive Session</option>
+                  <option value="Nutrition Counseling">
+                    Nutrition Counseling
+                  </option>
+                  <option value="Mental Health Check-In">
+                    Mental Health Check-In
+                  </option>
+                  <option value="Physical Therapy Session">
+                    Physical Therapy Session
+                  </option>
+                  <option value="Wellness Coaching">Wellness Coaching</option>
+                  <option value="Stress Management Session">
+                    Stress Management Session
+                  </option>
+                  <option value="Health Education Session">
+                    Health Education Session
+                  </option>
+
+                  <!-- Add more options as needed -->
+                </select>
+              </div>
+              <br />
+            </div>
             <div class="boo-but">
               <div class="sub-but">
                 <button
@@ -217,59 +462,97 @@
           <p class="fadeIn" id="confirmation-message"></p>
         </div>
       </div>
-    </div>
-    <br />
-    <br />
-    <br />
-    <div>
-      <div class="chatButton" id="chatButton">
-        <div class="backgroundAnimation">
-          <div class="lines"></div>
-        </div>
-        <img src="../static/images/chat-icon.gif" />
-      </div>
-
-      <div class="chatBox" id="chatBox">
-        <div class="chatheader">
-          <h3 class="bot-name">
-            <img
-              class="chat-icon"
-              src="../static/images/chat-icon.gif"
-              alt="Chat Icon"
-            />Medibot
-          </h3>
-
-          <button id="closeChat">&times;</button>
-        </div>
-
-        <div class="chatwallpaper">
-          <div id="waveContainer">
-            <div class="wave-01"></div>
-            <div class="wave-02"></div>
-            <div class="wave-03"></div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <div class="chatButton" id="chatButton">
+          <div class="backgroundAnimation">
+            <div class="lines"></div>
           </div>
-          <div class="chatLog" id="chatLog"></div>
-          <div class="inputt">
-            <input type="text" id="userInput" placeholder="Type a message..." />
-            <button id="sendMessage" aria-label="Send message">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
-                  fill="#000000"
-                />
-              </svg>
-            </button>
+          <img src="../static/images/chat-icon.gif" />
+        </div>
+
+        <div class="chatBox" id="chatBox">
+          <div class="chatheader">
+            <h3 class="bot-name">
+              <img
+                class="chat-icon"
+                src="../static/images/chat-icon.gif"
+                alt="Chat Icon"
+              />Medibot
+            </h3>
+
+            <button id="closeChat">&times;</button>
+          </div>
+
+          <div class="chatwallpaper">
+            <div id="waveContainer">
+              <div class="wave-01"></div>
+              <div class="wave-02"></div>
+              <div class="wave-03"></div>
+            </div>
+            <div class="chatLog" id="chatLog"></div>
+            <div class="inputt">
+              <input
+                type="text"
+                id="userInput"
+                placeholder="Type a message..."
+              />
+              <button id="sendMessage" aria-label="Send message">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                    fill="#000000"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <br /><br /><br />
+    <!-- sidebarr -->
+    <script>
+      // <!-- dropdown menu sidebar -->
+
+      const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+      dropdownToggles.forEach((toggle) => {
+        toggle.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+          const dropdown = this.nextElementSibling;
+          if (dropdown && dropdown.classList.contains("dropdown")) {
+            dropdown.classList.toggle("active");
+          }
+        });
+      });
+    </script>
+    <!--  sidebar smooth scrolling -->
+    <script>
+      document.querySelectorAll(".smooth-scroll").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href").substring(1);
+          const target = document.getElementById(targetId);
+
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get the button and message elements
@@ -343,7 +626,7 @@
     </script>
     <script src="../static/login/animation.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="../static/header.js"></script>
     <script src="../static/script.js"></script>
+    <script src="../static/calculator.js"></script>
   </body>
 </html>

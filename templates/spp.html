@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="../static/header/header.css">
+    <link rel="stylesheet" href="../static/symptom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            overflow-x: hidden;
+ 33
+        .reveal-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #92eaf9; /* Initial green color */
+            z-index: 9999;
+            animation: reveal 0.5s ease-out forwards; /* Adjust the animation duration as needed */
+        }
+
+        @keyframes reveal {
+            0% {
+                width: 100vw;
+            }
+            100% {
+                width: 0;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div class="reveal-animation"></div>
+    <header class="header-fixed" style="background: linear-gradient(to right, #90e3ff, #fff,#90e3ff);box-shadow: rgb(56 144 200 / 7%) 0px 1px 1px, #a4f0ff 0px 2px 2px, rgb(115 241 234 / 7%) 0px 4px 4px, #7ae1f64f 0px 8px 8px, #7be9ff8c 0px 16px 16px;">
+      <div class="header-limiter">
+          <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
+          <!-- <h1><a id="title">HealthAI<span>Connect</span></a></h1> -->
+          <nav>
+              <a style="color:#333;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='#333'" href="{{ url_for('home') }}">Home</a>           
+          </nav>
+      </div>
+    </header>
+  <div class="header-fixed-placeholder"></div>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    "Please try to select as many symptoms as possible to achieve high confidence level and Select the symptoms in the prominent order of their occurrence."
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<h1>Symptom-based Disease Predictor</h1>
+    <form action="/spp" method="post">
+        <h2>Select your Symptoms as relatable as possible</h2>
+        <div class='symptomselect'>
+            <!-- Loop through your symptoms and create select inputs -->
+            {% for i in range(1, 7) %}
+                <div class="updown">
+                    <label for="symptom{{ i }}"><strong>Symptom {{ i }}</strong>:</label>
+                    <!-- Replace select with a basic HTML structure for Select2 -->
+                    <select name="symptom{{ i }}" id="symptom{{ i }}">
+                        {% for symptom in symptoms %}
+                            <option value="{{ symptom }}">{{ symptom }}</option>
+                        {% endfor %}
+                    </select>
+                </div><br>
+            {% endfor %}
+        </div>
+        <input class="input-submit" style="text-decoration:bold;"type="submit" value="Predict">
+
+    </form>
+    {% if disease %}
+    <div class="prediction-result animate__animated animate__fadeInDown">
+        <div>
+            
+            <h2>Selected Symptoms</h2>
+            <div class="selected-symptoms">
+                <ul>
+                    {% for symptom in selected_symptoms %}
+                        <li>{{ symptom }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+            <h2>Prediction Result</h2>
+            <div class="result-info">
+                <p><strong><u>The Predicted Disease is:</u></strong><b>{{ disease }}</b></p>
+                <p><strong><u>Disease Description:</u></strong> {{ description }}</p>
+                <p><strong><u>Recommended Things to do at home:</u></strong></p>
+                <ul>
+                    {% for precaution in precautions %}
+                        <li>{{ precaution }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Remove the reveal animation div after a delay
+                setTimeout(function() {
+                    var revealDiv = document.querySelector('.reveal-animation');
+                    revealDiv.parentNode.removeChild(revealDiv);
+                }, 500); // Adjust the delay in milliseconds as needed
+    
+                // Initialize Select2 on all select elements within the 'symptomselect' div
+                $('.symptomselect select').select2({
+                    width: '100%' // Adjust the width as needed
+                });
+            });
+        </script>
+        <!--its messing with select options
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+        <script src="../static/header/header.js"></script>
+    </body>
+    </html>
