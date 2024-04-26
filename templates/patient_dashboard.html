@@ -21,7 +21,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='login/pat_dash.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='login/calendar.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -56,11 +65,11 @@
         >Book an Appointment</a
       >
       <a href="#booked_appointments" class="smooth-scroll">Appointments </a>
-      <a href="#">Logout</a>
+      <a href="{{ url_for('home') }}">Logout</a>
 
       <div class="sidebar-footer">
         <img src="../static/images/health-logo.png" alt="" />
-        <p>© 2021 HealthAI</p>
+        <p>© 2023 HealthAI Connect</p>
         for more info, please email us at info@healthai.com
       </div>
     </div>
@@ -83,7 +92,7 @@
           <div class="dash-banner">
             <div>
               <h1>Find the Best Doctors for HealthCare</h1>
-            <p>~ Empowering Your Journey to Better Health</p>
+              <p>~ Empowering Your Journey to Better Health</p>
             </div>
             <img src="../static/images/doc_banner.png" alt="" />
           </div>
@@ -92,21 +101,8 @@
           <div class="usertype-header">
             <h5>Patient Dashboard</h5>
           </div>
-          <div class="Nutri_contain">
-            <a href="{{ url_for('nutri') }}" alt="NutriVision">
-              <img
-                src="../static/images/nutition.jpg"
-                alt="Nutrition"
-                class="Nutri_img" />
-              <p>
-                Unlock the Secrets of Your Food: Picture It For Healthier
-                You!<br /></p
-            ></a>
-          </div>
         </div>
       </div>
-      <br />
-      <br />
       <div class="bmi_calculator">
         <form action="calculator.js" method="post">
           <h2>Body Mass Index</h2>
@@ -205,6 +201,39 @@
         </div>
       </div>
 
+      <div class="upcoming_components_wrap">
+        <div class="upcoming_component">
+          <h3 class="fadeIn">Upcoming Appointments</h3>
+          <div class="upcom-header">
+            {% if appointments %} {% for appointment in appointments %}
+            <div class="upcom-item">
+              <span></span>
+              <div>
+                <p>{{ appointment.session_purpose }}</p>
+                <p>{{ appointment.date }},{{ appointment.time }}</p>
+              </div>
+              <div>
+                <p class="upcom_doctor">Dr. {{ appointment.doctor }}</p>
+              </div>
+            </div>
+            {% endfor %} {% else %}
+            <p>No booked appointments..</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="Nutri_contain">
+          <a href="{{ url_for('nutri') }}" alt="NutriVision">
+            <img
+              src="../static/images/nutition.jpg"
+              alt="Nutrition"
+              class="Nutri_img" />
+            <h3>NutriVision</h3>
+            <p>
+              Unlock the Secrets of Your Food: Picture It For Healthier You!<br /></p
+          ></a>
+        </div>
+      </div>
+      <br />
       <div class="bmi_components_wrap">
         <h1>Essential Components for a Healthy Lifestyle</h1>
         <div class="component">
@@ -252,7 +281,40 @@
             wellness, promoting overall restoration and rejuvenation.
           </p>
         </div>
+        <div class="component">
+          <div class="comp-header">
+            <div
+              style="
+                height: 64px;
+                width: 64px;
+                border-radius: 50%;
+                background-color: cyan;
+                margin-right: 5px;
+              "
+            >
+              <img
+                style="
+                  mix-blend-mode: multiply;
+                  margin-left: 0px;
+                  height: 64px;
+                  width: 64px;
+                  border-radius: 50%;
+                  padding: 15px;
+                "
+                src="../static/images/drop.png"
+                alt=""
+              />
+            </div>
+            <h3>Proper Hydration</h3>
+          </div>
+          <p>
+            Water is necessary for digestion, circulation, nutrient absorption,
+            temperature regulation, and toxin removal.
+          </p>
+        </div>
       </div>
+      <br />
+
       <div class="main">
         <div class="features">
           <a href="{{ url_for('spp') }}" class="animatedLink">
@@ -295,7 +357,7 @@
         </div>
       </div>
       <br />
-      <br />
+
       <!-- Table for booked appointments -->
       <div class="booked" id="booked_appointments">
         <div class="padding animate__animated animate__fadeInBottomLeft">
@@ -310,6 +372,9 @@
                 <th>Chat</th>
                 <th>Date</th>
                 <th>Time</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>Session Purpose</th>
               </tr>
             </thead>
             <tbody>
@@ -323,6 +388,9 @@
                 </td>
                 <td>{{ appointment.date }}</td>
                 <td>{{ appointment.time }}</td>
+                <td>{{ appointment.age }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.session_purpose }}</td>
               </tr>
               <tr class="spacer">
                 <td colspan="100" style="background: transparent"></td>
@@ -338,6 +406,8 @@
           </table>
         </div>
       </div>
+      <br />
+
       <!-- Middle gap -->
       <div class="col-sm-1"></div>
       <!-- Form to book a new appointment -->
@@ -462,6 +532,7 @@
           <p class="fadeIn" id="confirmation-message"></p>
         </div>
       </div>
+      <div id="calendar"></div>
       <br />
       <br />
       <br />
@@ -628,5 +699,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static/script.js"></script>
     <script src="../static/calculator.js"></script>
+    <script src="../static/login/calendar.js"></script>
   </body>
 </html>

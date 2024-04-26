@@ -1,4 +1,6 @@
-doctor,patient,date,time,condition
-Rahmath,mateen,2024-2-9,01:30,accept
-Rahmath,mateen,2024-01-08,13:00,accept
-Rahmath,mateen,2024-01-01,16:15,accept
+doctor,patient,date,time,age,phone,session_purpose,condition
+Rahmath,mateen,2024-2-9,01:30,21,7981112458,Personal Health Session,accept
+Rahmath,mateen,2024-01-08,13:00,21,7981112458,Personal Health Session,accept
+Rahmath,mateen,2024-01-01,16:15,21,7981112458,Personal Health Session,accept
+Rahmath,mateen,2024-01-05,12:12,21,7981112458,Personal Health Session,accept
+Rahmath,mateen,2024-01-09,23:14,21,7981112458,Personal Health Session,accept

@@ -33,7 +33,7 @@ body {
     #dde5ee,
     #d3e0e9
   ); */
-  background: #003358cf;
+  background: #003358cf !important;
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -74,7 +74,7 @@ body {
   padding: 10px 0;
   text-align: center;
   background-color: #0056b3;
-  color: #818080;
+  color: #ffffff;
 }
 .sidebar-footer img {
   height: 120px;
@@ -134,26 +134,85 @@ body {
 
 .dash-banner {
   box-sizing: border-box;
-  margin: 24px 0 24px 0;
+  margin: 24px 0 0px 0;
   padding: 20px;
   border-radius: 25px;
   background: #000f3d;
-  width: 93.5%;
+  width: 81.5%;
   left: -17px;
   display: flex;
   height: 214px;
+  margin-bottom: 11px;
 }
 .dash-banner img {
   width: 220px;
   height: 280px;
   position: absolute;
-  top: 9.75%;
-  right: 32%;
+  top: 70px;
+  left: 820px;
 }
 .dash-banner h1 {
   width: 102.5%;
   padding-right: 265px;
   font-weight: 700;
+}
+.upcoming_components_wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 69%;
+}
+.upcoming_component h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.upcoming_component {
+  box-sizing: border-box;
+  margin: 20px 0 24px 30px;
+  padding: 20px;
+  border-radius: 25px;
+  width: 33%;
+  background-color: #00b4f6;
+  color: white;
+  height: 296px;
+  overflow: hidden;
+  width: 45%;
+}
+
+.upcoming_component .fadeIn {
+  display: flex;
+  justify-content: center;
+}
+.upcom-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #00143d;
+  color: white;
+  margin: 10px 0;
+  transition: transform 0.4s ease-in-out;
+}
+.upcom-item span {
+  width: 5px;
+  height: 30px;
+  margin: 9px 0 0 -19.7px;
+  border-radius: 50px 100px 100px 50px;
+  background-color: #ffffff;
+}
+.upcom-header {
+  width: 100%;
+}
+.upcom-item:hover {
+  background-color: #0056b3;
+  transform: scale(1.008);
+}
+
+.upcom_doctor {
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -219,7 +278,7 @@ span:nth-child(4) {
   border-radius: 10px;
 }
 .padding {
-  padding: 10px 16px 5px 16px;
+  padding: 0px 16px 5px 16px;
   border-radius: 25px;
   background-color: #00143d;
 }
@@ -241,10 +300,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /*  */
 .bmi_calculator {
-  height: auto;
+  height: 535px;
   box-sizing: border-box;
   padding: 10px 32px 32px 32px;
-  border-radius: 16px;
+  border-radius: 25px;
   background: var(--White);
   position: absolute;
   z-index: 2;
@@ -396,9 +455,10 @@ input[type="number"]::-webkit-outer-spin-button {
   display: none;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, auto);
-  gap: 24px;
-  margin-bottom: 32px;
+  /* gap: 24px; */
   position: relative;
+  margin-top: -22px;
+  margin-bottom: 12px;
 }
 .bmi_calculator form .stats_imperial div label {
   font-size: 14px;
@@ -412,16 +472,16 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid #d8e2e7;
   box-shadow: none;
   outline: 0;
+  height: 53px;
   font-size: 24px;
   font-weight: 600;
   max-width: 135px;
   color: var(--Gunmetal);
   transition: border 0.3s ease;
   box-sizing: border-box;
-  margin-top: 8px;
 }
 .bmi_calculator form .stats_imperial div #height_in {
-  margin-top: 39px;
+  margin-top: 31px;
 }
 .bmi_calculator form .stats_imperial div .ft {
   position: absolute;
@@ -430,7 +490,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--Blue);
   line-height: normal;
   letter-spacing: -1.2px;
-  top: 60px;
+  top: 40px;
   left: 100px;
 }
 .bmi_calculator form .stats_imperial div .in {
@@ -440,11 +500,11 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--Blue);
   line-height: normal;
   letter-spacing: -1.2px;
-  top: 60px;
-  left: 265px;
+  top: 40px;
+  left: 250px;
 }
 .bmi_calculator form .stats_imperial div #weight_lbs {
-  margin-top: 39px;
+  margin-top: 31px;
 }
 .bmi_calculator form .stats_imperial div .st {
   position: absolute;
@@ -453,7 +513,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--Blue);
   line-height: normal;
   letter-spacing: -1.2px;
-  top: 224px;
+  top: 124px;
   left: 100px;
 }
 .bmi_calculator form .stats_imperial div .lbs {
@@ -463,21 +523,22 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--Blue);
   line-height: normal;
   letter-spacing: -1.2px;
-  top: 224px;
-  left: 265px;
+  top: 124px;
+  left: 250px;
 }
 .bmi_calculator form .stats_imperial div input:focus,
 .bmi_calculator form .stats_imperial div input:hover {
   border: 1px solid var(--Blue);
 }
 .bmi_calculator .result_output {
+  height: 200px;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px;
   align-items: center;
   background: linear-gradient(90deg, #345ff6 0%, #587dff 100%);
-  border-radius: 156px 999px 999px 156px;
+  border-radius: 250px 999px 999px 250px;
 }
 .bmi_calculator .result_output .wrap_result #welcome {
   color: var(--White);
@@ -526,20 +587,20 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: black;
   border-radius: 50%; /* Ensures the dot is circular */
   position: relative;
-  top: -20px;
-  right: 14px;
+  top: 18px;
+  right: 148px;
 }
 
 .bmi_components_wrap {
   box-sizing: border-box;
-  margin: -35px 0 24px 0;
+  margin: 0px 0 24px 30px;
   padding: 20px;
-  border-radius: 35px;
+  border-radius: 25px;
   background: #000f3d;
-  width: 66%;
+  width: 96%;
   left: -17px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
 .bmi_components_wrap h1 {
@@ -598,7 +659,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /* header */
 .booked {
   width: 70%;
-  margin: auto;
+  margin: 20px auto;
 }
 .header-fixed {
   background: #00143d;
@@ -722,6 +783,9 @@ form {
   display: flex;
   justify-content: space-between;
 }
+.form-group {
+  margin-right: 20px;
+}
 .details {
   min-width: 45%;
 }
@@ -735,7 +799,7 @@ form {
 .book_table {
   background-color: #00143d;
   backdrop-filter: blur(15px);
-  padding: 16px 16px 0px 16px;
+  padding: 0px 16px 0px 16px;
   border-radius: 25px;
   overflow: hidden;
   width: 70%;
@@ -926,6 +990,7 @@ label {
 .sub-but {
   display: flex;
   justify-content: flex-end;
+  margin: 0px 0 0 -10px;
 }
 .button-51__Content {
   display: flex;
@@ -947,12 +1012,14 @@ label {
 .features {
   display: flex;
   justify-content: space-evenly;
+  width: 96%;
+  margin: auto;
+  margin-left: 45px;
 }
 .feature {
   min-height: 320px;
   max-height: 330px;
-  min-width: 400px;
-  max-width: 400px;
+  width: 93%;
   display: flex;
   flex-direction: column;
   border-radius: 25px;
@@ -962,7 +1029,7 @@ label {
   transition: transform 0.4s ease-in-out;
 }
 .feature img {
-  width: 400px;
+  width: 100%;
   height: 180px;
   border-radius: 25px;
 }
@@ -994,21 +1061,28 @@ label {
   background: #00143d;
   border-radius: 25px;
   color: white;
-  margin-right: 20px;
-  width: 338px;
+  margin-right: 36px;
+  margin-top: 20px;
+  width: 43%;
   text-decoration: none;
-  height: 98px;
+  height: 296px;
 }
 .Nutri_contain img {
-  width: 101px;
+  width: 100%;
+  height: 160px;
   border-radius: 25px;
-  float: right;
+}
+.Nutri_contain h3 {
+  font-size: 22px;
+  text-align: left;
+  margin-left: 13px;
+  font-weight: 700;
 }
 .Nutri_contain p {
-  padding: 10px 0 0 15px;
+  padding: 0px 0 0 15px;
 }
 .Nutri_contain:hover {
-  transform: scale(1.03);
+  transform: scale(1.015);
 }
 .Nutri_contain a {
   text-decoration: none;

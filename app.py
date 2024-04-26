@@ -637,7 +637,7 @@ def doctor_dashboard():
         return render_template('doctor_dashboard.html', username=doctor_username, appointments=appointments,
                                accepted_appointments=accepted_appointments)
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
 
 def get_accepted_appointments(doctor_username):
@@ -712,7 +712,7 @@ def accept_appointment(appointment_id):
 
 
 def save_accepted_appointment(doctor_name, appointment):
-    appointment_data = {'doctor': doctor_name, 'patient': appointment['patient'], 'date': appointment['date'], 'time': appointment['time'], 'condition': 'accept'}
+    appointment_data = {'doctor': doctor_name, 'patient': appointment['patient'], 'date': appointment['date'], 'time': appointment['time'],'age':appointment['age'],'phone':appointment['phone'],'session_purpose':appointment['session_purpose'], 'condition': 'accept'}
     appointments_df = pd.DataFrame([appointment_data])
     appointments_df.to_csv(patient_appointment_csv_file_path, mode='a', index=False, header=False)
 

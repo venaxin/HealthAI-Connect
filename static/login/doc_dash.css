@@ -22,27 +22,71 @@ body {
   overflow-x: hidden;
 }
 
-.header-fixed {
-  background: rgb(0, 119, 181);
-  padding: 20px 40px;
-  height: 72px;
-  color: #ffffff;
-  box-sizing: border-box;
-  top: -100px;
-  box-shadow: #75b8ff4d 0px 48px 100px 0px;
-  -webkit-transition: top 0.3s;
-  transition: top 0.3s;
+.sidebar {
+  height: 100%;
+  width: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #007bff;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
-.header-fixed .header-limiter nav a {
-  font-family: "Nunito Sans", sans-serif;
-  display: inline-block;
-  padding: 0 15px;
+.sidebar a {
+  padding: 15px 30px;
   text-decoration: none;
-  font-weight: 900;
-  color: snow;
-  transition: color 0.6s ease-in-out;
-  position: relative; /* Added position relative */
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+  margin: 4px;
+}
+
+.sidebar a:hover {
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 25px;
+  background: #005064;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #0056b3;
+  color: #818080;
+}
+.sidebar-footer img {
+  height: 120px;
+  border-radius: 50%;
+}
+
+.dropdown {
+  padding-left: 20px;
+  display: none;
+}
+
+.dropdown.active {
+  display: block;
+}
+
+.dropdown a {
+  padding: 8px 10px;
+  margin: 0 0 0 20px;
+  color: #ccc;
+}
+
+.dropdown a:hover {
+  background-color: #555;
+}
+
+/* ntent styles */
+.content {
+  margin-left: 260px;
+  padding: 0px 20px;
 }
 
 table {
