@@ -275,7 +275,7 @@ span:nth-child(4) {
   margin-top: 20px;
   padding: 20px;
   background: rgba(255, 0, 0, 0.799);
-  border-radius: 10px;
+  border-radius: 25px;
 }
 .padding {
   padding: 0px 16px 5px 16px;
@@ -778,10 +778,24 @@ container a:hover {
   border-radius: 10px !important;
   overflow: hidden;
 }
-
-form {
+.book-button button {
+  background-color: #042f65;
+  color: #fff;
+  font-size: larger;
+  font-weight: 900;
+  padding: 15px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+.form_display {
   display: flex;
   justify-content: space-between;
+  margin: 20px 0;
 }
 .form-group {
   margin-right: 20px;
@@ -789,26 +803,22 @@ form {
 .details {
   min-width: 45%;
 }
-.boo-but {
-  margin: 32px 0px 0px 14px;
-  transition: all 1s ease-in-out;
-  &.slide-out {
-    transform: translateX(200%);
-  }
-}
+
 .book_table {
   background-color: #00143d;
   backdrop-filter: blur(15px);
-  padding: 0px 16px 0px 16px;
+  padding: 0px 16px 0px 46px;
   border-radius: 25px;
   overflow: hidden;
-  width: 70%;
+  width: 65%;
   margin: auto;
 }
 .animation input {
   border-radius: 25px;
 }
-
+.booking {
+  display: flex;
+}
 form button,
 form a {
   display: inline-block;
@@ -860,153 +870,6 @@ form a {
 label {
   color: white;
   font-weight: 700;
-}
-
-.button-51 {
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-  font-family: "Nunito Sans", sans-serif;
-  box-sizing: border-box;
-  font-size: 0.8125rem;
-  font-weight: 450;
-  letter-spacing: normal;
-  -webkit-tap-highlight-color: transparent;
-  align-items: center;
-  background: #fff;
-  border-radius: 25px;
-  border: 0;
-  /* box-shadow: inset 0 -0.0625rem 0 #b5b5b5, inset -0.0625rem 0 0 #e3e3e3, inset 0.0625rem 0 0 #e3e3e3, inset 0 0.0625rem 0 #e3e3e3; */
-  color: #303030;
-  cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  line-height: 1;
-  margin: auto 0;
-  min-height: 215px;
-  min-width: 0.75rem;
-  padding: 0.375rem 0px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: ease-in-out 0.5s;
-  transition: background-color 0.075s cubic-bezier(0.19, 0.91, 0.38, 1),
-    box-shadow 0.075s cubic-bezier(0.19, 0.91, 0.38, 1);
-  transition-behavior: normal, normal;
-  user-select: none;
-}
-
-@media (-ms-high-contrast: active) {
-  .button-51 {
-    border-image: none 100% 1 0 stretch;
-    border-style: none;
-  }
-}
-
-.button-51__Content {
-  align-items: center;
-  display: flex;
-  font-size: 0.8125rem;
-  justify-content: center;
-  letter-spacing: normal;
-  line-height: 1.25rem;
-  min-height: 0.0625rem;
-  min-width: 0.0625rem;
-  position: relative;
-  transition: transform 75ms cubic-bezier(0.19, 0.91, 0.38, 1);
-  transition-behavior: normal;
-}
-
-@media (min-width: 48em) {
-  .button-51__Content {
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-}
-
-.button-51::after {
-  border-radius: 0.25rem;
-  bottom: -0.0625rem;
-  box-shadow: 0 0 0 -0.0625rem #005bd3;
-  content: "";
-  display: block;
-  left: -0.0625rem;
-  pointer-events: none;
-  position: absolute;
-  right: -0.0625rem;
-  top: -0.0625rem;
-  z-index: 1;
-}
-
-.button-51:focus-visible {
-  outline: 2px solid rgb(0, 91, 211);
-  outline-offset: 0.0625rem;
-}
-
-.button-51:hover {
-  background: #0052a3;
-  box-shadow: inset 0 -0.0625rem 0 #003feb, inset 0.0625rem 0 0 #00b4f6,
-    inset -0.0625rem 0 0 #003cff, inset 0 0.0625rem 0 #00c6f7;
-  outline: none;
-  color: white;
-}
-
-.button-51:focus,
-.button-51:focus-visible {
-  box-shadow: inset 0 -0.0625rem 0 #b5b5b5, inset -0.0625rem 0 0 #e3e3e3,
-    inset 0.0625rem 0 0 #e3e3e3, inset 0 0.0625rem 0 #e3e3e3;
-}
-
-.button-51:active {
-  background: #f7f7f7;
-  box-shadow: 0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.2) inset,
-    0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset,
-    -0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset;
-}
-
-.button-51:focus-visible::after {
-  content: none;
-}
-
-.button-51:active::after {
-  border-style: none;
-  box-shadow: none;
-}
-
-.button-51:active .button-51__Content {
-  transform: translateY(0.0625rem);
-}
-
-.button-51 .button-51__Content {
-  width: 100%;
-}
-
-.button-51.button-51 .button-51__Content {
-  font-weight: 650;
-  padding: 6px 10px;
-  font-size: 15px;
-}
-.button-51:focus {
-  outline: none;
-}
-.sub-but {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0px 0 0 -10px;
-}
-.button-51__Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.button-51__Text {
-  color: #000;
-  font-size: 30px;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(
-    270deg
-  ); /* Rotate the text back to the correct orientation */
-  margin: 12px 6px; /* Remove any default margin to ensure precise alignment */
 }
 
 .features {

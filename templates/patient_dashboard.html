@@ -411,128 +411,133 @@
       <!-- Middle gap -->
       <div class="col-sm-1"></div>
       <!-- Form to book a new appointment -->
-      <div class="booking" id="book_an_appointment">
-        <div class="book_table animate__animated animate__fadeInTopRight">
-          <h2>
-            <span>Book</span>
-            <span>an</span>
-            <span>Appointment</span>
-          </h2>
-          <form action="{{ url_for('book_appointment') }}" method="post">
-            <h2></h2>
-            <div class="details">
-              <div class="animation form-group">
-                <label for="doctor">Select Doctor:</label>
-                <select class="form-control" id="doctor" name="doctor" required>
-                  {% for doctor in doctors %}
-                  <option>{{ doctor }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="animation form-group">
-                <label for="date">Select Date:</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="date"
-                  name="date"
-                  required
-                />
-              </div>
-              <div class="animation form-group">
-                <label for="time">Select Time:</label>
-                <input
-                  type="time"
-                  class="form-control"
-                  id="time"
-                  name="time"
-                  required
-                />
-              </div>
-            </div>
-            <div class="details">
-              <div class="animation form-group">
-                <label for="age">Age:</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="age"
-                  name="age"
-                  required
-                />
-              </div>
-              <div class="animation form-group">
-                <label for="phone">Phone Number:</label>
-                <input
-                  type="tel"
-                  class="form-control"
-                  id="phone"
-                  name="phone"
-                  required
-                />
-              </div>
-              <div class="animation form-group">
-                <label for="session_purpose">Session Purpose:</label>
-                <select
-                  class="form-control"
-                  id="session_purpose"
-                  name="session_purpose"
-                  required
-                >
-                  <option value="" disabled selected>
-                    Select Session Purpose
-                  </option>
-                  <option value="Personal Health Session">
-                    Personal Health Session
-                  </option>
-                  <option value="Cognitive Behavioral Therapy (CBT) Session">
-                    Cognitive Behavioral Therapy (CBT) Session
-                  </option>
-                  <option value="Supportive Session">Supportive Session</option>
-                  <option value="Nutrition Counseling">
-                    Nutrition Counseling
-                  </option>
-                  <option value="Mental Health Check-In">
-                    Mental Health Check-In
-                  </option>
-                  <option value="Physical Therapy Session">
-                    Physical Therapy Session
-                  </option>
-                  <option value="Wellness Coaching">Wellness Coaching</option>
-                  <option value="Stress Management Session">
-                    Stress Management Session
-                  </option>
-                  <option value="Health Education Session">
-                    Health Education Session
-                  </option>
+      <div class="calendar_set">
+        <div class="booking" id="book_an_appointment">
+          <div class="book_table animate__animated animate__fadeInTopRight">
+            <h2>
+              <span>Book</span>
+              <span>an</span>
+              <span>Appointment</span>
+            </h2>
+            <form action="{{ url_for('book_appointment') }}" method="post">
+              <h2></h2>
+              <div class="form_display">
+                <div class="details">
+                  <div class="animation form-group">
+                    <label for="doctor">Select Doctor:</label>
+                    <select
+                      class="form-control"
+                      id="doctor"
+                      name="doctor"
+                      required
+                    >
+                      {% for doctor in doctors %}
+                      <option>{{ doctor }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="animation form-group">
+                    <label for="date">Select Date:</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="date"
+                      name="date"
+                      required
+                    />
+                  </div>
+                  <div class="animation form-group">
+                    <label for="time">Select Time:</label>
+                    <input
+                      type="time"
+                      class="form-control"
+                      id="time"
+                      name="time"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="details">
+                  <div class="animation form-group">
+                    <label for="age">Age:</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="age"
+                      name="age"
+                      required
+                    />
+                  </div>
+                  <div class="animation form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="phone"
+                      name="phone"
+                      required
+                    />
+                  </div>
+                  <div class="animation form-group">
+                    <label for="session_purpose">Session Purpose:</label>
+                    <select
+                      class="form-control"
+                      id="session_purpose"
+                      name="session_purpose"
+                      required
+                    >
+                      <option value="" disabled selected>
+                        Select Session Purpose
+                      </option>
+                      <option value="Personal Health Session">
+                        Personal Health Session
+                      </option>
+                      <option
+                        value="Cognitive Behavioral Therapy (CBT) Session"
+                      >
+                        Cognitive Behavioral Therapy (CBT) Session
+                      </option>
+                      <option value="Supportive Session">
+                        Supportive Session
+                      </option>
+                      <option value="Nutrition Counseling">
+                        Nutrition Counseling
+                      </option>
+                      <option value="Mental Health Check-In">
+                        Mental Health Check-In
+                      </option>
+                      <option value="Physical Therapy Session">
+                        Physical Therapy Session
+                      </option>
+                      <option value="Wellness Coaching">
+                        Wellness Coaching
+                      </option>
+                      <option value="Stress Management Session">
+                        Stress Management Session
+                      </option>
+                      <option value="Health Education Session">
+                        Health Education Session
+                      </option>
 
-                  <!-- Add more options as needed -->
-                </select>
+                      <!-- Add more options as needed -->
+                    </select>
+                  </div>
+                  <br />
+                </div>
               </div>
-              <br />
-            </div>
-            <div class="boo-but">
-              <div class="sub-but">
-                <button
-                  type="submit"
-                  class="button-51"
-                  role="button"
-                  id="bookAppointmentBtn"
-                >
-                  <span class="button-51__Content">
-                    <span class="button-51__Text text">B</span>
-                    <span class="button-51__Text text">O</span>
-                    <span class="button-51__Text text">O</span>
-                    <span class="button-51__Text text">K</span>
-                  </span>
-                </button>
+              <div class="booking_button">
+                <div class="book-button">
+                  <button type="submit" role="button" id="bookAppointmentBtn">
+                    Book Appointment
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
-          <p class="fadeIn" id="confirmation-message"></p>
+            </form>
+            <p class="fadeIn" id="confirmation-message"></p>
+          </div>
+          <div id="calendar"></div>
         </div>
       </div>
-      <div id="calendar"></div>
       <br />
       <br />
       <br />
