@@ -91,6 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add this part to ensure the current date is shaded initially
   const today = calendarDiv.querySelector('.today');
   if (today) {
-    today.style.backgroundColor = '#ff0000'; // Adjust the color to your preference
+    today.style.backgroundColor = 'rgb(94 171 255)'; // Adjust the color to your preference
   }
 });

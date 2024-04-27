@@ -145,19 +145,18 @@ span:nth-child(4) {
 
 .app-tables {
   display: flex;
-  justify-content: space-evenly;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .appointment-card {
   margin: 20px;
-  background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
-  box-shadow: #333;
-  width: 40%;
+  width: 80%;
 }
 .accepted-appointment-card {
   margin: 20px;
-  background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
-  box-shadow: #333;
-  width: 40%;
+  width: 80%;
 }
 th {
   color: #fff;

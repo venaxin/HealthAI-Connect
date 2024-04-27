@@ -10,7 +10,8 @@
       rel="stylesheet"
       type="text/css"
     />
-    <link rel="stylesheet" href="../static/header/header.css" />
+
+    <link rel="stylesheet" href="../static/login/calorie.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -37,6 +38,7 @@
       href="{{ url_for('static', filename='login/pat_dash.css') }}"
     />
     <link rel="stylesheet" href="../static/styles.css" />
+    <link rel="stylesheet" href="../static/login/sidebar.css" />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body>
@@ -77,17 +79,20 @@
       <br />
       <div class="nutri">
         <div class="greet">
-          <h1
-            class="fadeIn"
-            style="
-              font-weight: 900;
-              font-size: 50px;
-              margin: 0px 0px 5px 10px;
-              text-transform: capitalize;
-            "
-          >
-            Welcome, {{ username }}!
-          </h1>
+          <div class="fadeUp-box">
+            <h1
+              class="fadeUp"
+              style="
+                font-weight: 900;
+                font-size: 50px;
+                margin: 0px 0px 5px 10px;
+                text-transform: capitalize;
+              "
+            >
+              Welcome, {{ username }}!
+            </h1>
+          </div>
+
           <p class="fadeIn">Hope you are doing well</p>
           <div class="dash-banner">
             <div>
@@ -224,7 +229,7 @@
         <div class="Nutri_contain">
           <a href="{{ url_for('nutri') }}" alt="NutriVision">
             <img
-              src="../static/images/nutition.jpg"
+              src="../static/images/admin_dash_back.jpg"
               alt="Nutrition"
               class="Nutri_img" />
             <h3>NutriVision</h3>
@@ -234,87 +239,7 @@
         </div>
       </div>
       <br />
-      <div class="bmi_components_wrap">
-        <h1>Essential Components for a Healthy Lifestyle</h1>
-        <div class="component">
-          <div class="comp-header">
-            <img
-              src="../static/images/icon-eating.svg"
-              alt=""
-              height="64"
-              width="64"
-            />
-            <h3>Healthy eating</h3>
-          </div>
-          <p>
-            Healthy eating promotes weight control, disease prevention, better
-            digestion, immunity, mental clarity, and mood.
-          </p>
-        </div>
-        <div class="component">
-          <div class="comp-header">
-            <img
-              src="../static/images/icon-exercise.svg"
-              alt=""
-              height="64"
-              width="64"
-            />
-            <h3>Regular exercise</h3>
-          </div>
-          <p>
-            Exercise improves fitness, aids weight control, elevates mood, and
-            reduces disease risk, fostering wellness and longevity.
-          </p>
-        </div>
-        <div class="component">
-          <div class="comp-header">
-            <img
-              src="../static/images/icon-sleep.svg"
-              alt=""
-              height="64"
-              width="64"
-            />
-            <h3>Adequate sleep</h3>
-          </div>
-          <p>
-            Sleep enhances mental clarity, emotional stability, and physical
-            wellness, promoting overall restoration and rejuvenation.
-          </p>
-        </div>
-        <div class="component">
-          <div class="comp-header">
-            <div
-              style="
-                height: 64px;
-                width: 64px;
-                border-radius: 50%;
-                background-color: cyan;
-                margin-right: 5px;
-              "
-            >
-              <img
-                style="
-                  mix-blend-mode: multiply;
-                  margin-left: 0px;
-                  height: 64px;
-                  width: 64px;
-                  border-radius: 50%;
-                  padding: 15px;
-                "
-                src="../static/images/drop.png"
-                alt=""
-              />
-            </div>
-            <h3>Proper Hydration</h3>
-          </div>
-          <p>
-            Water is necessary for digestion, circulation, nutrient absorption,
-            temperature regulation, and toxin removal.
-          </p>
-        </div>
-      </div>
-      <br />
-
+      <h3 class="heading_services">Our HealthCare Services</h3>
       <div class="main">
         <div class="features">
           <a href="{{ url_for('spp') }}" class="animatedLink">
@@ -357,60 +282,157 @@
         </div>
       </div>
       <br />
-
-      <!-- Table for booked appointments -->
-      <div class="booked" id="booked_appointments">
-        <div class="padding animate__animated animate__fadeInBottomLeft">
-          <table class="custom-table" border="1">
-            <h2>
-              <span>Booked</span>
-              <span>Appointments</span>
-            </h2>
-            <thead>
-              <tr style="background: transparent">
-                <th>Doctor</th>
-                <th>Chat</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Age</th>
-                <th>Phone</th>
-                <th>Session Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if appointments %} {% for appointment in appointments %}
-              <tr>
-                <td>&nbsp;&nbsp;{{ appointment.doctor }}</td>
-                <td>
-                  <a href="{{ url_for('chat' , username=username) }}"
-                    ><button id="openChatBtn">Open Chat</button></a
-                  >
-                </td>
-                <td>{{ appointment.date }}</td>
-                <td>{{ appointment.time }}</td>
-                <td>{{ appointment.age }}</td>
-                <td>{{ appointment.phone }}</td>
-                <td>{{ appointment.session_purpose }}</td>
-              </tr>
-              <tr class="spacer">
-                <td colspan="100" style="background: transparent"></td>
-              </tr>
-              {% endfor %} {% else %}
-              <tr>
-                <td colspan="4" style="text-align: center">
-                  No booked appointments..
-                </td>
-              </tr>
-              {% endif %}
-            </tbody>
-          </table>
+      <div class="third-row">
+        <div class="bmi_components_wrap">
+          <h1>Essential Components for a Healthy Lifestyle</h1>
+          <div class="components">
+            <div class="component">
+              <div class="comp-header">
+                <img
+                  src="../static/images/icon-eating.svg"
+                  alt=""
+                  height="64"
+                  width="64"
+                />
+                <h3>Healthy eating</h3>
+              </div>
+              <p>
+                Healthy eating promotes weight control, disease prevention,
+                better digestion, immunity, mental clarity, and mood.
+              </p>
+            </div>
+            <div class="component">
+              <div class="comp-header">
+                <img
+                  src="../static/images/icon-exercise.svg"
+                  alt=""
+                  height="64"
+                  width="64"
+                />
+                <h3>Regular exercise</h3>
+              </div>
+              <p>
+                Exercise improves fitness, aids weight control, elevates mood,
+                and reduces disease risk, fostering wellness and longevity.
+              </p>
+            </div>
+            <div class="component">
+              <div class="comp-header">
+                <img
+                  src="../static/images/icon-sleep.svg"
+                  alt=""
+                  height="64"
+                  width="64"
+                />
+                <h3>Adequate sleep</h3>
+              </div>
+              <p>
+                Sleep enhances mental clarity, emotional stability, and physical
+                wellness, promoting overall restoration and rejuvenation.
+              </p>
+            </div>
+            <div class="component">
+              <div class="comp-header">
+                <div
+                  style="
+                    height: 64px;
+                    width: 64px;
+                    border-radius: 50%;
+                    background-color: cyan;
+                    margin-right: 5px;
+                  "
+                >
+                  <img
+                    style="
+                      mix-blend-mode: multiply;
+                      margin-left: 0px;
+                      height: 64px;
+                      width: 64px;
+                      border-radius: 50%;
+                      padding: 15px;
+                    "
+                    src="../static/images/drop.png"
+                    alt=""
+                  />
+                </div>
+                <h3>Proper Hydration</h3>
+              </div>
+              <p>
+                Water is necessary for digestion, circulation, nutrient
+                absorption, temperature regulation, and toxin removal.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="bmr-calculator" class="wrapper-calorie">
+          <div class="calculator">
+            <h3>Calorie Calculator</h3>
+            <div class="choose-gender">
+              <div class="segmented-control">
+                <input
+                  id="calc-gender-male"
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  checked=""
+                /><label for="calc-gender-male">Male</label>
+              </div>
+              <div class="segmented-control">
+                <input
+                  id="calc-gender-female"
+                  type="radio"
+                  name="gender"
+                  value="female"
+                /><label for="calc-gender-female">Female</label>
+              </div>
+            </div>
+            <label for="calc-age" id="calc-age_value">Age: 25</label>
+            <input id="calc-age" type="range" value="25" min="13" max="100" />
+            <label for="calc-height" id="calc-height_value"
+              >Height: 180cm</label
+            >
+            <input
+              id="calc-height"
+              type="range"
+              value="180"
+              min="80"
+              max="250"
+            />
+            <label for="calc-weight" id="calc-weight_value">Weight: 80kg</label>
+            <input
+              id="calc-weight"
+              type="range"
+              value="80"
+              min="40"
+              max="200"
+            />
+            <label for="calc-walking" id="calc-walking_value"
+              >Walking: 2 hours per week</label
+            >
+            <input id="calc-walking" type="range" value="2" min="0" max="50" />
+            <label for="calc-cardio" id="calc-cardio_value"
+              >Cardio: 1 hour per week</label
+            >
+            <input id="calc-cardio" type="range" value="1" min="0" max="50" />
+          </div>
+          <div class="results">
+            <div id="calc-target-gain">
+              To Gain Weight:<br />
+              <span>2700 calories</span>
+            </div>
+            <div id="calc-target-maintain">
+              To Maintain:<br />
+              <span>2400 calories</span>
+            </div>
+            <div id="calc-target-lose">
+              To Lose Weight:<br />
+              <span>1900 calories</span>
+            </div>
+          </div>
         </div>
       </div>
       <br />
-
-      <!-- Middle gap -->
       <div class="col-sm-1"></div>
-      <!-- Form to book a new appointment -->
       <div class="calendar_set">
         <div class="booking" id="book_an_appointment">
           <div class="book_table animate__animated animate__fadeInTopRight">
@@ -535,12 +557,58 @@
             </form>
             <p class="fadeIn" id="confirmation-message"></p>
           </div>
+
           <div id="calendar"></div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
+      <!-- Table for booked appointments -->
+      <div class="booked" id="booked_appointments">
+        <div class="padding animate__animated animate__fadeInBottomLeft">
+          <table class="custom-table" border="1">
+            <h2>
+              <span>Booked</span>
+              <span>Appointments</span>
+            </h2>
+            <thead>
+              <tr style="background: transparent">
+                <th>Doctor</th>
+                <th>Chat</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>Session Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if appointments %} {% for appointment in appointments %}
+              <tr>
+                <td>&nbsp;&nbsp;{{ appointment.doctor }}</td>
+                <td>
+                  <a href="{{ url_for('chat' , username=username) }}"
+                    ><button id="openChatBtn">Open Chat</button></a
+                  >
+                </td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.age }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.session_purpose }}</td>
+              </tr>
+              <tr class="spacer">
+                <td colspan="100" style="background: transparent"></td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="4" style="text-align: center">
+                  No booked appointments..
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div>
         <div class="chatButton" id="chatButton">
           <div class="backgroundAnimation">
@@ -594,41 +662,6 @@
         </div>
       </div>
     </div>
-    <br /><br /><br />
-    <!-- sidebarr -->
-    <script>
-      // <!-- dropdown menu sidebar -->
-
-      const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-
-      dropdownToggles.forEach((toggle) => {
-        toggle.addEventListener("click", function (event) {
-          event.preventDefault(); // Prevent default link behavior
-          const dropdown = this.nextElementSibling;
-          if (dropdown && dropdown.classList.contains("dropdown")) {
-            dropdown.classList.toggle("active");
-          }
-        });
-      });
-    </script>
-    <!--  sidebar smooth scrolling -->
-    <script>
-      document.querySelectorAll(".smooth-scroll").forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          const targetId = this.getAttribute("href").substring(1);
-          const target = document.getElementById(targetId);
-
-          if (target) {
-            window.scrollTo({
-              top: target.offsetTop,
-              behavior: "smooth",
-            });
-          }
-        });
-      });
-    </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get the button and message elements
@@ -704,6 +737,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static/script.js"></script>
     <script src="../static/calculator.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../static/login/calorie.js"></script>
     <script src="../static/login/calendar.js"></script>
   </body>
 </html>

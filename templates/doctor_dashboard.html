@@ -11,6 +11,8 @@
       type="text/css"
     />
     <link rel="stylesheet" href="../static/header/header.css" />
+    <link rel="stylesheet" href="../static/login/sidebar.css" />
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -54,20 +56,16 @@
         >Book an Appointment</a
       >
       <a href="#booked_appointments" class="smooth-scroll">Appointments </a>
-      <a href="#">Logout</a>
+      <a href="{{ url_for('home') }}">Logout</a>
 
       <div class="sidebar-footer">
         <img src="../static/images/health-logo.png" alt="" />
-        <p>© 2021 HealthAI</p>
+        <p>© 2023 HealthAI Connect</p>
         for more info, please email us at info@healthai.com
       </div>
     </div>
     <div class="content">
     <h1 class="fadeIn">Welcome, Dr. {{ username }}!</h1>
-    <br />
-    <br />
-
-    <br />
     <div class="app-tables">
       <!-- Display booked appointments -->
       <div class="appointment-card">
@@ -130,7 +128,6 @@
           </table>
         </div>
       </div>
-      <br />
       <div class="accepted-appointment-card">
         <div class="padding animate__animated animate__fadeInBottomRight">
           <table class="appointments-table" border="1">
@@ -196,5 +193,6 @@
     <script src="../static/login/animation.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="../static/header/header.js"></script>
+    <script src="../static/login/sidebar.js"></script>
   </body>
 </html>
