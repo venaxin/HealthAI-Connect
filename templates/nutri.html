@@ -44,8 +44,7 @@
           alt="Default Image"
         />
         <nav>
-          <a href="{{ url_for('home') }}" style="font-weight: 700">Home</a>
-          <a href="{{ url_for('healthcare') }}" style="font-weight: 700"
+          <a id="goBackBtn" onclick="goBack()" style="font-weight: 700"
             >Back</a
           >
         </nav>
@@ -225,6 +224,9 @@
           });
         });
       });
+      function goBack() {
+        window.history.back();
+    }
     </script>
   </body>
 </html>

@@ -78,7 +78,7 @@
   flex: 1;
   text-align: center;
   line-height: 2em;
-  border: 1px solid var(--line-color);
+  border: 1px solid var(--line-color) !important;
 }
 
 .segmented-control:first-child {
@@ -98,12 +98,11 @@
 .results span {
   font-weight: 900;
   font-size: 15px;
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }
 
 /* The crazy stuff that needs to be here for the custom input styling */
 input[type="range"] {
-  -webkit-appearance: none;
   margin: 18px 0;
   width: 100%;
   transition: all 0.265ms ease-out;
@@ -122,27 +121,26 @@ input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 6px;
   cursor: pointer;
-  background: var(--line-color);
+  background: var(--line-color)  !important;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 0 8px 1px var(--secondary-color),
-    0 0 16px 4px var(--background-color);
+    0 0 16px 4px var(--background-color) !important;
   border: 3px solid #fff;
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: var(--secondary-color);
+  background: var(--secondary-color) !important;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -8px;
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: var(--secondary-color);
+  background: var(--secondary-color) !important;
 }
 
 input[type="radio"] {
-  -webkit-appearance: none;
   display: none;
 }
 
@@ -152,19 +150,19 @@ input[type="radio"] {
   height: 100%;
   display: block;
   cursor: pointer;
-  color: var(--text-color--muted);
+  color: var(--text-color--muted) !important;
 }
 
 .segmented-control input[type="radio"]:checked + label {
-  background-color: var(--line-color);
+  background-color: var(--line-color) !important;
   width: 100%;
   height: 100%;
   display: block;
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }
 
 .segmented-control input[type="radio"]:focus + label {
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color) !important;
 }
 
 .segmented-control:first-child input[type="radio"]:checked + label {
@@ -179,19 +177,18 @@ input[type="range"]::-moz-range-track {
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background: var(--line-color);
+  background: var(--line-color) !important;
 }
 
 input[type="range"]::-moz-range-thumb {
   box-shadow: 0 0 8px 1px var(--secondary-color),
-    0 0 16px 4px var(--background-color);
+    0 0 16px 4px var(--background-color) !important;
   border: 3px solid #fff;
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: var(--secondary-color);
+  background: var(--secondary-color) !important;
   cursor: pointer;
-  -webkit-appearance: none;
   margin-top: -8px;
 }
 .calculator h3{

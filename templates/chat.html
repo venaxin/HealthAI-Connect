@@ -3,9 +3,9 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../static/login/chats.css" />
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
   </head>
   <body>
     <div class="container">
@@ -78,111 +78,119 @@
         </form>
       </div>
     </div>
+    <div>
+      {% if username in doctors %}
+      <h1 style="margin-top:700%;">Doctor<h1>
+      {%elif username in patients%}
+      <h1 style="margin-top:700%;">Patient<h1>
+      {%endif%}
+    </div>
+
     <div class="boxes first">
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <div class="boxes second">
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <div class="boxes third">
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <div class="boxes fourth">
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
+    </div>
+    <div class="boxes second">
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="boxes third">
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="boxes fourth">
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="../static/login/chat.js"></script>
-    </body>
+  </body>
 </html>

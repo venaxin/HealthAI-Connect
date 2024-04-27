@@ -14,7 +14,7 @@
     <div class="header-limiter">
         <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">
         <nav>
-            <a href="{{ url_for('home') }}">Home</a> 
+            <a href="{{ url_for('dashboard') }}">Back</a> 
         </nav>
     </div>
   </header>
@@ -25,7 +25,7 @@
       <p>Advanced imaging technology delivering accurate diagnoses with compassionate care.</p>
       <br><br>
         <div class="feature-cards">
-  <a href="{{ url_for('pneumonia') }}" alt="Pneumonia" style="margin: 0px 0px 0px -40px;">
+  <a href="{{ url_for('patient_pneumonia') }}" alt="Pneumonia" style="margin: 0px 0px 0px -40px;">
     <div class="card">
       <div class="wrapper">
         <img src="../static/images/lungss.gif"  class="cover-image" />
@@ -35,7 +35,7 @@
     </div>
   </a>
   
-  <a href="{{ url_for('tumor') }}" alt="Tumor" >
+  <a href="{{ url_for('patient_tumor') }}" alt="Tumor" >
     <div class="card">
       <div class="wrapper">
         <img src="../static/images/brain.gif" style="mix-blend-mode:darken;" class="cover-image" />

@@ -80,7 +80,7 @@ with app.app_context():
 def chat():
     username = request.args.get('username')
     messages = Message.query.all()
-    return render_template('chat.html', messages=messages, username=username)
+    return render_template('chat.html', messages=messages, username=username, doctors=doctors,patients=patients)
 
 @socketio.on('message')
 def handle_message(data):
@@ -429,6 +429,9 @@ def getResult(img):
 def tumor():
     return render_template('tumor1.html')
 
+@app.route('/patient_tumor', methods=['GET'])
+def patient_tumor():
+    return render_template('patient_tumor.html')
 
 @app.route('/predict_tumor', methods=['GET', 'POST'])
 def predict_tumor():
@@ -458,7 +461,9 @@ def predict_pneumonia(image_path):
 @app.route('/pneumonia')
 def pneumonia():
     return render_template('pneumonia.html')
-
+@app.route('/patient_pneumonia')
+def patient_pneumonia():
+    return render_template('patient_pneumonia.html')
 @app.route('/predict_neumonia', methods=['POST'])
 def predict_neumonia():
     if 'file' not in request.files:

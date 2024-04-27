@@ -1,0 +1,244 @@
+{% extends "patient_pneumonia1.html" %} {% block content %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Caution : This is a prediction model and not a substitute for a professional
+  medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not
+  upload any irrelevant images.
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<div class="display">
+  <div class="detect">
+    <center>
+      <br />
+      <h2 class="heading1">Pneumonia Detection</h2>
+
+      <form id="upload-file" method="post" enctype="multipart/form-data ">
+        <div class="mb-4 container" style="width: 500px">
+          <label for="imageUpload" class="para form-label"
+            >Upload X-Ray here!</label
+          >
+          <input
+            class="form-control bg-secondary"
+            type="file"
+            name="file"
+            class="btn btn-success"
+            id="imageUpload"
+            accept=".png, .jpg, .jpeg"
+          />
+        </div>
+      </form>
+
+      <div class="image-section" style="display: none">
+        <div class="img-contain">
+          <h2 class="heading2">Uploaded Image</h2>
+          <img id="imagePreview" class="image img-responsive" src="#" />
+        </div>
+
+        <div>
+          <button
+            type="button"
+            class="btn btn-success btn-lg fw-bold"
+            id="btn-predict"
+            style="
+              font-size: 25px;
+              border-radius: 50px;
+              background-color: #00143d;
+              color: white;
+              padding: 10px 20px;
+              margin-top: 20px;
+              margin-bottom: 20px;
+            "
+          >
+            Predict
+          </button>
+        </div>
+      </div>
+
+      <div class="loader" style="display: none"></div>
+
+      <h3 class="results" id="result">
+        <span> </span>
+      </h3>
+    </center>
+    <br />
+  </div>
+  <div class="info-card">
+    <h1>Pneumonia</h1>
+    <div class="container">
+      <div class="info-box-fixed">
+        <div class="info-box-limiter">
+          <nav>
+            <a class="button" onclick="showContent('overview')"> OVERVIEW </a>
+            <a class="button" onclick="showContent('symptoms')"> SYMPTOMS </a>
+            <a class="button" onclick="showContent('treatments')">
+              TREATMENTS
+            </a>
+            <a class="button" onclick="showContent('spec')">CAUSES</a>
+          </nav>
+        </div>
+      </div>
+      <hr style="width: 600px; margin-left: -40px" />
+      <div class="content" id="overview-content">
+        <img class="info-image" src="../static/images/pneumonia_info1.png" />
+        <p>
+          Pneumonia is an infection in your lungs caused by bacteria, viruses or
+          fungi. Pneumonia causes your lung tissue to swell (inflammation) and
+          can cause fluid or pus in your lungs. Bacterial pneumonia is usually
+          more severe than viral pneumonia, which often resolves on its own.
+          Pneumonia can affect one or both lungs. Pneumonia in both of your
+          lungs is called bilateral or double pneumonia.
+        </p>
+        <p>
+          The infection can be life-threatening to anyone, particularly infants,
+          children, and people over 65 with underlying lung disease who receive
+          immunosuppressive therapy. Symptoms include a cough with phlegm or
+          pus, fever, chills and difficulty breathing. Antibiotics can treat
+          many forms of pneumonia. Some forms of pneumonia can be prevented by
+          vaccines.<br />
+        </p>
+        <hr style="width: 494px" />
+        <h3>Difference between viral and bacterial pneumonia?</h3>
+        <p>
+          While all pneumonia is inflammation caused by an infection in your
+          lungs, you may have different symptoms depending on whether the root
+          cause is a virus, bacteria or fungi. Bacterial pneumonia tends to be
+          more common and more severe than viral pneumonia. <br />It's more
+          likely to require a hospital stay. Providers treat bacterial pneumonia
+          with antibiotics. Viral pneumonia causes flu-like symptoms and is more
+          likely to resolve on its own. You usually don't need specific
+          treatment for viral pneumonia.
+        </p>
+      </div>
+
+      <div class="content" id="symptoms-content" style="display: none">
+        <p>
+          The signs and symptoms of pneumonia vary from mild to severe,
+          depending on factors such as the type of germ causing the infection,
+          and your age and overall health. Mild signs and symptoms often are
+          similar to those of a cold or flu, but they last longer. Signs and
+          symptoms of pneumonia may include:
+        </p>
+        <ul>
+          <li>Chest pain when you breathe or cough</li>
+          <li>
+            Confusion or changes in mental awareness (in adults age 65 and
+            older)
+          </li>
+          <li>Cough, which may produce phlegm</li>
+          <li>Fatigue</li>
+          <li>Fever, sweating and shaking chills</li>
+          <li>
+            Lower than normal body temperature (in adults older than age 65 and
+            people with weak immune systems)
+          </li>
+          <li>Nausea, vomiting or diarrhea</li>
+          <li>Shortness of breath</li>
+        </ul>
+        <p>
+          Newborns and infants may not show any sign of the infection. Or they
+          may vomit, have a fever and cough, appear restless or tired and
+          without energy, or have difficulty breathing and eating.
+        </p>
+        <hr style="width: 494px; margin-left: 0px" />
+
+        <h2>High-Risk Groups</h2>
+        <p>
+          It's especially important that people in these high-risk groups see a
+          doctor:
+        </p>
+        <ul>
+          <li>Adults older than age 65</li>
+          <li>Children younger than age 2 with signs and symptoms</li>
+          <li>
+            People with an underlying health condition or weakened immune system
+          </li>
+          <li>
+            People receiving chemotherapy or taking medication that suppresses
+            the immune system
+          </li>
+        </ul>
+      </div>
+
+      <div class="content" id="treatments-content" style="display: none">
+        <p>
+          Treatment for pneumonia involves curing the infection and preventing
+          complications. People who have community-acquired pneumonia usually
+          can be treated at home with medication. Although most symptoms ease in
+          a few days or weeks, the feeling of tiredness can persist for a month
+          or more. Specific treatments depend on the type and severity of your
+          pneumonia, your age and your overall health. The options include:
+        </p>
+        <ul>
+          <li>
+            <b>Antibiotics.</b> These medicines are used to treat bacterial
+            pneumonia. It may take time to identify the type of bacteria causing
+            your pneumonia and to choose the best antibiotic to treat it. If
+            your symptoms don't improve, your doctor may recommend a different
+            antibiotic.
+          </li>
+          <li>
+            <b>Cough medicine.</b> This medicine may be used to calm your cough
+            so that you can rest. Because coughing helps loosen and move fluid
+            from your lungs, it's a good idea not to eliminate your cough
+            completely. In addition, you should know that very few studies have
+            looked at whether over-the-counter cough medicines lessen coughing
+            caused by pneumonia. If you want to try a cough suppressant, use the
+            lowest dose that helps you rest.
+          </li>
+          <li>
+            <b>Fever reducers/pain relievers.</b> You may take these as needed
+            for fever and discomfort. These include drugs such as aspirin,
+            ibuprofen (Advil, Motrin IB, others) and acetaminophen (Tylenol,
+            others).
+          </li>
+        </ul>
+      </div>
+
+      <div class="content" id="spec-content" style="display: none">
+        <p>
+          Many germs can cause pneumonia. The most common are bacteria and
+          viruses in the air we breathe. Your body usually prevents these germs
+          from infecting your lungs. But sometimes these germs can overpower
+          your immune system, even if your health is generally good. Pneumonia
+          is classified according to the types of germs that cause it and where
+          you got the infection.
+        </p>
+        <h4>Community-acquired pneumonia</h4>
+        <p>
+          Community-acquired pneumonia is the most common type of pneumonia. It
+          occurs outside of hospitals or other health care facilities. It may be
+          caused by:
+        </p>
+        <ul>
+          <li><b>Bacteria.</b></li>
+          The most common cause of bacterial pneumonia in the U.S. is
+          Streptococcus pneumoniae. This type of pneumonia can occur on its own
+          or after you've had a cold or the flu. It may affect one part (lobe)
+          of the lung, a condition called lobar pneumonia.
+          <li><b>Bacteria-like organisms.</b></li>
+          Mycoplasma pneumoniae also can cause pneumonia. It typically produces
+          milder symptoms than do other types of pneumonia. Walking pneumonia is
+          an informal name given to this type of pneumonia, which typically
+          isn't severe enough to require bed rest.
+          <li><b>Fungi.</b></li>
+          This type of pneumonia is most common in people with chronic health
+          problems or weakened immune systems, and in people who have inhaled
+          large doses of the organisms. The fungi that cause it can be found in
+          soil or bird droppings and vary depending upon geographic location.
+          <li><b>Viruses, including COVID-19.</b></li>
+          Some of the viruses that cause colds and the flu can cause pneumonia.
+          Viruses are the most common cause of pneumonia in children younger
+          than 5 years. Viral pneumonia is usually mild. But in some cases it
+          can become very serious. Coronavirus 2019 (COVID-19) may cause
+          pneumonia, which can become severe.
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
