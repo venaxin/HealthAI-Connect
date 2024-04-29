@@ -93,6 +93,7 @@
   border: 1px solid #ccc;
   max-width: 20%;
   width: fit-content;
-  padding: 2px;
+  padding: 5px;
+  border-radius: 10px;
   max-height: fit-content;
 }
