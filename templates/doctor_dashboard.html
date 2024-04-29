@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="../static/login/toDo.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Cookie"
       rel="stylesheet"
@@ -38,6 +39,13 @@
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='login/calendar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
   </head>
   <body>
@@ -108,11 +116,19 @@
             </div>
           </div>
           <div class="upcoming_components_wrap">
-            <div class="upcoming_component">
-              <div class="fadeUp-box" style="height: 30px">
-                <h3 class="fadeUp">Task List</h3>
+            <div class="todo-container">
+              <h2>To-Do List</h2>
+              <div class="addInput">
+                <input
+                  type="text"
+                  id="taskInput"
+                  placeholder="Enter a new task..."
+                />
+                <button class="addTaskBtn" onclick="addTask()">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
               </div>
-              
+              <ul id="taskList"></ul>
             </div>
             <div class="Nutri_contain">
               <a href="{{ url_for('nutri') }}" alt="NutriVision">
@@ -431,5 +447,6 @@
         appointmentsChart.update();
       });
     </script>
+    <script src="../static/login/toDo.js"></script>
   </body>
 </html>
