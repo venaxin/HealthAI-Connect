@@ -10,7 +10,11 @@
       rel="stylesheet"
       type="text/css"
     />
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='login/calorie.css') }}"
+    />
     <link rel="stylesheet" href="../static/login/calorie.css" />
     <link
       rel="stylesheet"
@@ -39,9 +43,27 @@
     />
     <link rel="stylesheet" href="../static/styles.css" />
     <link rel="stylesheet" href="../static/login/sidebar.css" />
+    <link rel="stylesheet" href="../static/chatbot.css" />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+      /* For Chrome, Safari, and Opera */
+      input[type="range"]::-webkit-slider-thumb {
+        background-color: #4caf50; /* Change color as needed */
+      }
+
+      /* For Firefox */
+      input[type="range"]::-moz-range-thumb {
+        background-color: #4caf50; /* Change color as needed */
+      }
+
+      /* For Edge and IE */
+      input[type="range"]::-ms-thumb {
+        background-color: #4caf50; /* Change color as needed */
+      }
+    </style>
   </head>
   <body>
+    
     <div class="sidebar">
       <div class="sidebar-header">
         <h3>HealthAI Connect</h3>
@@ -54,8 +76,8 @@
 
       <a href="#" class="dropdown-toggle">HealthCare Imaging</a>
       <div class="dropdown" id="features-dropdown">
-        <a href="{{ url_for('spp') }}">- Pneumonia</a>
-        <a href="{{ url_for('hddp') }}">- Brain Tumor</a>
+        <a href="{{ url_for('patient_pneumonia') }}">- Pneumonia</a>
+        <a href="{{ url_for('patient_tumor') }}">- Brain Tumor</a>
       </div>
       <a href="{{ url_for('nutri') }}">Nutrivision</a>
       <a href="#book_an_appointment" class="smooth-scroll"
@@ -81,6 +103,7 @@
                 font-size: 50px;
                 margin: 0px 0px 5px 10px;
                 text-transform: capitalize;
+                color:#000f3d;
               "
             >
               Welcome, {{ username }}!
@@ -191,11 +214,13 @@
         </form>
         <div class="result_output">
           <div class="wrap_result">
-            <p id="welcome">Welcome!</p>
+            <p id="welcome"></p>
             <p id="top_bmi">Your BMI is...</p>
             <p id="result"></p>
             <p id="welcome_more">
-              Enter your height and weight and you’ll see your BMI result here
+              <br />
+              Enter your height and weight and you’ll see your Body Mass Index
+              result here
             </p>
           </div>
           <p id="ideal_bmi_info"></p>
@@ -607,59 +632,56 @@
           </table>
         </div>
       </div>
-      <div>
-        <div class="chatButton" id="chatButton">
-          <div class="backgroundAnimation">
-            <div class="lines"></div>
-          </div>
-          <img src="../static/images/chat-icon.gif" />
+    </div>
+    <div>
+      <div class="chatButton" id="chatButton">
+        <div class="backgroundAnimation">
+          <div class="lines"></div>
+        </div>
+        <img src="../static/images/chat-icon.gif" />
+      </div>
+
+      <div class="chatBox" id="chatBox">
+        <div class="chatheader">
+          <h3 class="bot-name">
+            <img
+              class="chat-icon"
+              src="../static/images/chat-icon.gif"
+              alt="Chat Icon"
+            />Medibot
+          </h3>
+
+          <button id="closeChat">&times;</button>
         </div>
 
-        <div class="chatBox" id="chatBox">
-          <div class="chatheader">
-            <h3 class="bot-name">
-              <img
-                class="chat-icon"
-                src="../static/images/chat-icon.gif"
-                alt="Chat Icon"
-              />Medibot
-            </h3>
-
-            <button id="closeChat">&times;</button>
+        <div class="chatwallpaper">
+          <div id="waveContainer">
+            <div class="wave-01"></div>
+            <div class="wave-02"></div>
+            <div class="wave-03"></div>
           </div>
-
-          <div class="chatwallpaper">
-            <div id="waveContainer">
-              <div class="wave-01"></div>
-              <div class="wave-02"></div>
-              <div class="wave-03"></div>
-            </div>
-            <div class="chatLog" id="chatLog"></div>
-            <div class="inputt">
-              <input
-                type="text"
-                id="userInput"
-                placeholder="Type a message..."
-              />
-              <button id="sendMessage" aria-label="Send message">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
-                    fill="#000000"
-                  />
-                </svg>
-              </button>
-            </div>
+          <div class="chatLog" id="chatLog"></div>
+          <div class="inputt">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendMessage" aria-label="Send message">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                  fill="#000000"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </div>
+    <script src="../static/chatbot.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get the button and message elements
@@ -740,6 +762,7 @@
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
+
     <script src="../static/login/sidebar.js"></script>
     <script src="../static/login/calorie.js"></script>
     <script src="../static/login/calendar.js"></script>

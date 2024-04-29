@@ -6,6 +6,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link rel="stylesheet" href="../static/chatbot.css" />
   </head>
   <body>
     <div class="container">
@@ -190,7 +191,59 @@
         <div></div>
       </div>
     </div>
+    {% if username in doctors %}
+    <div>
+      <div class="chatButton" id="chatButton">
+        <div class="backgroundAnimation">
+          <div class="lines"></div>
+        </div>
+        <img src="../static/images/chat-icon.gif" />
+      </div>
+
+      <div class="chatBox" id="chatBox">
+        <div class="chatheader">
+          <h3 class="bot-name">
+            <img
+              class="chat-icon"
+              src="../static/images/chat-icon.gif"
+              alt="Chat Icon"
+            />Medibot
+          </h3>
+
+          <button id="closeChat">&times;</button>
+        </div>
+
+        <div class="chatwallpaper">
+          <div id="waveContainer">
+            <div class="wave-01"></div>
+            <div class="wave-02"></div>
+            <div class="wave-03"></div>
+          </div>
+          <div class="chatLog" id="chatLog"></div>
+          <div class="inputt">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button id="sendMessage" aria-label="Send message">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-14.707-.707 4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 10.414V16a1 1 0 1 1-2 0v-5.586l-2.293 2.293a1 1 0 0 1-1.414-1.414Z"
+                  fill="#000000"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> 
+    {%endif%}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="../static/login/chat.js"></script>
+    
+    <script src="../static/chatbot.js"></script>
   </body>
 </html>

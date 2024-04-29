@@ -68,11 +68,11 @@ function calculateBMI_Metric() {
         const maxBMI = 24.9 * (meters*meters);
         resultElement.innerText = bmi.toFixed(1);
         if(bmi >= 18.5 && bmi <= 24.9){
-            const idealM = 'Your BMI suggests you’re a healthy weight.'
+            const idealM = 'Your BMI suggests you’re a healthy person.'
             idealBMI.innerText = `${idealM} Your ideal weight is between ${minBMI.toFixed(1)}kgs. - ${maxBMI.toFixed(1)}kgs.`
         }
         else {
-            const idealMNot = 'Your BMI suggests you’re not a healthy weight.'
+            const idealMNot = 'Your BMI suggests you’re not a healthy person.'
             idealBMI.innerText = `${idealMNot} Your ideal weight is between ${minBMI.toFixed(1)}kgs. - ${maxBMI.toFixed(1)}kgs.`
         }
         topBMI.style.display = "block";

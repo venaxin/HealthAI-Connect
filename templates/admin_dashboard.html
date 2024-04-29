@@ -12,28 +12,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />    
+  <link rel="stylesheet" href="../static/login/sidebar.css" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login/admin_dash.css') }}">
 </head>
 <body>
-    <header class="header-fixed">
-
-        <div class="header-limiter">
-            <img class="logo" id="changingImage" src="../static/images/HealthAI-e.gif" alt="Default Image">    
-            <nav>
-                <a href="{{url_for('home')}}">Home</a>
-                
-                <a href="{{ url_for('login') }}">Log Out</a>
-            </nav>
-    
+    <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>HealthAI Connect</h3>
         </div>
-    
-    </header>
-    <div class="header-fixed-placeholder"></div>
-    <div class="container"><br>
-    <h1 class="fadeIn" style="font: normal 40px Nunito Sans, sans-serif;font-weight: 700;
-    margin:-8px 0px 15px -167px;
-    text-shadow: 0px 6px 6px #908bd8;">Welcome, {{ username }} (Admin)</h1>
+        <a href="#" class="dropdown-toggle">Disease Predictor</a>
+        <div class="dropdown" id="features-dropdown">
+          <a href="{{ url_for('symptompredict') }}">- Symptom</a>
+          <a href="{{ url_for('reviewpredict') }}">- Descriptive</a>
+        </div>
+  
+        <a href="#" class="dropdown-toggle">HealthCare Imaging</a>
+        <div class="dropdown" id="features-dropdown">
+          <a href="{{ url_for('pneumonia') }}">- Pneumonia</a>
+          <a href="{{ url_for('tumor') }}">- Brain Tumor</a>
+        </div>
+        <a href="{{ url_for('nutri') }}">Nutrivision</a>
+        <a href="#Requested" class="smooth-scroll">Appointments Request </a>
+        <a href="#Scheduled_appointment" class="smooth-scroll"
+          >Booked Appointment</a
+        >
+        <a href="{{ url_for('home') }}">Logout</a>
+  
+        <div class="sidebar-footer">
+          <img src="../static/images/health-logo.png" alt="" />
+          <p>© 2023 HealthAI Connect</p>
+          for more info, please email us at info@healthai.com
+        </div>
+      </div>
+      <div class="content">
+
+    <h1 class="fadeIn">Welcome, {{ username }} (Admin)</h1>
+    <div class="flex-item">
+        <div class="block-item">
+          <div class="chart-main">
+            <div class="chart-container">
+              <h3>&nbsp;&nbsp;&nbsp;Pending Requests&nbsp;&nbsp;&nbsp;</h3>
+              <canvas id="appointmentsChart"></canvas>
+              <h2>{{ appointments|length }}</h2>
+            </div>
+            <div class="chart-container">
+              <h3>Booked Appointments</h3>
+              <canvas id="appointmentsChart1"></canvas>
+              <h2>{{ accepted_appointments|length }}</h2>
+            </div>
+            <div class="chart-container">
+              <h3>Total Appointments</h3>
+              <canvas id="appointmentsChart2"></canvas>
+              <h2>{{ accepted_appointments|length + appointments|length }}</h2>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
     <div class="user-tables">
     <div class="patient-card" >
         <div class="padding animate__animated animate__fadeInRightBig">
@@ -185,6 +228,115 @@
     });
     
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ctx = document.getElementById('appointmentsChart').getContext('2d');
+      var appointmentsCount = {{ appointments|length }};
+      var acceptedAppointmentsCount = {{ accepted_appointments|length }};
+      var remainingCount = acceptedAppointmentsCount + appointmentsCount;
+
+      var appointmentsChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Pending Appointments', 'Total Appointments'],
+          datasets: [{
+            data: [appointmentsCount, remainingCount],
+            backgroundColor: [
+              'rgba(0, 171, 197, 0.5)', // Red color for requested appointments
+              'rgba(178, 229, 237, 0.5)', // Blue color for remaining appointments
+            ],
+            borderColor: [
+              'rgba(0, 171, 197, 1)',
+              'rgba(178, 229, 237, 1)',
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Requested Appointments'
+          }
+        }
+      });appointmentsChart.legend.options.display = false;
+      appointmentsChart.update();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ctx = document.getElementById('appointmentsChart1').getContext('2d');
+      var appointmentsCount = {{ appointments|length }};
+      var acceptedAppointmentsCount = {{ accepted_appointments|length }};
+      var remainingCount =appointmentsCount + acceptedAppointmentsCount;
+
+      var appointmentsChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Accepted Appointments', 'Total Appointments'],
+          datasets: [{
+            data: [acceptedAppointmentsCount, remainingCount],
+            backgroundColor: [
+              'rgba(46, 199, 192, 0.5)', // Red color for requested appointments
+              'rgba(135, 223, 233, 0.5)', // Blue color for remaining appointments
+            ],
+            borderColor: [
+              'rgba(46, 199, 192, 1)',
+              'rgba(135, 223, 233, 1)',
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Scheduled Appointments'
+          }
+        }
+      });appointmentsChart.legend.options.display = false;
+      appointmentsChart.update();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ctx = document.getElementById('appointmentsChart2').getContext('2d');
+      var acceptedAppointmentsCount = {{ accepted_appointments|length }};
+      var requestedAppointmentsCount = {{ appointments|length }};
+      var totalAppointmentsCount = acceptedAppointmentsCount + requestedAppointmentsCount;
+
+      var appointmentsChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Accepted Appointments', 'Requested Appointments'],
+          datasets: [{
+            data: [acceptedAppointmentsCount, requestedAppointmentsCount],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.5)', // Red color for accepted appointments
+              'rgba(54, 162, 235, 0.5)', // Blue color for requested appointments
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Total Appointments'
+          },
+          legend: {
+            display: false // Hide legend
+          },
+          tooltips: {
+            enabled: false // Disable tooltips
+          }
+        }
+      });
+      appointmentsChart.legend.options.display = false;
+      appointmentsChart.update();
+    });
+  </script>
 <script src="../static/login/animation.js"></script>
 <script src="../static/header/header.js"></script>
 </body>

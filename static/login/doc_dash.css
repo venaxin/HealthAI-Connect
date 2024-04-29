@@ -21,19 +21,18 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
-.block-item{
+.block-item {
   width: 69%;
   display: block;
 }
-.flex-item{
+.flex-item {
   display: flex;
 }
-.chart-main{
+.chart-main {
   display: flex;
-    justify-content: space-between !important;
-    margin-left: 8px;
-    margin-bottom: 20px;
-
+  justify-content: space-between !important;
+  margin-left: 8px;
+  margin-bottom: 20px;
 }
 canvas {
   display: block;
@@ -115,7 +114,7 @@ canvas {
   background-color: #ffffff;
   overflow: hidden;
 }
-.upcom-item div p{
+.upcom-item div p {
   margin: 0;
 }
 .upcom-header {
@@ -168,24 +167,23 @@ canvas {
   text-decoration: none;
   color: #fff;
 }
-.welcome{
+.welcome {
   padding: 20px;
-  
 }
-.welcome h1{
+.welcome h1 {
   font-size: 40px;
   font-weight: 700;
   color: #000212;
   margin: 0;
 }
-.welcome p{
+.welcome p {
   font-size: 20px;
   font-weight: 600;
   color: #000212;
   margin: 0;
   padding: 10px;
 }
-.greet{
+.greet {
   display: flex;
   justify-content: space-between;
 }
@@ -195,7 +193,7 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #007bff;
+  background-color: #57adba;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -214,7 +212,8 @@ canvas {
   text-decoration: none;
   font-size: 18px;
   border-radius: 25px;
-  background: #005064;
+  background: #91e4f9;
+  color: #333;
 }
 
 .sidebar-footer {
@@ -223,8 +222,8 @@ canvas {
   width: 100%;
   padding: 10px 0;
   text-align: center;
-  background-color: #0056b3;
-  color: #818080;
+  background-color: #57adba;
+  color: #ffffff;
 }
 .sidebar-footer img {
   height: 120px;
@@ -247,7 +246,7 @@ canvas {
 }
 
 .dropdown a:hover {
-  background-color: #555;
+  background-color: #1992ad;
 }
 
 /* ntent styles */
@@ -319,7 +318,7 @@ span:nth-child(4) {
 }
 .appointment-card {
   margin: 60px 0;
-    width: 92%;
+  width: 92%;
 }
 .accepted-appointment-card {
   margin: 0px 0 70px 0;
@@ -388,6 +387,10 @@ h2 {
 }
 .features a {
   width: 30%;
+  text-decoration: none;
+}
+.features a:hover {
+  text-decoration: none;
 }
 .feature img {
   width: 100%;
@@ -485,11 +488,11 @@ table tr {
 
 .padding {
   padding: 10px 16px 5px 16px;
-  background-color: rgb(0, 119, 181);
+  background-color: rgb(77, 164, 177);
   backdrop-filter: blur(15px);
-  box-shadow: rgba(21, 130, 255, 0.16) 0px 50px 100px -20px,
-    rgba(112, 179, 255, 0.59) 0px 30px 60px -30px,
-    rgb(0 90 231 / 55%) 0px -2px 6px 0px inset;
+  box-shadow: rgba(21, 235, 255, 0.16) 0px 50px 100px -20px,
+    rgba(112, 255, 245, 0.59) 0px 30px 60px -30px,
+    rgba(0, 227, 231, 0.55) 0px -2px 6px 0px inset;
   border-radius: 25px;
 }
 form button,
@@ -529,22 +532,23 @@ form a {
 }
 
 #calendar {
- width: 100% !important;
+  width: 100% !important;
   margin-right: 0px !important;
 }
-.today{
+.today {
   border-radius: 50px !important;
 }
 
-#calendar th, #calendar td {
+#calendar th,
+#calendar td {
   padding: 10px !important;
   font-size: 13px !important;
 }
-.cal{
-    height: 545px;
-    border-radius: 20px;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    overflow: hidden;
-    margin-left: 20px;
-  }
+.cal {
+  height: 545px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  overflow: hidden;
+  margin-left: 20px;
+}

@@ -6,7 +6,7 @@
     filter: blur(0);
   }
 }
-.sidebar-header h3{
+.sidebar-header h3 {
   margin-top: -3px;
   font-weight: bolder;
   color: white;
@@ -42,7 +42,7 @@ body {
     #dde5ee,
     #d3e0e9
   ); */
-  background: #003358cf !important;
+  background: #5ba7ddcf !important;
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -85,7 +85,7 @@ body {
 .upcoming_component h3 {
   font-size: 28px;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   margin: 0;
 }
 
@@ -95,7 +95,7 @@ body {
   padding: 20px;
   border-radius: 25px;
   width: 33%;
-  background-color: #00b4f6;
+  background-color: #ffffff;
   color: white;
   height: 296px;
   overflow: hidden;
@@ -330,10 +330,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .bmi_calculator form .stats div label {
   margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 150%;
-  color: #5e6e85;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 200%;
+  color: #000;
 }
 .bmi_calculator form .stats div input {
   padding: 20px 24px;
@@ -458,7 +458,7 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-direction: column;
   padding: 20px;
   align-items: center;
-  background: linear-gradient(90deg, #345ff6 0%, #587dff 100%);
+  background: #000f3d;
   border-radius: 250px 999px 999px 250px;
 }
 .bmi_calculator .result_output .wrap_result #welcome {
@@ -475,7 +475,7 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-direction: column;
 }
 .bmi_calculator .result_output .wrap_result #welcome_more {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--White);
   line-height: 150%;
@@ -548,10 +548,10 @@ input[type="number"]::-webkit-outer-spin-button {
   letter-spacing: -1.2px;
 }
 .bmi_components_wrap .component p {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 150%;
-  color: var(--DarkElectricBlue);
+  color: rgba(200, 200, 200, 1);
 }
 
 .custom-table {
@@ -687,7 +687,7 @@ container a:hover {
   font-weight: 600;
   text-transform: capitalize;
   vertical-align: middle;
-  background-color: #f2f2f200;
+  background-color: #ffffff;
 }
 .custom-table td:first-child {
   border-radius: 20px 0px 0px 20px;

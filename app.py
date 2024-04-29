@@ -224,11 +224,8 @@ def send():
                 # Attempt to run the QA chain
              #   response = chain.run(input_documents=docs, question=user_question,return_only_outputs=True)
               #  print(cb)
-            PROMPT="""You are an expert in medical and healthcare knowledge and your name is medibot. If you are asked "who are you" you can say your name and profession. and you can reply to thank you also.
-            you need to answer the following question from the given information only and provide the best possible answer from given info only.
-            if there is any related word or info in the prompt then you can answer the question from that or you can answer by your own.   
-            Your answer should be very precise and in one para and to the point dont give any irrelevant information. your answer should be like you are telling not giving from any resources"""
-            question=PROMPT+user_question+doc 
+            PROMPT="""You are an expert in medical and healthcare knowledge and your name is medibot. if you are asked question which is not related to the medical field or healthcare field then you can't answer the question."""
+            question=PROMPT+user_question 
             responses= google_gemini.generate_content(question)
             response=responses.text
             return jsonify({'response': response})
@@ -723,4 +720,4 @@ def save_accepted_appointment(doctor_name, appointment):
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)

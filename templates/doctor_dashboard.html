@@ -51,29 +51,24 @@
   <body>
     <div class="sidebar">
       <div class="sidebar-header">
-        <img
-          style="height: 54px; width: 250px; mix-blend-mode: luminosity"
-          id="changingImage"
-          src="../static/images/HealthAI-e.gif"
-          alt="Default Image"
-        />
+        <h3>HealthAI Connect</h3>
       </div>
       <a href="#" class="dropdown-toggle">Disease Predictor</a>
       <div class="dropdown" id="features-dropdown">
-        <a href="{{ url_for('spp') }}">- Symptom</a>
-        <a href="{{ url_for('hddp') }}">- Descriptive</a>
+        <a href="{{ url_for('symptompredict') }}">- Symptom</a>
+        <a href="{{ url_for('reviewpredict') }}">- Descriptive</a>
       </div>
 
       <a href="#" class="dropdown-toggle">HealthCare Imaging</a>
       <div class="dropdown" id="features-dropdown">
-        <a href="{{ url_for('spp') }}">- Pneumonia</a>
-        <a href="{{ url_for('hddp') }}">- Brain Tumor</a>
+        <a href="{{ url_for('pneumonia') }}">- Pneumonia</a>
+        <a href="{{ url_for('tumor') }}">- Brain Tumor</a>
       </div>
       <a href="{{ url_for('nutri') }}">Nutrivision</a>
-      <a href="#book_an_appointment" class="smooth-scroll"
-        >Book an Appointment</a
+      <a href="#Requested" class="smooth-scroll">Appointments Request </a>
+      <a href="#Scheduled_appointment" class="smooth-scroll"
+        >Booked Appointment</a
       >
-      <a href="#booked_appointments" class="smooth-scroll">Appointments </a>
       <a href="{{ url_for('home') }}">Logout</a>
 
       <div class="sidebar-footer">
@@ -117,7 +112,7 @@
           </div>
           <div class="upcoming_components_wrap">
             <div class="todo-container">
-              <h2>To-Do List</h2>
+              <h2>Tasks</h2>
               <div class="addInput">
                 <input
                   type="text"
@@ -128,7 +123,62 @@
                   <i class="fa-solid fa-plus"></i>
                 </button>
               </div>
-              <ul id="taskList"></ul>
+              <ul id="taskList">
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Record Patient Notes</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Prescribe Medications</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Develop Treatment Plans</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Order Diagnostic Tests</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Analyze Test Results</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+                <li class="todo-item">
+                  <div class="taskListHeader">
+                    <input type="checkbox" onchange="markDone(this)" />
+                    <span class="task">Monitor Patient Progress</span>
+                  </div>
+                  <button class="delete-btn" onclick="removeTask(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+              </ul>
             </div>
             <div class="Nutri_contain">
               <a href="{{ url_for('nutri') }}" alt="NutriVision">
@@ -169,7 +219,7 @@
       <h3 class="heading_services">Our HealthCare Services</h3>
       <div class="main">
         <div class="features">
-          <a href="{{ url_for('spp') }}" class="animatedLink">
+          <a href="{{ url_for('symptompredict') }}" class="animatedLink">
             <div class="feature">
               <img src="../static/images/admin_dash_back.jpg" alt="Doctor" />
               <div class="description">
@@ -180,7 +230,7 @@
               </div>
             </div>
           </a>
-          <a href="{{ url_for('hddp') }}" class="animatedLink">
+          <a href="{{ url_for('reviewpredict') }}" class="animatedLink">
             <div class="feature">
               <img src="../static/images/admin_dash_back.jpg" alt="Chat" />
               <div class="description">
@@ -191,7 +241,7 @@
               </div>
             </div>
           </a>
-          <a href="{{ url_for('healthimaging_patient') }}" class="animatedLink">
+          <a href="{{ url_for('healthcare') }}" class="animatedLink">
             <div class="feature">
               <img
                 src="../static/images/admin_dash_back.jpg"
@@ -209,7 +259,7 @@
       </div>
       <div class="app-tables">
         <!-- Display booked appointments -->
-        <div class="appointment-card">
+        <div class="appointment-card" id="Requested">
           <div class="padding animate__animated animate__fadeInTopLeft">
             <table class="appointments-table" border="1">
               <h2>
@@ -269,7 +319,7 @@
             </table>
           </div>
         </div>
-        <div class="accepted-appointment-card">
+        <div class="accepted-appointment-card" id="Scheduled_appointment">
           <div class="padding animate__animated animate__fadeInBottomRight">
             <table class="appointments-table" border="1">
               <h2>
@@ -352,12 +402,12 @@
             datasets: [{
               data: [appointmentsCount, remainingCount],
               backgroundColor: [
-                'rgba(255, 99, 132, 0.5)', // Red color for requested appointments
-                'rgba(54, 162, 235, 0.5)', // Blue color for remaining appointments
+                'rgba(0, 171, 197, 0.5)', // Red color for requested appointments
+                'rgba(178, 229, 237, 0.5)', // Blue color for remaining appointments
               ],
               borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
+                'rgba(0, 171, 197, 1)',
+                'rgba(178, 229, 237, 1)',
               ],
               borderWidth: 1
             }]
@@ -386,12 +436,12 @@
             datasets: [{
               data: [acceptedAppointmentsCount, remainingCount],
               backgroundColor: [
-                'rgba(255, 99, 132, 0.5)', // Red color for requested appointments
-                'rgba(54, 162, 235, 0.5)', // Blue color for remaining appointments
+                'rgba(46, 199, 192, 0.5)', // Red color for requested appointments
+                'rgba(135, 223, 233, 0.5)', // Blue color for remaining appointments
               ],
               borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
+                'rgba(46, 199, 192, 1)',
+                'rgba(135, 223, 233, 1)',
               ],
               borderWidth: 1
             }]

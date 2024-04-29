@@ -1,0 +1,336 @@
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glowing-chatButton {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes rotateBackground {
+  100% {
+    background-position: 200% 200%; /* Move the background position */
+  }
+}
+
+@keyframes expandHeightAnimation {
+  from {
+    height: auto;
+    opacity: 0;
+  }
+  to {
+    height: 4300px; /* Adjust height as needed */
+    opacity: 1;
+  }
+}
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #ffffff !important; /* Change color as needed */
+}
+#waveContainer {
+  width: 99.6%;
+  height: 57px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 106%);
+  overflow: hidden;
+  z-index: 2; /* Higher z-index */
+}
+.wave-01 {
+  position: absolute;
+  width: 300%;
+  height: 1010px;
+  left: -100%;
+  bottom: 90%;
+  background-color: #3695ff;
+  border-radius: 45%;
+  animation: rotate 10s linear infinite;
+}
+
+.wave-02 {
+  position: absolute;
+  width: 300%;
+  height: 1010px;
+  left: -100%;
+  bottom: 100%;
+  background-color: #1d88ff;
+  border-radius: 43%;
+  animation: rotate 7s linear infinite;
+}
+
+.wave-03 {
+  position: absolute;
+  width: 300%;
+  height: 1010px;
+  left: -100%;
+  bottom: 130%;
+  background-color: #047bff;
+  border-radius: 40%;
+  animation: rotate 5s linear infinite;
+}
+
+.chatButton {
+  width: 65px;
+  height: 65px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 998;
+  transition: all 1s ease;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.chatButton:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-chatButton 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 100%;
+  height: 65px;
+  width: 65px;
+}
+
+.backgroundAnimation {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.lines {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #047bff 25%,
+    transparent 50%,
+    #047bff 75%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: rotateBackground 8s linear infinite; /* Animation for background rotation */
+}
+
+.chatButton img {
+  width: 100%; /* Adjust size of the image */
+  height: 100%; /* Adjust size of the image */
+  position: relative;
+  z-index: 1; /* Ensure image appears above the background */
+}
+
+.chatButton.hidden {
+  right: calc(50% - 25px); /* Adjust the position to the center */
+  opacity: 0;
+}
+
+.chatBox {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 998;
+  border-radius: 15px 15px 25px 25px;
+  min-width: 350px;
+  max-width: 350px;
+
+  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.3), -5px 0px 15px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateX(100%);
+}
+
+.chatBox.show {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 1s ease-in-out, opacity 0.5s ease;
+}
+.chatheader {
+  background: linear-gradient(to top, #047bff, #429dff, #95c6ff);
+  height: 60px;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Distribute items along the header */
+  border-radius: 15px 15px 0 0;
+  padding: 0 15px; /* Adjust padding */
+}
+
+.chatheader h3 {
+  font-size: 18px;
+  color: #fff; /* Adjust margin between icon and h3 */
+}
+
+/* Style for chat-icon */
+.chat-icon {
+  width: 24px; /* Adjust icon size */
+  height: 24px;
+  margin-right: 10px; /* Adjust margin between icon and h3 */
+}
+
+/* Adjusted close button style */
+#closeChat {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+/* Dr.Rowbot text style */
+.bot-name {
+  margin-right: 10px; /* Space between Dr.Rowbot and chat icon */
+}
+
+.chatwallpaper {
+  /* background: linear-gradient(
+      to right,
+      #80ffdb,
+      #64dfdf,
+      #48bfe3,
+      #5390d9,
+      #5e60ce
+    ); */
+  background: url("../static/images/navy22.jpg"); /* Reference the image in the same directory */
+  background-size: cover; /* Cover the entire element with the background image */
+  border-radius: 0px 0px 20px 20px;
+  overflow: hidden;
+}
+.chatLog {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 450px;
+  padding: 10px;
+  padding-bottom: 0;
+  z-index: 1; /* Lower z-index */
+  position: relative; /* Ensure position is relative for z-index to work */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer / Edge */
+  height: 0; /* Set initial height to 0 */
+  transition: height 0.5s ease;
+  /* Hide scrollbar for WebKit (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.chatLog.expandHeight {
+  animation: expandHeightAnimation 0.5s forwards;
+}
+
+.message {
+  margin-bottom: 18px;
+  max-width: 70%; /* Limit the width of the speech bubble */
+  word-wrap: break-word; /* Wrap long messages */
+  padding: 10px 15px; /* Adjust padding for the speech bubble */
+}
+
+.user-message {
+  background-color: #48bfe3c7;
+  color: #ffffff; /* Text color for user messages */
+  align-self: flex-end;
+  border-radius: 5px 15px 0px 10px;
+}
+
+.chatbot-message {
+  background-color: #3695ff7a;
+  color: #ffffff; /* Text color for chatbot messages */
+  align-self: flex-start;
+  border-radius: 15px 5px 10px 0px;
+}
+
+.inputt {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#userInput {
+  flex: 1;
+  padding: 8px;
+  margin: 8px;
+  margin-right: 0px;
+  background: linear-gradient(to top, #047bff, #429dff, #95c6ff);
+  color: white;
+  font-size: 15px;
+  border: 1px solid #424141;
+  border-radius: 20px;
+
+  outline: none;
+}
+
+#userInput::placeholder {
+  color: white;
+  font-size: 15px; /* Adjust the color and opacity of the placeholder */
+}
+
+#sendMessage {
+  padding: 8px;
+  margin: 8px;
+  margin-left: 0px;
+  border: none;
+  background: linear-gradient(to top, #047bff, #429dff, #95c6ff);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%; /* Make the button circular */
+  margin-left: 5px;
+  width: 41px; /* Ensure equal width and height to create a circle */
+  height: 41px;
+}
+
+#sendMessage:hover {
+  background: #047bff;
+}
+
+/* Upward arrow icon */
+#sendMessage svg {
+  /* position: absolute; */
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  /*transform: rotate(-90deg);  Rotate the arrow icon */
+}

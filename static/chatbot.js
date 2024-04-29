@@ -1,53 +1,52 @@
 const closeChat = document.getElementById("closeChat");
 const userInput = document.getElementById("userInput");
 const sendMessage = document.getElementById("sendMessage");
-const chatButton = document.getElementById('chatButton');
-const chatBox = document.getElementById('chatBox');
-const chatHeader = document.querySelector('.chatheader');
-const chatLog = document.querySelector('.chatLog');
+const chatButton = document.getElementById("chatButton");
+const chatBox = document.getElementById("chatBox");
+const chatHeader = document.querySelector(".chatheader");
+const chatLog = document.querySelector(".chatLog");
 
 let instructionsShown = false;
 
-chatButton.addEventListener('click', () => {
-  chatButton.classList.add('hidden');
+chatButton.addEventListener("click", () => {
+  chatButton.classList.add("hidden");
 
   if (!instructionsShown) {
     displayDefaultInstructions();
     instructionsShown = true;
   }
 
-  chatBox.classList.add('show');
+  chatBox.classList.add("show");
 
   // Reset styles before starting the animation sequence
-  chatBox.style.opacity = '0';
-  chatHeader.style.opacity = '0';
-  chatLog.style.height = '0';
+  chatBox.style.opacity = "0";
+  chatHeader.style.opacity = "0";
+  chatLog.style.height = "0";
 
   setTimeout(() => {
-
     setTimeout(() => {
-      chatBox.style.opacity = '1'; 
-      chatBox.style.transform = 'translateX(0)'; 
+      chatBox.style.opacity = "1";
+      chatBox.style.transform = "translateX(0)";
       setTimeout(() => {
-        chatHeader.style.opacity = '1';
-      }, 0); 
+        chatHeader.style.opacity = "1";
+      }, 0);
       setTimeout(() => {
-        chatLog.style.transition = 'height 0.5s'; 
-        chatLog.style.height = '350px'; 
+        chatLog.style.transition = "height 0.5s";
+        chatLog.style.height = "430px";
       }, 700); // Adjust timing for chat log height increase
     }, 300); // Adjust delay before chat box animation starts
   }, 0); // Adjust delay before starting the animation sequence
 });
 
 closeChat.addEventListener("click", () => {
-  chatBox.style.opacity = '0'; 
-  chatLog.style.height = '0'; 
+  chatBox.style.opacity = "0";
+  chatLog.style.height = "0";
   instructionsShown = false; // Reset the instructionsShown flag
 
   // Show the chat button again after the animation
   setTimeout(() => {
-    chatBox.classList.remove('show');
-    chatButton.classList.remove('hidden');
+    chatBox.classList.remove("show");
+    chatButton.classList.remove("hidden");
   }, 500); // Adjust timing for chat box to slide out and chat button to reappear
 });
 

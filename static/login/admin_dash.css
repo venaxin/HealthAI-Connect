@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap");
 @keyframes fade-in {
   100% {
     opacity: 1;
@@ -8,56 +8,78 @@
 }
 /* General reset and body styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-
-    background: url(../images/admin_dash_back.jpg);
-    background-size: 100% 110%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-    overflow-x: hidden;
-    margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  background-size: 100% 110%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  overflow-x: hidden;
+  margin: 0;
 }
 @keyframes fadeIn {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
-/* header */
-
-.header-fixed {
-  background:#5f72af;
-  padding: 20px 40px;
-  height: 73px;
-  color: #ffffff;
-  box-sizing: border-box;
-  top: -100px;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  -webkit-transition: top 0.3s;
-  transition: top 0.3s;
+.sidebar {
+  background-color: #5f72af;
 }
 
-.header-fixed .header-limiter nav a {
-  font-family: 'Nunito Sans', sans-serif;
-  display: inline-block;
-  padding: 0 15px;
-  text-decoration: none;
+.sidebar-header h3 {
+  color: white;
+  background: #00143d;
+}
+
+.sidebar a {
   color: #fff;
-  transition: color 0.6s ease-in-out;
-  position: relative; /* Added position relative */
 }
 
-container a {
+.sidebar a:hover {
+  background: #007bff;
+}
+
+.sidebar-footer {
+  background-color: #5f72af;
+  color: #ffffff;
+}
+
+.dropdown a {
+  color: #ccc;
+}
+
+.dropdown a:hover {
+  background-color: #00143d;
+}
+
+.usertype-header {
+  color: white;
+
+  background-color: #007bff;
+}
+
+.sidebar-header {
+  background-color: #384369;
+}
+
+.sidebar-header h2 {
+  color: #fff;
+}
+
+.content {
+  background: #f4f7f6;
+}
+
+.content a {
   color: #c6dbff;
   text-decoration: none;
   margin-top: 10px;
@@ -65,56 +87,101 @@ container a {
   transition: color 0.3s;
 }
 
-container a:hover {
+.content a:hover {
   color: #0e4276;
 }
 
-
 .fadeIn {
   animation: fadeIn 2s ease-in-out;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   margin: 20px;
 }
-.container{
-    background: url("../images/bak.gif");
+
+.block-item {
+  width: 69%;
+  display: block;
 }
-.user-tables{
+.flex-item {
+  display: flex;
+}
+.chart-main {
+  display: flex;
+  justify-content: space-between !important;
+  margin-left: 8px;
+  margin-bottom: 20px;
+}
+canvas {
+  display: block;
+  box-sizing: border-box;
+  height: 140px !important;
+  width: 140px !important;
+  margin: auto;
+}
+.chart-container {
+  height: 207px;
+  min-width: 199px;
+  display: block;
+  margin: 0 auto;
+  background: white;
+  width: fit-content;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.chart-container h2 {
+  font-size: 40px;
+  font-family: "Nunito Sans", sans-serif;
+  margin-top: -91px;
+  text-align: center;
+  font-weight: 700;
+  color: #000;
+}
+.chart-container h3 {
+  font-size: 21px;
+  font-family: "Nunito Sans", sans-serif;
+  text-align: center;
+  font-weight: 700;
+  color: #000;
+  padding: 5px 5px 0px 5px;
+}
+
+.user-tables {
   display: flex;
   justify-content: space-evenly;
 }
-.patient-card{
-    margin: 20px;
-    background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
-    box-shadow: #333;
-    width: 40%;
+.patient-card {
+  margin: 20px;
+  background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
+  box-shadow: #333;
+  width: 40%;
 }
-.doctor-card{
-    margin: 20px;
-    background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
-    box-shadow: #333;
-    width:40%
+.doctor-card {
+  margin: 20px;
+  background: rgba(#111, rgb(0, 0, 0), rgb(0, 0, 0), 0.6);
+  box-shadow: #333;
+  width: 40%;
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 20px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 /* Doctor Dashboard styles */
 h2 {
   font-size: 30px;
   font-weight: 700;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   text-align: center;
   transform: scale(0.94);
   animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
 }
 
-
 span {
   display: inline-block;
   opacity: 0;
   filter: blur(4px);
+  color: snow;
 }
 
 span:nth-child(1) {
@@ -134,24 +201,25 @@ span:nth-child(4) {
 }
 
 table {
-  overflow:hidden;
-  th, td {
-    padding:.25em .5em;
-    text-align:left;
-    vertical-align:top;
+  overflow: hidden;
+  th,
+  td {
+    padding: 0.25em 0.5em;
+    text-align: left;
+    vertical-align: top;
   }
   tr {
-    transition:all 1s ease-in-out;
+    transition: all 1s ease-in-out;
     &.slide-out {
-      transform:translateX(100%);
+      transform: translateX(100%);
     }
   }
 }
 
 table {
   border: none;
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 tr.spacer {
   padding: 0 !important;
@@ -159,48 +227,49 @@ tr.spacer {
   border-radius: 0 !important;
   background: transparent !important;
 }
-.padding{
+.padding {
   padding: 10px 12px 8px 12px;
   border-radius: 20px;
   box-shadow: inset 0px 0px 19px -6px #9686ff;
   backdrop-filter: blur(15px);
   background: #5f72af;
 }
-table th{
-    padding: 10px;
-    text-align: left;
-    border: none;
-    font-size: large;
+table th {
+  padding: 10px;
+  text-align: left;
+  border: none;
+  font-size: large;
 }
-table td{
-  padding: 5px; 
+table td {
+  padding: 5px;
   border: none;
   border-radius: 20px 0px 0px 20px;
-  font-weight:600;
+  font-weight: 600;
   text-transform: capitalize;
   vertical-align: middle;
 }
-table td:nth-child(2){
+table td:nth-child(2) {
   border-radius: 0px 20px 20px 0px;
 }
 
 table th:nth-child(2),
 table td:nth-child(2) {
-    padding: 10px;
-    text-align: center;
-    border: none;
+  padding: 10px;
+  text-align: center;
+  border: none;
 }
 
 table th {
-    background-color: transparent;
+  background-color: transparent;
+  color: snow;
 }
 
 table tr {
-    background-color: #ffffffc7;
+  background-color: #ffffffc7;
 }
 
-form button,form 
-a {
+form button,
+form a {
   display: inline-block;
   padding: 8px 16px;
   text-decoration: none;
@@ -216,96 +285,96 @@ a {
 
 form button:hover,
 form a:hover {
-    background-color: #744ffa;
-    color: #fff;
-    border: 1.5px #52037f solid;
+  background-color: #744ffa;
+  color: #fff;
+  border: 1.5px #52037f solid;
 }
 
 form a {
-    text-align: center;
-    margin-top: 10px;
-    display: block;
-    width: 100px;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+  width: 100px;
 }
 
 .button-81 {
-    background-color: #fff;
-    border: 0 solid #e2e8f0;
-    border-radius: 1.5rem;
-    box-sizing: border-box;
-    color: #0d172a;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1;
-    padding: 1rem 1.6rem;
-    text-align: center;
-    text-decoration: none #0d172a solid;
-    text-decoration-thickness: auto;
-    transition: all .1s cubic-bezier(.4, 0, .2, 1);
-    box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .button-81:hover {
-    background-color: #1e293b;
-    color: #fff;
-  }
-  
-  @media (min-width: 768px) {
-    .button-81 {
-      font-size: 1.125rem;
-      padding: 1rem 2rem;
-    }
-  }
-  
-  .pushable {
-    background: hsl(340deg 100% 32%);
-    border-radius: 12px;
-    border: none;
-    padding: 0;
-    width: fit-content;
-    cursor: pointer;
-    margin: 10px 10px;
-    outline-offset: 4px;
-  }
-  .front {
-    display: block;
-    padding: 12px 25px;
-    border-radius: 12px;
-    font-size: 1.25rem;
-    background: hsl(345deg 100% 47%);
-    color: white;
-    transform: translateY(-6px);
-  }
-  .pushable:active .front {
-    transform: translateY(-2px);
-  }
-  
-  .heading button {
-    max-width: fit-content;
-    padding: 10px 20px;
-    background-color: #110e5aeb;
-    margin: 20px auto;
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .accept {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .accept button:nth-child(2){
-    margin-left: 20px;
-  }
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
-  /* Add this to your existing CSS file or create a new CSS file for modal styles */
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
+
+.pushable {
+  background: hsl(340deg 100% 32%);
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  width: fit-content;
+  cursor: pointer;
+  margin: 10px 10px;
+  outline-offset: 4px;
+}
+.front {
+  display: block;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: hsl(345deg 100% 47%);
+  color: white;
+  transform: translateY(-6px);
+}
+.pushable:active .front {
+  transform: translateY(-2px);
+}
+
+.heading button {
+  max-width: fit-content;
+  padding: 10px 20px;
+  background-color: #110e5aeb;
+  margin: 20px auto;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.accept {
+  display: flex;
+  justify-content: space-evenly;
+}
+.accept button:nth-child(2) {
+  margin-left: 20px;
+}
+
+/* Add this to your existing CSS file or create a new CSS file for modal styles */
 /* Modal Styles */
 .modal {
   display: none;
@@ -315,7 +384,7 @@ form a {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-dialog {
@@ -395,31 +464,31 @@ form a {
 /* Your existing keyframes */
 @keyframes fadeInDown {
   from {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes slideInRight {
   from {
-      opacity: 0;
-      transform: translateX(20px);
+    opacity: 0;
+    transform: translateX(20px);
   }
   to {
-      opacity: 1;
-      transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }

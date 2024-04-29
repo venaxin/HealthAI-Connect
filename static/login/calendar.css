@@ -8,7 +8,9 @@
   overflow: hidden;
   height: fit-content;
 }
-
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #ffffff !important; /* Change color as needed */
+}
 #calendar h2 {
   text-align: center;
   margin-top: 5px;
@@ -46,11 +48,12 @@
 
 #calendar th,
 #calendar td {
-  padding: 5px;
+  padding: 5px 9px;
   text-align: center;
 }
 
 #calendar th {
+  font-size: 13px;
   background-color: #ffffff; /* Dark blue */
 }
 

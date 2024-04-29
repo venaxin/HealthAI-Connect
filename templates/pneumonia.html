@@ -1,9 +1,11 @@
 {% extends "pneumonia1.html" %} {% block content %}
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  Caution : This is a prediction model and not a substitute for a professional
-  medical diagnosis, Please consult a doctor for a proper diagnosis. Also Do not
-  upload any irrelevant images.
+  "Disclaimer: This platform provides predictive insights and information.
+  However, it is not a replacement for professional medical judgment. Please use
+  the information provided here as a supplementary tool in your clinical
+  decision-making process. Always consult with your patients and rely on your
+  medical expertise for accurate diagnosis and treatment recommendations."
   <button
     type="button"
     class="btn-close"
@@ -73,7 +75,7 @@
       <div class="info-box-fixed">
         <div class="info-box-limiter">
           <nav>
-            <a class="button" onclick="showContent('overview')"> OVERVIEW </a>
+            <a class="button" onclick="showContent('overview')"> SEARCH </a>
             <a class="button" onclick="showContent('symptoms')"> SYMPTOMS </a>
             <a class="button" onclick="showContent('treatments')">
               TREATMENTS
@@ -84,7 +86,7 @@
       </div>
       <hr style="width: 600px; margin-left: -40px" />
       <div class="content" id="overview-content">
-        <img class="info-image" src="../static/images/pneumonia_info1.png" />
+        <!-- <img class="info-image" src="../static/images/pneumonia_info1.png" />
         <p>
           Pneumonia is an infection in your lungs caused by bacteria, viruses or
           fungi. Pneumonia causes your lung tissue to swell (inflammation) and
@@ -112,7 +114,7 @@
           with antibiotics. Viral pneumonia causes flu-like symptoms and is more
           likely to resolve on its own. You usually don't need specific
           treatment for viral pneumonia.
-        </p>
+        </p> -->
       </div>
 
       <div class="content" id="symptoms-content" style="display: none">
