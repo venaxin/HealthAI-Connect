@@ -520,7 +520,7 @@ def dashboard():
             # Load doctor-specific data and pass it to the template
             return render_template('doctor_dashboard.html', username=session['username'], appointments=get_doctor_appointments(session['username']))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
 
 def get_patient_appointments(patient_username):
@@ -539,7 +539,7 @@ def admin_dashboard():
         doctorss = pd.read_csv(doctor_csv_file_path).to_dict('records')
         return render_template('admin_dashboard.html', username=session['username'], patientss=patientss, doctorss=doctorss)
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
 
 @app.route('/admin_delete_user', methods=['POST'])
@@ -564,7 +564,7 @@ def admin_delete_user():
 def logout():
     session.pop('username', None)
     session.pop('user_type', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -585,7 +585,7 @@ def register():
                 doctors_df = pd.DataFrame([[username, password]], columns=['username', 'password'])
                 doctors_df.to_csv(doctor_csv_file_path, mode='a', index=False, header=False)
 
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
         else:
             return render_template('register.html', message='Username, password, and user type are required.')
 
