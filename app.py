@@ -720,4 +720,4 @@ def save_accepted_appointment(doctor_name, appointment):
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app , debug=True)
