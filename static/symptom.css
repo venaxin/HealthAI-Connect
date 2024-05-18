@@ -34,9 +34,8 @@ form {
     width: 80%;
     margin: 0 auto;
     background-color: #00143d;
-        padding: 20px;
+    padding: 20px;
     border-radius: 25px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
 }
@@ -62,8 +61,8 @@ form h2{
 }
 .alert-success {
     --bs-alert-color: var(--bs-success-text-emphasis) ;
-    --bs-alert-bg: #b7f8ff !important;
-    --bs-alert-border-color: #9797973d !important;
+    --bs-alert-bg: #ffffff !important;
+    --bs-alert-border-color: #0000003d !important;
     --bs-alert-link-color: var(--bs-success-text-emphasis);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
