@@ -25,7 +25,8 @@ input[type="range"]::-webkit-slider-thumb {
 .sidebar a {
   padding: 15px 30px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 700;
   color: #fff;
   display: block;
   transition: 0.3s;

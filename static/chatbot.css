@@ -264,7 +264,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .message {
   margin-bottom: 18px;
-  max-width: 70%; /* Limit the width of the speech bubble */
+  max-width: 90%; /* Limit the width of the speech bubble */
   word-wrap: break-word; /* Wrap long messages */
   padding: 10px 15px; /* Adjust padding for the speech bubble */
 }
@@ -273,14 +273,14 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: #48bfe3c7;
   color: #ffffff; /* Text color for user messages */
   align-self: flex-end;
-  border-radius: 5px 15px 0px 10px;
+  border-radius: 5px 25px 0px 25px;
 }
 
 .chatbot-message {
   background-color: #3695ff7a;
   color: #ffffff; /* Text color for chatbot messages */
   align-self: flex-start;
-  border-radius: 15px 5px 10px 0px;
+  border-radius: 25px 5px 25px 0px;
 }
 
 .inputt {
