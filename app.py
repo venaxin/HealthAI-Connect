@@ -20,11 +20,9 @@ print('Loading ----25% Done')
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from langchain.llms import OpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from langchain.callbacks import get_openai_callback
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from dotenv import load_dotenv
@@ -58,12 +56,17 @@ warnings.simplefilter("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore")
 
 app = Flask(__name__)
-app.secret_key = 'Secret@key'  # Change this to a secure key in a production environment
-app.config['SECRET_KEY'] = 'secret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat.db'  # Use SQLite for simplicity
+# Use .env or defaults
+from dotenv import load_dotenv as _load
+_load()
+app.secret_key = os.getenv('SECRET_KEY', 'Secret@key')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'secret!')
+# Use env-provided DATABASE_URL or default to /tmp for Cloud Run compatibility
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:////tmp/chat.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-socketio = SocketIO(app)
+# Use eventlet async mode in production
+socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins='*')
 
 
 class Message(db.Model):
@@ -110,6 +113,13 @@ doctor_csv_file_path = 'database/doctor_credentials.csv'
 admin_csv_file_path = 'database/admin_credentials.csv'
 appointment_csv_file_path = 'database/appointments.csv'
 patient_appointment_csv_file_path = 'database/Accepted_appointments.csv'
+DATA_DIR = os.getenv('DATA_DIR', '/tmp/data')
+os.makedirs(DATA_DIR, exist_ok=True)
+patient_csv_file_path = os.path.join(DATA_DIR, 'credentials.csv')
+doctor_csv_file_path = os.path.join(DATA_DIR, 'doctor_credentials.csv')
+admin_csv_file_path = os.path.join(DATA_DIR, 'admin_credentials.csv')
+appointment_csv_file_path = os.path.join(DATA_DIR, 'appointments.csv')
+patient_appointment_csv_file_path = os.path.join(DATA_DIR, 'Accepted_appointments.csv')
 
 # Create CSV files if they don't exist
 for file_path in [patient_csv_file_path, doctor_csv_file_path, admin_csv_file_path, appointment_csv_file_path, patient_appointment_csv_file_path]:
@@ -126,8 +136,8 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 embeddings = HuggingFaceEmbeddings(model_name="deepset/sentence_bert")
 knowledge_base = FAISS.load_local('embed',embeddings)
-llm = OpenAI(model="gpt-3.5-turbo-instruct",temperature=0.9, max_tokens=500)
-#llm=ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.9)
+# If needed later, you can initialize a Gemini LLM via LangChain like:
+# gemini_llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.9)
 print("     Loaded embedding models")
 print('Loading  ML and DL models...')
 # Brain Tumor Detection
@@ -218,12 +228,7 @@ def send():
             docs = knowledge_base.similarity_search(user_question)
             print(docs[0])
             doc=f" {docs[0]}"
-            # Assuming 'llm' is a pre-trained language model If nothing related to the question in the prompt then you can't answer the question .
-            #chain = load_qa_chain(llm=llm, chain_type="stuff")
-            #with get_openai_callback() as cb:
-                # Attempt to run the QA chain
-             #   response = chain.run(input_documents=docs, question=user_question,return_only_outputs=True)
-              #  print(cb)
+            # Using Gemini directly without LangChain QA chain
             PROMPT="""You are an expert in medical and healthcare knowledge and your name is medibot. if you are asked question which is not related to the medical field or healthcare field then you can't answer the question."""
             question=PROMPT+user_question 
             responses= google_gemini.generate_content(question)
@@ -406,10 +411,10 @@ def healthimaging_patient():
 #Brain Tumor Detection
 def get_className(classNo):
     class_index = np.argmax(classNo)
-    if class_index==0:
-	    return "No Brain Tumor Detected."
-    elif class_index==1:
-    	return """Brain tumor detected. We strongly advise you to consult with a doctor immediately for further evaluation and treatment options."""
+    if class_index == 0:
+        return "No Brain Tumor Detected."
+    elif class_index == 1:
+        return """Brain tumor detected. We strongly advise you to consult with a doctor immediately for further evaluation and treatment options."""
 
 
 def getResult(img):
@@ -435,13 +440,15 @@ def predict_tumor():
     if request.method == 'POST':
         f = request.files['file']
 
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
-            basepath, 'uploads/tumor', secure_filename(f.filename))
-        f.save(file_path)
-        value=getResult(file_path)
-        result=get_className(value) 
-        return result
+    # Use a writable uploads root (default to /tmp on Cloud Run)
+    uploads_root = os.getenv('UPLOAD_DIR', '/tmp/uploads')
+    tumor_dir = os.path.join(uploads_root, 'tumor')
+    os.makedirs(tumor_dir, exist_ok=True)
+    file_path = os.path.join(tumor_dir, secure_filename(f.filename))
+    f.save(file_path)
+    value = getResult(file_path)
+    result = get_className(value)
+    return result
     return None
 
 # pneumonia
@@ -471,7 +478,10 @@ def predict_neumonia():
         print('No selected file')
         return jsonify({'error': 'No selected file'})
     if file:
-        file_path = os.path.join('uploads/pneumonia', file.filename)
+        uploads_root = os.getenv('UPLOAD_DIR', '/tmp/uploads')
+        pneu_dir = os.path.join(uploads_root, 'pneumonia')
+        os.makedirs(pneu_dir, exist_ok=True)
+        file_path = os.path.join(pneu_dir, secure_filename(file.filename))
         file.save(file_path)
         result = predict_pneumonia(file_path)
         if result == 0:
@@ -720,4 +730,6 @@ def save_accepted_appointment(doctor_name, appointment):
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':
-    socketio.run(app)
+    host = os.getenv('HOST', '0.0.0.0')
+    port = int(os.getenv('PORT', '8080'))
+    socketio.run(app, host=host, port=port)
