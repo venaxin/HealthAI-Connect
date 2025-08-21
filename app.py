@@ -23,8 +23,8 @@ from datetime import datetime
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from langchain.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 import google.generativeai as genai
 from nltk.stem import WordNetLemmatizer
@@ -134,11 +134,16 @@ print('Loading embedding models...')
 # Chatbot
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-embeddings = HuggingFaceEmbeddings(model_name="deepset/sentence_bert")
-knowledge_base = FAISS.load_local('embed',embeddings)
-# If needed later, you can initialize a Gemini LLM via LangChain like:
-# gemini_llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.9)
-print("     Loaded embedding models")
+# Use a smaller, widely-available model to speed cold starts
+try:
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    knowledge_base = FAISS.load_local('embed', embeddings, allow_dangerous_deserialization=True)
+    print("     Loaded embedding models and FAISS index")
+except Exception as e:
+    print(f"Warning: Embeddings/FAISS index not fully loaded: {e}")
+    embeddings = None
+    knowledge_base = None
+    # App continues without vector search
 print('Loading  ML and DL models...')
 # Brain Tumor Detection
 tumor_model =load_model('models/BrainTumor15Epochscategorical.h5')
@@ -225,9 +230,12 @@ def send():
         try: 
             # Attempt to perform similarity search
             google_gemini=genai.GenerativeModel('gemini-pro')
-            docs = knowledge_base.similarity_search(user_question)
-            print(docs[0])
-            doc=f" {docs[0]}"
+            docs = []
+            if knowledge_base is not None:
+                docs = knowledge_base.similarity_search(user_question)
+                if docs:
+                    print(docs[0])
+            doc = f" {docs[0]}" if docs else ""
             # Using Gemini directly without LangChain QA chain
             PROMPT="""You are an expert in medical and healthcare knowledge and your name is medibot. if you are asked question which is not related to the medical field or healthcare field then you can't answer the question."""
             question=PROMPT+user_question 
