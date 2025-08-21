@@ -15,7 +15,7 @@ sentence-transformers
 google-generativeai
 python-dotenv
 tensorflow
-opencv-python
+opencv-python-headless
 nltk
 beautifulsoup4
 gunicorn

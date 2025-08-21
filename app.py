@@ -21,10 +21,20 @@ from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+"""Vector stack (FAISS + HuggingFace embeddings) imported lazily to avoid hard crash
+if optional packages are missing in the deployed image. This prevents the whole
+app from failing to boot (503) when langchain-community or langchain-huggingface
+is absent; vector search features will just be disabled."""
+try:
+    from langchain_community.vectorstores import FAISS  # type: ignore
+    from langchain_huggingface import HuggingFaceEmbeddings  # type: ignore
+    _VECTOR_STACK_AVAILABLE = True
+except Exception as _vector_err:  # broad so any import side-effect failure is caught
+    print(f"Vector stack unavailable, continuing without retrieval: {_vector_err}")
+    FAISS = None  # type: ignore
+    HuggingFaceEmbeddings = None  # type: ignore
+    _VECTOR_STACK_AVAILABLE = False
 from dotenv import load_dotenv
 import google.generativeai as genai
 from nltk.stem import WordNetLemmatizer
@@ -38,7 +48,13 @@ tf.get_logger().setLevel('ERROR')
 print('Loading ------------75% Done')
 from tensorflow.keras.preprocessing import image
 from PIL import Image
-import cv2
+try:
+    import cv2  # OpenCV is optional; if system libs missing we continue without it
+    _CV2_AVAILABLE = True
+except Exception as _cv2_err:
+    print(f"OpenCV not available, continuing without it: {_cv2_err}")
+    cv2 = None  # type: ignore
+    _CV2_AVAILABLE = False
 from keras.models import load_model
 from werkzeug.utils import secure_filename
 from keras.preprocessing import image
@@ -134,16 +150,19 @@ print('Loading embedding models...')
 # Chatbot
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-# Use a smaller, widely-available model to speed cold starts
-try:
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    knowledge_base = FAISS.load_local('embed', embeddings, allow_dangerous_deserialization=True)
-    print("     Loaded embedding models and FAISS index")
-except Exception as e:
-    print(f"Warning: Embeddings/FAISS index not fully loaded: {e}")
-    embeddings = None
-    knowledge_base = None
-    # App continues without vector search
+embeddings = None
+knowledge_base = None
+if _VECTOR_STACK_AVAILABLE:
+    try:
+        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")  # type: ignore
+        knowledge_base = FAISS.load_local('embed', embeddings, allow_dangerous_deserialization=True)  # type: ignore
+        print("     Loaded embedding models and FAISS index")
+    except Exception as e:
+        print(f"Warning: Embeddings/FAISS index not fully loaded: {e}")
+        embeddings = None
+        knowledge_base = None
+else:
+    print("     Skipping embeddings/FAISS load (vector stack unavailable)")
 print('Loading  ML and DL models...')
 # Brain Tumor Detection
 tumor_model =load_model('models/BrainTumor15Epochscategorical.h5')
