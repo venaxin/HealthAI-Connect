@@ -19,8 +19,22 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
-COPY . .
+# Copy only necessary application code & assets to keep image lean
+COPY app.py ./
+COPY models/ models/
+COPY templates/ templates/
+COPY static/ static/
+COPY embed/ embed/
+
+# Required CSV data files (omit large raw files & PDFs)
+RUN mkdir -p data
+COPY data/Symptom-severity.csv data/
+COPY data/symptom_Description.csv data/
+COPY data/symptom_precaution.csv data/
+COPY data/dataset.csv data/
+COPY data/drugsComTrain.csv data/
+
+# (Optional) If embed/ or some data files are absent, container still works (chatbot without retrieval)
 
 # Expose port
 ENV PORT=8080

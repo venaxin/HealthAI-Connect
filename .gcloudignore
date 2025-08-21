@@ -1,0 +1,20 @@
+# Mirror .dockerignore patterns so Cloud Build upload context is minimized
+.dockerignore
+.git
+.gitignore
+.venv/
+venv/
+ENV/
+notebooks/
+*.ipynb
+uploads/
+extras/
+PPts nd report/
+data/pdfs/
+.cache/
+.huggingface/
+*.pptx
+*.ppt
+*.zip
+*.tar
+*.tar.gz
