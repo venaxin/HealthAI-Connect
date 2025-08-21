@@ -1,4 +1,60 @@
-**/__pycache__/
+# Reduce image build context size to avoid 3+ GiB uploads and speed builds
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+# Git
+.git
+.gitignore
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter notebooks (dev only)
+notebooks/
+*.ipynb
+
+# Large raw PDFs (not needed at runtime if index already built)
+data/pdfs/
+
+# Presentations / reports
+PPts nd report/
+
+# Local user uploads (use ephemeral /tmp/uploads in Cloud Run)
+uploads/
+
+# Extra example/test folders
+extras/
+
+# Caches
+.cache/
+.huggingface/
+
+# OS metadata
+.DS_Store
+
+# Archives & large misc
+*.pptx
+*.ppt
+*.zip
+*.tar
+*.tar.gz
+
+# Local CSV database copies (we recreate minimal ones in /tmp at runtime)
+database/*.csv
+!database/credentials.csv
+!database/doctor_credentials.csv
+!database/admin_credentials.csv
+!database/appointments.csv
+!database/Accepted_appointments.csv
+
+# If you actually need other assets for runtime, remove them from here.**/__pycache__/
 **/*.pyc
 **/*.pyo
 **/*.pyd
