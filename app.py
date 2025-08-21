@@ -77,8 +77,16 @@ from dotenv import load_dotenv as _load
 _load()
 app.secret_key = os.getenv('SECRET_KEY', 'Secret@key')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'secret!')
-# Use env-provided DATABASE_URL or default to /tmp for Cloud Run compatibility
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:////tmp/chat.db')
+# Robust DATABASE_URL resolution: treat unset or blank as missing
+_raw_db_url = os.getenv('DATABASE_URL', '').strip()
+if not _raw_db_url:
+    _raw_db_url = 'sqlite:////tmp/chat.db'
+elif _raw_db_url.startswith('sqlite:///') and not _raw_db_url.startswith('sqlite:////'):
+    # Normalize absolute /tmp path if someone used 3 slashes
+    if _raw_db_url.endswith('/tmp/chat.db'):
+        _raw_db_url = 'sqlite:////tmp/chat.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = _raw_db_url
+print(f"Using database URL: {app.config['SQLALCHEMY_DATABASE_URI']}")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 # Use eventlet async mode in production
