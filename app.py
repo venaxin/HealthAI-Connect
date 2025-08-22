@@ -99,15 +99,81 @@ class Message(db.Model):
     content = db.Column(db.String(200), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Initialize the database within the script
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False, index=True)
+    password = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.String(20), nullable=False, index=True)  # patient | doctor | admin
+
+class Appointment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    doctor = db.Column(db.String(80), nullable=False, index=True)
+    patient = db.Column(db.String(80), nullable=False, index=True)
+    date = db.Column(db.String(20), nullable=False)
+    time = db.Column(db.String(20), nullable=False)
+    age = db.Column(db.String(10))
+    phone = db.Column(db.String(30))
+    session_purpose = db.Column(db.String(160))
+    status = db.Column(db.String(20), nullable=False, default='pending', index=True)  # pending | accept | completed | reject
+
+def _seed_from_csv_if_empty():
+    """Populate DB from legacy CSV files if tables empty (first run migration)."""
+    # Legacy CSV paths
+    legacy_patient = patient_csv_file_path
+    legacy_doctor = doctor_csv_file_path
+    legacy_admin = admin_csv_file_path
+    legacy_appt = appointment_csv_file_path
+    legacy_accept = patient_appointment_csv_file_path
+    if User.query.count() == 0:
+        # Users
+        for path, role in [ (legacy_patient,'patient'), (legacy_doctor,'doctor'), (legacy_admin,'admin') ]:
+            try:
+                if os.path.exists(path) and os.path.getsize(path)>0:
+                    dfu = pd.read_csv(path, header=None, names=['username','password'])
+                    for _, r in dfu.iterrows():
+                        if not User.query.filter_by(username=r.username).first():
+                            db.session.add(User(username=r.username, password=r.password, role=role))
+            except Exception as e:
+                print(f"Seed warn ({role}): {e}")
+        db.session.commit()
+    if Appointment.query.count() == 0:
+        # Pending appointments
+        for path, status in [ (legacy_appt,'pending'), (legacy_accept,'accept') ]:
+            try:
+                if os.path.exists(path) and os.path.getsize(path)>0:
+                    cols = ['doctor','patient','date','time','age','phone','session_purpose']
+                    # Accepted file may have condition column; handle flexibly
+                    dfap = pd.read_csv(path, header=None)
+                    # Try to align columns
+                    if dfap.shape[1] >= 7:
+                        dfap = dfap.iloc[:,0:7]
+                        dfap.columns = cols
+                        for _, r in dfap.iterrows():
+                            db.session.add(Appointment(doctor=r.doctor, patient=r.patient, date=r.date, time=r.time,
+                                                       age=r.age, phone=r.phone, session_purpose=r.session_purpose,
+                                                       status=status))
+                db.session.commit()
+            except Exception as e:
+                print(f"Seed warn (appointments {status}): {e}")
+
 with app.app_context():
     db.create_all()
+    _seed_from_csv_if_empty()
+
+def _user_maps():
+    """Return dicts of users by role for legacy code compatibility."""
+    users = User.query.all()
+    patients_map = {u.username: u.password for u in users if u.role=='patient'}
+    doctors_map = {u.username: u.password for u in users if u.role=='doctor'}
+    admins_map = {u.username: u.password for u in users if u.role=='admin'}
+    return patients_map, doctors_map, admins_map
 
 @app.route('/chat')
 def chat():
     username = request.args.get('username')
+    p_map, d_map, _a_map = _user_maps()
     messages = Message.query.all()
-    return render_template('chat.html', messages=messages, username=username, doctors=doctors,patients=patients)
+    return render_template('chat.html', messages=messages, username=username, doctors=d_map, patients=p_map)
 
 @socketio.on('message')
 def handle_message(data):
@@ -131,12 +197,12 @@ def clear_chats():
         return 'Method Not Allowed', 405
 
  
-# Load existing users from CSV files
-patient_csv_file_path = 'database/credentials.csv'
-doctor_csv_file_path = 'database/doctor_credentials.csv'
-admin_csv_file_path = 'database/admin_credentials.csv'
-appointment_csv_file_path = 'database/appointments.csv'
-patient_appointment_csv_file_path = 'database/Accepted_appointments.csv'
+# Legacy CSV (used only for initial seeding now)
+patient_csv_file_path = 'database/credentials.csv'  # legacy
+doctor_csv_file_path = 'database/doctor_credentials.csv'  # legacy
+admin_csv_file_path = 'database/admin_credentials.csv'  # legacy
+appointment_csv_file_path = 'database/appointments.csv'  # legacy
+patient_appointment_csv_file_path = 'database/Accepted_appointments.csv'  # legacy
 DATA_DIR = os.getenv('DATA_DIR', '/tmp/data')
 os.makedirs(DATA_DIR, exist_ok=True)
 patient_csv_file_path = os.path.join(DATA_DIR, 'credentials.csv')
@@ -149,10 +215,7 @@ patient_appointment_csv_file_path = os.path.join(DATA_DIR, 'Accepted_appointment
 for file_path in [patient_csv_file_path, doctor_csv_file_path, admin_csv_file_path, appointment_csv_file_path, patient_appointment_csv_file_path]:
     Path(file_path).touch()
 
-# Load existing users from CSV files using pandas
-patients = pd.read_csv(patient_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
-doctors = pd.read_csv(doctor_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
-admins = pd.read_csv(admin_csv_file_path, header=None, names=['username', 'password']).set_index('username').to_dict()['password']
+patients, doctors, admins = _user_maps()
 
 print('Loading embedding models...')
 # Chatbot
@@ -569,22 +632,29 @@ def dashboard():
 
 
 def get_patient_appointments(patient_username):
-    try:
-        appointments = pd.read_csv(patient_appointment_csv_file_path)
-        appointments = appointments[appointments['patient'] == patient_username].to_dict('records')
-        return appointments
-    except FileNotFoundError:
-        return []
+    appts = Appointment.query.filter_by(patient=patient_username).filter(Appointment.status.in_(['pending','accept','completed'])).all()
+    return [
+        {
+            'id': a.id,
+            'doctor': a.doctor,
+            'patient': a.patient,
+            'date': a.date,
+            'time': a.time,
+            'age': a.age,
+            'phone': a.phone,
+            'session_purpose': a.session_purpose,
+            'status': a.status
+        } for a in appts
+    ]
 
 
 @app.route('/admin_dashboard')
 def admin_dashboard():
     if 'username' in session and session['user_type'] == 'admin':
-        patientss = pd.read_csv(patient_csv_file_path).to_dict('records')
-        doctorss = pd.read_csv(doctor_csv_file_path).to_dict('records')
+        patientss = [{'username': u.username} for u in User.query.filter_by(role='patient').all()]
+        doctorss = [{'username': u.username} for u in User.query.filter_by(role='doctor').all()]
         return render_template('admin_dashboard.html', username=session['username'], patientss=patientss, doctorss=doctorss)
-    else:
-        return redirect(url_for('home'))
+    return redirect(url_for('home'))
 
 
 @app.route('/admin_delete_user', methods=['POST'])
@@ -593,15 +663,10 @@ def admin_delete_user():
         user_type = request.form.get('user_type')
         username_to_delete = request.form.get('username')
         if user_type and username_to_delete:
-            if user_type == 'patient':
-                patients_df = pd.read_csv(patient_csv_file_path)
-                patients_df = patients_df[patients_df['username'] != username_to_delete]
-                patients_df.to_csv(patient_csv_file_path, index=False)
-            elif user_type == 'doctor':
-                doctors_df = pd.read_csv(doctor_csv_file_path)
-                doctors_df = doctors_df[doctors_df['username'] != username_to_delete]
-                doctors_df.to_csv(doctor_csv_file_path, index=False)
-
+            u = User.query.filter_by(username=username_to_delete, role=user_type).first()
+            if u:
+                db.session.delete(u)
+                db.session.commit()
     return redirect(url_for('admin_dashboard'))
 
 
@@ -618,28 +683,18 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         user_type = request.form.get('user_type')
-
         if username and password and user_type:
-            if user_exists(username):
+            if User.query.filter_by(username=username).first():
                 return render_template('register.html', message='Username already exists. Try another one.')
-
-            if user_type == 'patient':
-                patients_df = pd.DataFrame([[username, password]], columns=['username', 'password'])
-                patients_df.to_csv(patient_csv_file_path, mode='a', index=False, header=False)
-            elif user_type == 'doctor':
-                doctors_df = pd.DataFrame([[username, password]], columns=['username', 'password'])
-                doctors_df.to_csv(doctor_csv_file_path, mode='a', index=False, header=False)
-
+            db.session.add(User(username=username, password=password, role=user_type))
+            db.session.commit()
             return redirect(url_for('home'))
-        else:
-            return render_template('register.html', message='Username, password, and user type are required.')
-
+        return render_template('register.html', message='Username, password, and user type are required.')
     return render_template('register.html')
 
 
 def user_exists(username):
-    # Check if the username exists in patients or doctors
-    return username in patients or username in doctors
+    return User.query.filter_by(username=username).first() is not None
 
 
 @app.route('/book_appointment', methods=['POST'])
@@ -648,31 +703,35 @@ def book_appointment():
         patient_username = session.get('username')
         doctor_username = request.form.get('doctor')
         date = request.form.get('date')
-        time = request.form.get('time')
-        age=request.form.get('age')
-        phone=request.form.get('phone')
-        session_purpose=request.form.get('session_purpose')
- 
-        if patient_username and doctor_username and date and time:
-            appointment_data = {'doctor': doctor_username, 'patient': patient_username, 'date': date, 'time': time,'age':age,'phone':phone,'session_purpose':session_purpose}
-            save_appointment_to_csv(appointment_data, appointment_csv_file_path)
+        time_ = request.form.get('time')
+        age = request.form.get('age')
+        phone = request.form.get('phone')
+        session_purpose = request.form.get('session_purpose')
+        if patient_username and doctor_username and date and time_:
+            appt = Appointment(doctor=doctor_username, patient=patient_username, date=date, time=time_, age=age, phone=phone, session_purpose=session_purpose, status='pending')
+            db.session.add(appt)
+            db.session.commit()
             return redirect(url_for('dashboard'))
-        else:
-            return render_template('patient_dashboard.html', username=session['username'], message='All fields are required.')
+        return render_template('patient_dashboard.html', username=session['username'], message='All fields are required.')
 
 
-def save_appointment_to_csv(appointment_data, file_path):
-    appointments_df = pd.DataFrame([appointment_data])
-    appointments_df.to_csv(file_path, mode='a', index=False, header=False)
+def save_appointment_to_csv(*args, **kwargs):  # legacy no-op placeholder
+    pass
 
 
 def get_doctor_appointments(doctor_username):
-    try:
-        appointments = pd.read_csv(appointment_csv_file_path)
-        appointments = appointments[appointments['doctor'] == doctor_username].to_dict('records')
-        return appointments
-    except FileNotFoundError:
-        return []
+    appts = Appointment.query.filter_by(doctor=doctor_username).filter(Appointment.status=='pending').all()
+    return [{
+        'id': a.id,
+        'doctor': a.doctor,
+        'patient': a.patient,
+        'date': a.date,
+        'time': a.time,
+        'age': a.age,
+        'phone': a.phone,
+        'session_purpose': a.session_purpose,
+        'status': a.status
+    } for a in appts]
 
 
 @app.route('/doctor_dashboard')
@@ -688,12 +747,18 @@ def doctor_dashboard():
 
 
 def get_accepted_appointments(doctor_username):
-    try:
-        appointments = pd.read_csv(patient_appointment_csv_file_path)
-        appointments = appointments[(appointments['doctor'] == doctor_username) & (appointments['condition'] == 'accept')].to_dict('records')
-        return appointments
-    except FileNotFoundError:
-        return []
+    appts = Appointment.query.filter_by(doctor=doctor_username, status='accept').all()
+    return [{
+        'id': a.id,
+        'doctor': a.doctor,
+        'patient': a.patient,
+        'date': a.date,
+        'time': a.time,
+        'age': a.age,
+        'phone': a.phone,
+        'session_purpose': a.session_purpose,
+        'status': a.status
+    } for a in appts]
 
 
 @app.route('/complete_appointment/<int:appointment_id>', methods=['POST'])
@@ -724,44 +789,36 @@ def remove_appointment_from_csv(doctor_username, appointment):
         pass
 
 
-def remove_appointments_from_csv(doctor_username, appointment):
-    try:
-        appointments_df = pd.read_csv(appointment_csv_file_path)
-        appointments_df = appointments_df[~((appointments_df['doctor'] == doctor_username) &
-                                           (appointments_df['patient'] == appointment['patient']) &
-                                           (appointments_df['date'] == appointment['date']) &
-                                           (appointments_df['time'] == appointment['time']))]
-        appointments_df.to_csv(appointment_csv_file_path, index=False)
-    except FileNotFoundError:
-        pass
+def remove_appointments_from_csv(*args, **kwargs):  # legacy placeholder
+    pass
 
 
 @app.route('/accept_appointment/<int:appointment_id>', methods=['POST'])
 def accept_appointment(appointment_id):
     if 'username' in session and session['user_type'] == 'doctor':
-        doctor_username = session['username']
-        appointments = get_doctor_appointments(doctor_username)
-        action = request.form['action']
+        action = request.form.get('action')
+        appt = Appointment.query.filter_by(id=appointment_id).first()
+        if appt and appt.doctor == session['username'] and appt.status == 'pending':
+            if action == 'accept':
+                appt.status = 'accept'
+            elif action == 'reject':
+                appt.status = 'reject'
+            db.session.commit()
+        return redirect(url_for('doctor_dashboard'))
+    return redirect(url_for('home'))
 
-        if request.method == 'POST':
-            # Process the form submission only for POST requests
-            if 0 <= appointment_id < len(appointments):
-                appointment = appointments[appointment_id]
-                if action == 'accept':
-                    save_accepted_appointment(doctor_username, appointment)
-                    remove_appointments_from_csv(doctor_username, appointment)
-                elif action == 'reject':
-                    remove_appointments_from_csv(doctor_username, appointment)
 
-                return redirect(url_for('doctor_dashboard'))
+def save_accepted_appointment(*args, **kwargs):  # legacy placeholder
+    pass
 
+@app.route('/complete_appointment/<int:appointment_id>', methods=['POST'])
+def complete_appointment(appointment_id):
+    if 'username' in session and session['user_type'] == 'doctor':
+        appt = Appointment.query.filter_by(id=appointment_id, doctor=session['username']).first()
+        if appt and appt.status == 'accept':
+            appt.status = 'completed'
+            db.session.commit()
     return redirect(url_for('doctor_dashboard'))
-
-
-def save_accepted_appointment(doctor_name, appointment):
-    appointment_data = {'doctor': doctor_name, 'patient': appointment['patient'], 'date': appointment['date'], 'time': appointment['time'],'age':appointment['age'],'phone':appointment['phone'],'session_purpose':appointment['session_purpose'], 'condition': 'accept'}
-    appointments_df = pd.DataFrame([appointment_data])
-    appointments_df.to_csv(patient_appointment_csv_file_path, mode='a', index=False, header=False)
 
 warnings.filterwarnings("default")
 if __name__ == '__main__':
