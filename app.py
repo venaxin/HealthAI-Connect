@@ -116,14 +116,20 @@ class Appointment(db.Model):
     session_purpose = db.Column(db.String(160))
     status = db.Column(db.String(20), nullable=False, default='pending', index=True)  # pending | accept | completed | reject
 
+# Define legacy CSV paths early so seeding function can reference them
+legacy_patient_csv = 'database/credentials.csv'
+legacy_doctor_csv = 'database/doctor_credentials.csv'
+legacy_admin_csv = 'database/admin_credentials.csv'
+legacy_appointments_csv = 'database/appointments.csv'
+legacy_accepted_csv = 'database/Accepted_appointments.csv'
+
 def _seed_from_csv_if_empty():
     """Populate DB from legacy CSV files if tables empty (first run migration)."""
-    # Legacy CSV paths
-    legacy_patient = patient_csv_file_path
-    legacy_doctor = doctor_csv_file_path
-    legacy_admin = admin_csv_file_path
-    legacy_appt = appointment_csv_file_path
-    legacy_accept = patient_appointment_csv_file_path
+    legacy_patient = legacy_patient_csv
+    legacy_doctor = legacy_doctor_csv
+    legacy_admin = legacy_admin_csv
+    legacy_appt = legacy_appointments_csv
+    legacy_accept = legacy_accepted_csv
     if User.query.count() == 0:
         # Users
         for path, role in [ (legacy_patient,'patient'), (legacy_doctor,'doctor'), (legacy_admin,'admin') ]:
@@ -215,7 +221,12 @@ patient_appointment_csv_file_path = os.path.join(DATA_DIR, 'Accepted_appointment
 for file_path in [patient_csv_file_path, doctor_csv_file_path, admin_csv_file_path, appointment_csv_file_path, patient_appointment_csv_file_path]:
     Path(file_path).touch()
 
-patients, doctors, admins = _user_maps()
+"""Do NOT materialize patients/doctors/admins at import time; that requires an app context.
+They are now fetched on-demand via _user_maps() inside each request handler to avoid
+"Working outside of application context" runtime errors.
+"""
+
+# Legacy globals removed; use dynamic lookup
 
 print('Loading embedding models...')
 # Chatbot
@@ -597,16 +608,16 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-
-        if username in patients and patients[username] == password:
+        p_map, d_map, a_map = _user_maps()
+        if username in p_map and p_map[username] == password:
             session['username'] = username
             session['user_type'] = 'patient'
             return redirect(url_for('dashboard'))
-        elif username in doctors and doctors[username] == password:
+        elif username in d_map and d_map[username] == password:
             session['username'] = username
             session['user_type'] = 'doctor'
             return redirect(url_for('doctor_dashboard'))
-        elif username in admins and admins[username] == password:
+        elif username in a_map and a_map[username] == password:
             session['username'] = username
             session['user_type'] = 'admin'
             return redirect(url_for('admin_dashboard'))
@@ -623,7 +634,8 @@ def dashboard():
         if user_type == 'patient':
             patient_username = session['username']
             appointments = get_patient_appointments(patient_username)
-            return render_template('patient_dashboard.html', username=patient_username, appointments=appointments, doctors=doctors)
+            _p_map, d_map, _a_map = _user_maps()
+            return render_template('patient_dashboard.html', username=patient_username, appointments=appointments, doctors=d_map)
         elif user_type == 'doctor':
             # Load doctor-specific data and pass it to the template
             return render_template('doctor_dashboard.html', username=session['username'], appointments=get_doctor_appointments(session['username']))
@@ -712,7 +724,8 @@ def book_appointment():
             db.session.add(appt)
             db.session.commit()
             return redirect(url_for('dashboard'))
-        return render_template('patient_dashboard.html', username=session['username'], message='All fields are required.')
+    _p_map, d_map, _a_map = _user_maps()
+    return render_template('patient_dashboard.html', username=session['username'], message='All fields are required.', doctors=d_map, appointments=get_patient_appointments(session['username']))
 
 
 def save_appointment_to_csv(*args, **kwargs):  # legacy no-op placeholder
