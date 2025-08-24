@@ -4,7 +4,7 @@ flask-sqlalchemy
 pymysql
 pandas
 numpy
-scikit-learn
+scikit-learn==1.3.2  # pinned for model pickle compatibility (Tree node dtype pre-missing_go_to_left change)
 joblib
 langchain
 langchain-google-genai

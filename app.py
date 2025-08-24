@@ -774,19 +774,9 @@ def get_accepted_appointments(doctor_username):
     } for a in appts]
 
 
-@app.route('/complete_appointment/<int:appointment_id>', methods=['POST'])
-def complete_appointment(appointment_id):
-    if 'username' in session and session['user_type'] == 'doctor':
-        doctor_username = session['username']
-        accepted_appointments = get_accepted_appointments(doctor_username)
-
-        if 0 <= appointment_id < len(accepted_appointments):
-            appointment = accepted_appointments[appointment_id]
-
-            # Remove the appointment from the CSV file
-            remove_appointment_from_csv(doctor_username, appointment)
-
-    return redirect(url_for('doctor_dashboard'))
+"""Removed earlier duplicate complete_appointment route that relied on list index.
+Use the later definition keyed by actual Appointment.id.
+"""
 
 
 def remove_appointment_from_csv(doctor_username, appointment):
